@@ -76,3 +76,13 @@ function Set_Control_animation(controlname, animationname,fill_mode)
     control.style.animation = animationname;
     control.style.animationFillMode = fill_mode;
 }
+
+
+function Set_Control_animation_infinite(controlname, animationname, fill_mode) {
+    var control = document.getElementById(controlname);
+
+    control.style.animation = animationname;
+    control.style.animationIterationCount = "infinite";
+    control.style.animationFillMode = fill_mode;
+
+}
