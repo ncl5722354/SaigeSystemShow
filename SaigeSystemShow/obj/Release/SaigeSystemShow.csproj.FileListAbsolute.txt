@@ -1,0 +1,6 @@
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\SaigeSystemShow.dll.config
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\SaigeSystemShow.dll
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\SaigeSystemShow.pdb
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\MySql.Data.dll
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Release\SaigeSystemShow.dll
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Release\SaigeSystemShow.pdb
