@@ -104,7 +104,7 @@
 <body>
     <form id="form1" runat="server">
     <div style="overflow:hidden">
-        <img id="img_bg" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/loginba.png" />
+        <img id="img_bg" style="position:absolute;left:0%;width:100%;top:0%; height:100%;" src="pic/loginba.png" />
          <div id="mask" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:darkblue;opacity:0.5"></div>
         <div id="div_headeer" style="position:absolute;left:0%;width:100%;top:0%;height:80px;background-color:#178AB9">
             <label id="login_name" style="position:absolute;left:85%;width:15%;top:20px;height:30px;font-size:25px;color:white;">登录者</label>
@@ -126,15 +126,64 @@
         </div>
 
 
-        <div id="device_project_info" style="position:absolute;left:45%;width:40%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden;">
+        <div id="device_project_info" style="position:absolute;left:45%;width:35%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden;">
              <div id="back1" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
             <label id="label_device_project_info" style="position:absolute;left:5%;width:50%;top:2%;height:15%;font-size:20px;color:#61C9D6;">各项目设备信息</label>
-            <div id="device_project_subdiv" style="position:absolute;left:0%;width:100%;top:20%;bottom:0px;overflow:hidden;">
+            <div id="context_div" style="position:absolute;left:0%;width:100%;top:20%;bottom:0px;overflow:hidden;">
+               <div id="device_project_subdiv"  style="position:absolute;left:0%;width:100%;top:0px;bottom:0px;">
 
+               </div>
             </div>
         </div>
+
+        <div id="warning_info" style="position:absolute;left:45%;width:35%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden;">
+            <div id="back2" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
+                <label id="label_warning_info" style="position:absolute;left:0%;width:60%;top:2%;height:15%;font-size:20px;color:#61C9D6;text-align:center">报警信息</label>
+                <label id="label_warninig_time" style="position:absolute;left:60%;width:40%;top:2%;height:15%;font-size:20px;color:#61C9D6;text-align:center">报警时间</label>
+                <div id="warning_info_context_div" style="position:absolute;left:0%;width:100%;top:20%;bottom:0px;overflow:hidden">
+                <div id="warning_info_subdiv" style="position:absolute;left:0%;width:100%;top:0px;bottom:0px">
+
+                </div>
+                </div>
+            
+        </div>
        
-    </div>
+
+        <div id="device_energy_cost" style="position:absolute;left:20%;width:20%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden">
+            <div id="back3" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
+            <label id="label_energy_title" style="position:absolute;left:10%;width:30%;top:5%;height:15px;font-size:15px;color:#61C9D6">能源概况</label>
+            <label id="label_today_energy_title" style="position:absolute;left:1%;width:30%;top:30%;height:15px;font-size:15px;color:#61C9D6">今日能源消耗</label>
+            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">3256</label>
+            <label id="label_month_energy_title" style="position:absolute;left:1%;width:30%;top:50%;height:15px;font-size:15px;color:#61C9D6">本月能源消耗</label>
+            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">70782</label>
+        </div>
+
+        <div id="pie_device_online_div" style="position:absolute;left:85%;width:13%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
+            <div id="back4" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
+                <label id="pie_device_onliee_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意</label>
+                <canvas id="pie_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
+
+                </canvas>
+            
+        </div>
+
+
+        <div id="Doughnut_device_online_div" style="position:absolute;left:85%;width:13%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
+            <div id="back6" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
+             <label id="goughnut_device_onliee_title2" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意2</label>
+            <canvas id="doughunt_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
+
+                </canvas>
+        </div>
+
+        <div id="line_energy_cowst" style="position:absolute;left:20%;width:70%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
+            <div id="back5" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:white;opacity:0.7;border-radius:5%;"> </div>
+             <label id="line_energy_cost_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:black">能源监测</label>
+                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:30%;height:65%;color:white">
+
+                </canvas>
+
+       </div>
     </form>
 </body>
 </html>
@@ -148,9 +197,10 @@
 <script src="sql_JS.js"></script>
 <script src="cooket.js"></script>
 <script src="Controler_Function.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script>
 
-    var all_label = new Array(); // 所有在设备信息参与滚动的label名称数组
+    
     function init()
     {
         var username = getCookie("username");
@@ -171,37 +221,49 @@
         gundong_list.push("项目2 2个设备");
         gundong_list.push("项目2 2个设备");
 
-        self.setInterval("device_info_rollscreen_clock()", gundong_list.length * 8000);
 
        
 
         var device_project_subdiv_view = document.getElementById("device_project_subdiv");
+        Put_Array_Label_In_Div(gundong_list, "device_project_subdiv");
 
-        for(var i=0;i<gundong_list.length;i++)
-        {
-            var label = document.createElement("label");
-            label.style.position = "absolute";
-            label.style.top = (i*30).toString()+"px";
-            label.style.left = "5%";
-            label.style.height = "30px";
-            label.style.width = "90%";
-            label.style.fontSize = "20px";
-            label.textContent = gundong_list[i].toString();
-            label.style.color = "#61C9D6";
-            label.id = "label__device_project_info" + i.toString();
-            device_project_subdiv_view.appendChild(label);
-            all_label.push(label.id.toString());
-
-            Set_Animation_Label(label.id);
-        }
-
-        
-        device_project_subdiv_view.style.height = ((i + 1) * 30).toString() + "px";
-        
-        
-      //Set_Control_animation_infinite("device_project_subdiv", "animation_roll_screen 10s", "forwards");
        
         
+        
+        Set_Sroll_Div_In_Div("device_project_subdiv");
+
+
+        var warning_list = new Array();
+
+        var warn1 = new Array();
+        warn1.push("故障1");
+        warn1.push("2021-04-14 00:00:02");
+
+        var warn2 = new Array();
+        warn2.push("故障2");
+        warn2.push("2021-04-14 00:00:03");
+
+        var warn3 = new Array();
+        warn3.push("故障3");
+        warn3.push("2021-04-14 00:00:03");
+      
+        warning_list.push(warn1);
+        warning_list.push(warn2);
+        warning_list.push(warn3);
+
+        var width_list = new Array();
+        width_list.push("60%");
+        width_list.push("40%");
+
+        var left_list = new Array();
+        left_list.push("0%");
+        left_list.push("60%");
+
+        Put_Table_Label_In_Div(warning_list, left_list, width_list, "warning_info_subdiv");
+
+        Set_Sroll_Div_In_Div("warning_info_subdiv");
+       
+         
 
 
     }
@@ -220,6 +282,11 @@
     Set_Animation_Label("label_deviceoverview_num");
     Set_Animation_Label("label_deviceonline_title");
     Set_Animation_Label("label_deviceonline_num");
+
+    Set_Animation_Label("label_energy_title");
+    Set_Animation_Label("label_today_energy_title");
+    Set_Animation_Label("label_month_energy_title");
+
     
 
 
@@ -266,8 +333,57 @@
         }
     }
 
+    var myradarchart;
+
+    var value_array=new Array();
+    value_array.push(30);
+    value_array.push(100);
+
+    var color_array=new Array();
+    color_array.push("red");
+    color_array.push("blue");
+
+    var label_array = new Array();
+    label_array.push("不在线");
+    label_array.push("在线");
+
+    var high_array = new Array();
+    high_array.push("#550000");
+    high_array.push("#000055");
 
     
-   
+    var myradarline;
+
+    var point1 = [1125];
+    var point2 = [1245];
+    var point3 = [1752];
+    var point4 = [1532];
+    var point5 = [1500];
+    var point6 = [1800];
+
+    var point_list = new Array();
+    point_list.push(point1);
+    point_list.push(point2);
+    point_list.push(point3);
+    point_list.push(point4);
+    point_list.push(point5);
+    point_list.push(point6);
+
+
+    var datetime_list = new Array();
+    datetime_list.push("2021-04-01");
+    datetime_list.push("2021-04-02");
+    datetime_list.push("2021-04-03");
+    datetime_list.push("2021-04-04");
+    datetime_list.push("2021-04-05");
+    datetime_list.push("2021-04-06");
+
+
+
+    Show_Pie(myradarchart, value_array, color_array, high_array, label_array, "pie_device_online");
+    Show_Doughnut(myradarchart, value_array, color_array, high_array, label_array, "doughunt_device_online");
+
+    Show_Line(myradarline, point_list,datetime_list, "line_energy_cost");
     
+   
 </script>
