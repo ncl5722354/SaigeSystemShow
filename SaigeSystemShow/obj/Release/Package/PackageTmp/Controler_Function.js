@@ -238,3 +238,97 @@ function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_arr
     }
 
 }
+
+
+
+function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
+    try {
+        myRadarChart.clean();
+    }
+    catch (err) { }
+
+    var ctx = document.getElementById(canvas_name).getContext("2d");
+
+    var options = {
+        datasetStrokeWidth: 1,
+        pointDotStrokeWidth: 1,
+        pointDot: true,
+        pointDotRadius: 1,
+        pointHitDetectionRadius: 1,
+        datasetStroke: false,
+        bezierCurveTension: 1,
+        datasetFill: false,
+        bezierCurve: false,
+        scaleFontColor: "#fff",
+        tooltipFontColor: "#fff",
+        scaleFontColor: "rgba(220,220,220,1)",
+        scaleFontSize: 50,
+        pointLabelFontColor: "rgba(220,220,220,0)",
+       
+
+    };
+
+
+    var data = {
+        labels: [],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(220,220,0,1)",   // 线的颜色
+                pointColor: "rgba(220,0,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: []
+            }]
+    };
+
+    myRadarChart = new Chart(ctx).Line(data, {
+        bezierCurve: false
+    });
+
+    for (var i = 0; i < value_array.length; i++) {
+        myRadarChart.addData(value_array[i],label_list[i].toString());
+    }
+
+
+}
+
+
+
+function Show_Doughnut(myRadarChart, value_array, color_array, highlight_array, label_array, canvas_name) {
+    try {
+        myRadarChart.clean();
+    }
+    catch (err) { }
+
+    var ctx = document.getElementById(canvas_name).getContext("2d");
+
+    var options = {
+        datasetStrokeWidth: 1,
+        pointDotStrokeWidth: 0,
+        pointDot: false,
+        pointDotRadius: 1,
+        pointHitDetectionRadius: 1,
+        datasetStroke: false,
+        bezierCurveTension: 1,
+        datasetFill: false,
+        bezierCurve: false,
+    };
+
+
+    var data = {};
+
+    myRadarChart = new Chart(ctx).Doughnut(data, options);
+
+    for (var i = 0; i < value_array.length; i++) {
+        myRadarChart.addData({
+            value: value_array[i],
+            color: color_array[i],
+            highlight: highlight_array[i],
+            label: label_array[i]
+        });
+    }
+
+}
