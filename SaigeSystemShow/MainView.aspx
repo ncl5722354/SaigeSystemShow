@@ -120,9 +120,9 @@
         <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
             <div id="back" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
             <label id="label_deviceoverview_title" style="position:absolute;left:5%;width:50%;top:2%;height:15%;font-size:20px;color:#61C9D6;">设备总数量</label>
-            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:17%;height:30px;font-size:40px;color:#61C9D6;">##台</label>
+            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:17%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
             <label id="label_deviceonline_title" style="position:absolute;left:5%;width:50%;top:50%;height:15%;font-size:20px;color:#61C9D6;">设备在线数量</label>
-            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:65%;height:30px;font-size:40px;color:#61C9D6;">##台</label>
+            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:65%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
         </div>
 
 
@@ -153,9 +153,9 @@
             <div id="back3" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
             <label id="label_energy_title" style="position:absolute;left:10%;width:30%;top:5%;height:15px;font-size:15px;color:#61C9D6">能源概况</label>
             <label id="label_today_energy_title" style="position:absolute;left:1%;width:30%;top:30%;height:15px;font-size:15px;color:#61C9D6">今日能源消耗</label>
-            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">3256</label>
+            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
             <label id="label_month_energy_title" style="position:absolute;left:1%;width:30%;top:50%;height:15px;font-size:15px;color:#61C9D6">本月能源消耗</label>
-            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">70782</label>
+            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
         </div>
 
         <div id="pie_device_online_div" style="position:absolute;left:85%;width:13%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
@@ -223,7 +223,7 @@
 
         Project_Online_Tick();
         Device_Num_And_Online_Tick();
-
+        Energy_Cost_Tick();
 
 
         var project_online_timer = setInterval(Project_Online_Tick, 30000);         // 更新项目的在线情况
@@ -232,6 +232,7 @@
         var device_online_timer = setInterval(Device_Num_And_Online_Tick, 30000);    // 更新设备的在线情况
 
 
+        var energy_cost_timer = setInterval(Energy_Cost_Tick, 10000);                // 更新能源消耗的情况
 
 
 
@@ -346,61 +347,6 @@
     }
 
 
-
-
-    
-
-    //var myradarchart;
-
-    //var value_array=new Array();
-    //value_array.push(30);
-    //value_array.push(100);
-
-    //var color_array=new Array();
-    //color_array.push("red");
-    //color_array.push("blue");
-
-    //var label_array = new Array();
-    //label_array.push("不在线");
-    //label_array.push("在线");
-
-    //var high_array = new Array();
-    //high_array.push("#550000");
-    //high_array.push("#000055");
-
-    
-    //var myradarline;
-
-    //var point1 = [1125];
-    //var point2 = [1245];
-    //var point3 = [1752];
-    //var point4 = [1532];
-    //var point5 = [1500];
-    //var point6 = [1800];
-
-    //var point_list = new Array();
-    //point_list.push(point1);
-    //point_list.push(point2);
-    //point_list.push(point3);
-    //point_list.push(point4);
-    //point_list.push(point5);
-    //point_list.push(point6);
-
-
-    //var datetime_list = new Array();
-    //datetime_list.push("2021-04-01");
-    //datetime_list.push("2021-04-02");
-    //datetime_list.push("2021-04-03");
-    //datetime_list.push("2021-04-04");
-    //datetime_list.push("2021-04-05");
-    //datetime_list.push("2021-04-06");
-
-
-
-    //Show_Pie(myradarchart, value_array, color_array, high_array, label_array, "pie_device_online");
-    //Show_Doughnut(myradarchart, value_array, color_array, high_array, label_array, "doughunt_device_online");
-
-    //Show_Line(myradarline, point_list,datetime_list, "line_energy_cost");
     
     // 在线项目相关
     function Project_Online_Tick()
@@ -528,6 +474,62 @@
 
          Show_Doughnut(Doughnut_Project_Online, value_array, color_array, color_array, label_array, "doughunt_device_online");
 
+
+    }
+
+
+    // 能源消耗相关
+    function Energy_Cost_Tick()
+    {
+        // 读出今天的能源消耗
+
+        var today = new Date();
+        today.setHours(0, 0, 0);
+
+        var today_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(today);
+        
+
+        var torrow = new Date();
+        torrow.setDate(torrow.getDate() + 1);
+        torrow.setHours(0, 0, 0);
+        var torrow_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(torrow);
+
+
+
+        var month = new Date();
+        month.setDate(0);
+        month.setHours(0, 0, 0);
+        var month_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(month);
+
+
+        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
+        try {
+            var cost_today_json = From_Text_To_Json(cost_today);
+
+        
+            var cost_today_value = cost_today_json[0].toString();
+
+            var label_energy_cost = document.getElementById("label_today_energy");
+
+            label_energy_cost.textContent = cost_today_value;
+
+        }
+        catch (err) { }
+
+
+        var cost_month = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
+        try {
+            var cost_month_json = From_Text_To_Json(cost_month);
+
+
+            var cost_month_value = cost_month_json[0].toString();
+
+            var label_energy_cost_month = document.getElementById("label_month_energy");
+
+            label_energy_cost_month.textContent = cost_month_value;
+
+        }
+        catch (err) { }
 
     }
 
