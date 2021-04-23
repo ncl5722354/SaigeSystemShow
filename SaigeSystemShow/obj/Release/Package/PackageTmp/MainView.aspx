@@ -120,9 +120,9 @@
         <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
             <div id="back" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
             <label id="label_deviceoverview_title" style="position:absolute;left:5%;width:50%;top:2%;height:15%;font-size:20px;color:#61C9D6;">设备总数量</label>
-            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:17%;height:30px;font-size:40px;color:#61C9D6;">##台</label>
+            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:17%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
             <label id="label_deviceonline_title" style="position:absolute;left:5%;width:50%;top:50%;height:15%;font-size:20px;color:#61C9D6;">设备在线数量</label>
-            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:65%;height:30px;font-size:40px;color:#61C9D6;">##台</label>
+            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:65%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
         </div>
 
 
@@ -153,14 +153,14 @@
             <div id="back3" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
             <label id="label_energy_title" style="position:absolute;left:10%;width:30%;top:5%;height:15px;font-size:15px;color:#61C9D6">能源概况</label>
             <label id="label_today_energy_title" style="position:absolute;left:1%;width:30%;top:30%;height:15px;font-size:15px;color:#61C9D6">今日能源消耗</label>
-            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">3256</label>
+            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
             <label id="label_month_energy_title" style="position:absolute;left:1%;width:30%;top:50%;height:15px;font-size:15px;color:#61C9D6">本月能源消耗</label>
-            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">70782</label>
+            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
         </div>
 
         <div id="pie_device_online_div" style="position:absolute;left:85%;width:13%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
             <div id="back4" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-                <label id="pie_device_onliee_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意</label>
+                <label id="pie_device_onliee_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线项目示意</label>
                 <canvas id="pie_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
 
                 </canvas>
@@ -170,16 +170,16 @@
 
         <div id="Doughnut_device_online_div" style="position:absolute;left:85%;width:13%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
             <div id="back6" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-             <label id="goughnut_device_onliee_title2" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意2</label>
+             <label id="goughnut_device_onliee_title2" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意</label>
             <canvas id="doughunt_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
 
                 </canvas>
         </div>
 
-        <div id="line_energy_cowst" style="position:absolute;left:20%;width:70%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
+        <div id="line_energy_cowst" style="position:absolute;left:20%;width:75%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
             <div id="back5" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:white;opacity:0.7;border-radius:5%;"> </div>
              <label id="line_energy_cost_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:black">能源监测</label>
-                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:30%;height:65%;color:white">
+                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:15%;height:84%;color:white;overflow:inherit">
 
                 </canvas>
 
@@ -200,6 +200,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script>
 
+    // 全局数量
+    var Pie_Project_Online;
+    var Doughnut_Project_Online;
+    var Line_Energy_Cost;
+
     
     function init()
     {
@@ -213,12 +218,23 @@
 
        
 
-       
+
         // 各项目的在线情况
 
         Project_Online_Tick();
-        var project_online_timer = setInterval(Project_Online_Tick, 60000);
-        var device_online_timer = setInterval(Device_Num_And_Online_Tick, 3000);
+        Device_Num_And_Online_Tick();
+        Energy_Cost_Tick();
+        Show_Energy_Cost_Line();
+
+        var project_online_timer = setInterval(Project_Online_Tick, 30000);         // 更新项目的在线情况
+
+
+        var device_online_timer = setInterval(Device_Num_And_Online_Tick, 30000);    // 更新设备的在线情况
+
+
+        var energy_cost_timer = setInterval(Energy_Cost_Tick, 10000);                // 更新能源消耗的情况
+
+        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 60000);
 
 
 
@@ -287,7 +303,7 @@
     Set_Animation_Label("label_month_energy_title");
 
     
-
+    // 动画限定的函数
 
     // 选择按钮动作的动画设定
     function Set_Animation_Select_Button(controlname)
@@ -333,121 +349,85 @@
     }
 
 
-
-
     
-
-    var myradarchart;
-
-    var value_array=new Array();
-    value_array.push(30);
-    value_array.push(100);
-
-    var color_array=new Array();
-    color_array.push("red");
-    color_array.push("blue");
-
-    var label_array = new Array();
-    label_array.push("不在线");
-    label_array.push("在线");
-
-    var high_array = new Array();
-    high_array.push("#550000");
-    high_array.push("#000055");
-
-    
-    var myradarline;
-
-    var point1 = [1125];
-    var point2 = [1245];
-    var point3 = [1752];
-    var point4 = [1532];
-    var point5 = [1500];
-    var point6 = [1800];
-
-    var point_list = new Array();
-    point_list.push(point1);
-    point_list.push(point2);
-    point_list.push(point3);
-    point_list.push(point4);
-    point_list.push(point5);
-    point_list.push(point6);
-
-
-    var datetime_list = new Array();
-    datetime_list.push("2021-04-01");
-    datetime_list.push("2021-04-02");
-    datetime_list.push("2021-04-03");
-    datetime_list.push("2021-04-04");
-    datetime_list.push("2021-04-05");
-    datetime_list.push("2021-04-06");
-
-
-
-    Show_Pie(myradarchart, value_array, color_array, high_array, label_array, "pie_device_online");
-    Show_Doughnut(myradarchart, value_array, color_array, high_array, label_array, "doughunt_device_online");
-
-    Show_Line(myradarline, point_list,datetime_list, "line_energy_cost");
-    
-
+    // 在线项目相关
     function Project_Online_Tick()
     {
-        // 从数据库中读出相关的在线消息
+        // 从数据库中读出项目的在线消息
+        // 先读出所有的项目 再从项目是否在线的表里找到是否在线
 
+        var online_count = 0;             // 在线的数目
+        var offline_count = 0;            // 离线的数目
+        
         try
         {
+            // 滚动图表 
             var onlinelist_str = get_result_sql("SELECT xiangmuID,xiangmuname,onlinetime FROM saigedatabase.xiangmuguanlitable left join saigedatabase.project_online on xiangmuguanlitable.xiangmuID=project_online.ProjectID");
             var json_object = From_Text_To_Json(onlinelist_str);
 
             var show_list = new Array();
 
-            for(var i=0;i<json_object.length;i++)
-            {
+
+            for (var i = 0; i < json_object.length; i++) {
+
+                var item = new Array();
                 var time_str = json_object[i][2].toString();
                 var time = Date.parse(time_str);
 
-                var online_is= json_object[i][1].toString()+" ";
+                //  var online_is= json_object[i][1].toString()+" ";
 
-                try {
-                    var nowtime = new Date();
+                item.push(json_object[i][1].toString());
 
-                    if(Math.abs( parseInt(time-nowtime)/1000/60)>1)
-                    {
-                        online_is = online_is + "不在线";
-                    }
-                    
+                var nowtime = new Date();
 
-                    if (Math.abs(parseInt(time - nowtime) / 1000 / 60) <=1)
-                    {
-                        online_is = online_is + "在线";
-                    }
-
-                    if(time_str=="")
-                    {
-                        online_is = online_is + "不在线";
-                    }
-
-
+                if (Math.abs(parseInt(time - nowtime) / 1000 / 60) > 1) {
+                    //  online_is = online_is + "不在线";
+                    offline_count++;
+                    item.push("不在线");
                 }
-                catch (err) {
-                    online_is = online_is + "不在线";
+
+
+                if (Math.abs(parseInt(time - nowtime) / 1000 / 60) <= 1) {
+                    online_count++;
+                    item.push("在线");
                 }
-                show_list.push(online_is);
 
-
-
-
-
+                if (time_str == "") {
+                    offline_count++;
+                    item.push("不在线");
+                }
+                show_list.push(item);
             }
 
-            Put_Array_Label_In_Div(show_list, "device_project_subdiv");
+            var left_array = new Array();
+            left_array.push("0%");
+            left_array.push("60%");
 
+            var width_array = new Array();
+            width_array.push("60%");
+            width_array.push("40%");
 
+            Put_Table_Label_In_Div(show_list, left_array, width_array, "device_project_subdiv");
+
+            var value_array=new Array();
+            value_array.push(online_count);
+            value_array.push(offline_count);
+
+            var color_array=new Array();
+            color_array.push("blue");
+            color_array.push("red");
+
+            var label_array = new Array();
+            label_array.push("在线项目");
+            label_array.push("离线项目");
+
+            Show_Pie(Pie_Project_Online, value_array, color_array, color_array, label_array, "pie_device_online");
+            
         }
         catch(err){}
     }
 
-
+    // 在线设备数相关
     function Device_Num_And_Online_Tick()
     {
         var Device_Num_Label = document.getElementById("label_deviceoverview_num");
@@ -474,9 +454,146 @@
 
          Device_Online_Num_Label.textContent = device_online_list_json.length.toString() + "台";
 
+         var online_devices = device_online_list_json.length;
+
+         var offline_devices = device_list_json.length - device_online_list_json.length;
+
+
+         var value_array = new Array();
+         value_array.push(online_devices.toString());
+         value_array.push(offline_devices.toString());
+
+
+         var color_array=new Array();
+         color_array.push("blue");
+         color_array.push("red");
+
+         var label_array = new Array();
+         label_array.push("在线设备");
+         label_array.push("离线设备");
+
+        
+
+         Show_Doughnut(Doughnut_Project_Online, value_array, color_array, color_array, label_array, "doughunt_device_online");
+
+
+    }
+
+
+    // 能源消耗相关
+    function Energy_Cost_Tick()
+    {
+        // 读出今天的能源消耗
+
+        var today = new Date();
+        today.setHours(0, 0, 0);
+
+        var today_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(today);
+        
+
+        var torrow = new Date();
+        torrow.setDate(torrow.getDate() + 1);
+        torrow.setHours(0, 0, 0);
+        var torrow_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(torrow);
 
 
 
+        var month = new Date();
+        month.setDate(0);
+        month.setHours(0, 0, 0);
+        var month_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(month);
+
+
+        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
+        try {
+            var cost_today_json = From_Text_To_Json(cost_today);
+
+        
+            var cost_today_value = cost_today_json[0].toString();
+
+            var label_energy_cost = document.getElementById("label_today_energy");
+
+            label_energy_cost.textContent = cost_today_value;
+
+        }
+        catch (err) { }
+
+
+        var cost_month = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
+        try {
+            var cost_month_json = From_Text_To_Json(cost_month);
+
+
+            var cost_month_value = cost_month_json[0].toString();
+
+            var label_energy_cost_month = document.getElementById("label_month_energy");
+
+            label_energy_cost_month.textContent = cost_month_value;
+
+        }
+        catch (err) { }
+
+    }
+
+
+
+    // 计算从开始时间到结束时间的消耗量
+    function Energy_Cost_BeginDate_To_EndDate(startdate,enddate)
+    {
+
+        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + startdate + "\" and savetime<=\"" + enddate + "\") as a group by a.device_id) as b");
+        try {
+            var cost_today_json = From_Text_To_Json(cost_today);
+
+
+            var cost_today_value = parseFloat (cost_today_json[0].toString());
+
+            if ( isNaN(cost_today_value)==true)
+            {
+                return 0;
+            }
+
+            return cost_today_value;
+
+        }
+        catch (err) { return 0;}
+
+
+
+
+    }
+
+
+    function Show_Energy_Cost_Line()
+    {
+        // 30天的能源监测
+
+        var nowdate = new Date();
+
+        var label_list = new Array();
+        var value_list = new Array();
+
+
+        for (var i = 15; i >=0; i--) {
+
+            var startday = new Date();
+            var endday = new Date();
+
+            startday.setDate(nowdate.getDate() - i);
+            endday.setDate(nowdate.getDate() - i + 1);
+
+            var startday_string = To_yyyy_MM_dd_From_Data(startday);
+
+            label_list.push(startday_string);
+
+            var endday_string = To_yyyy_MM_dd_From_Data(endday);
+
+            var energy_cost_day_value = Energy_Cost_BeginDate_To_EndDate(startday_string, endday_string);
+            value_list.push([energy_cost_day_value]);
+
+        }
+
+        Show_Line(Line_Energy_Cost, value_list, label_list, "line_energy_cost");
     }
 
 

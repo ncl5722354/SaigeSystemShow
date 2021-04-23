@@ -200,12 +200,13 @@ function Put_Table_Label_In_Div(arrayitem,arrayleft,arraywidth,div_name)
 }
 
 
+// 饼状图
 
 function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_array,canvas_name)
 {
     try
     {
-        myRadarChart.clean();
+        myRadarChart.destroy();
     }
     catch (err) { }
 
@@ -240,10 +241,10 @@ function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_arr
 }
 
 
-
+// 曲线
 function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
     try {
-        myRadarChart.clean();
+        myRadarChart.destroy();
     }
     catch (err) { }
 
@@ -296,10 +297,10 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
 }
 
 
-
+// 环状图
 function Show_Doughnut(myRadarChart, value_array, color_array, highlight_array, label_array, canvas_name) {
     try {
-        myRadarChart.clean();
+        myRadarChart.destroy();
     }
     catch (err) { }
 

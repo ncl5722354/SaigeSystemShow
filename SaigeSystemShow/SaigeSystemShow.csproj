@@ -88,6 +88,7 @@
     <Content Include="cooket.js" />
     <Content Include="DataGrid.js" />
     <Content Include="dll\MySql.Data.dll" />
+    <Content Include="Elect_RealTime.aspx" />
     <Content Include="json.js" />
     <Content Include="js\jquery-3.5.1.js" />
     <Content Include="Login.aspx" />
@@ -100,6 +101,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elect_RealTime.aspx.cs">
+      <DependentUpon>Elect_RealTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Elect_RealTime.aspx.designer.cs">
+      <DependentUpon>Elect_RealTime.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

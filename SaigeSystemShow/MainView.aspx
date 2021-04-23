@@ -112,9 +112,9 @@
         </div>
 
         <label id="label_company" style="position:absolute;left:25%;width:50%;top:95%;height:30px;font-size:25px;color:white;text-align:center">深圳市赛格物业管理有限公司</label>
-        <div id="div_menu" style="position:absolute;left:0%;width:15%;top:80px;bottom:0px;background-color:#212C32">
-            <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center">页面总览</div>
-            <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">数据采集</div>
+        <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
+            <div id="div_overview" style="position:absolute;left:-5%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
+            <div id="div_data_collection" style="position:absolute;left:-5%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
@@ -176,13 +176,16 @@
                 </canvas>
         </div>
 
-        <div id="line_energy_cowst" style="position:absolute;left:20%;width:70%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
+        <div id="line_energy_cowst" style="position:absolute;left:20%;width:75%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
             <div id="back5" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:white;opacity:0.7;border-radius:5%;"> </div>
              <label id="line_energy_cost_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:black">能源监测</label>
-                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:30%;height:65%;color:white">
+                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:15%;height:84%;color:white;overflow:inherit">
 
                 </canvas>
 
+       </div>
+
+       <iframe id="subiframe" style="position:absolute;left:10%;top:10%;width:90%;height:90%;visibility:hidden"></iframe>
        </div>
     </form>
 </body>
@@ -203,7 +206,7 @@
     // 全局数量
     var Pie_Project_Online;
     var Doughnut_Project_Online;
-
+    var Line_Energy_Cost;
 
     
     function init()
@@ -224,7 +227,7 @@
         Project_Online_Tick();
         Device_Num_And_Online_Tick();
         Energy_Cost_Tick();
-
+        Show_Energy_Cost_Line();
 
         var project_online_timer = setInterval(Project_Online_Tick, 30000);         // 更新项目的在线情况
 
@@ -233,6 +236,8 @@
 
 
         var energy_cost_timer = setInterval(Energy_Cost_Tick, 10000);                // 更新能源消耗的情况
+
+        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 60000);
 
 
 
@@ -532,6 +537,93 @@
         catch (err) { }
 
     }
+
+
+
+    // 计算从开始时间到结束时间的消耗量
+    function Energy_Cost_BeginDate_To_EndDate(startdate,enddate)
+    {
+
+        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + startdate + "\" and savetime<=\"" + enddate + "\") as a group by a.device_id) as b");
+        try {
+            var cost_today_json = From_Text_To_Json(cost_today);
+
+
+            var cost_today_value = parseFloat (cost_today_json[0].toString());
+
+            if ( isNaN(cost_today_value)==true)
+            {
+                return 0;
+            }
+
+            return cost_today_value;
+
+        }
+        catch (err) { return 0;}
+
+
+
+
+    }
+
+
+    function Show_Energy_Cost_Line()
+    {
+        // 30天的能源监测
+
+        var nowdate = new Date();
+
+        var label_list = new Array();
+        var value_list = new Array();
+
+
+        for (var i = 15; i >=0; i--) {
+
+            var startday = new Date();
+            var endday = new Date();
+
+            startday.setDate(nowdate.getDate() - i);
+            endday.setDate(nowdate.getDate() - i + 1);
+
+            var startday_string = To_yyyy_MM_dd_From_Data(startday);
+
+            label_list.push(startday_string);
+
+            var endday_string = To_yyyy_MM_dd_From_Data(endday);
+
+            var energy_cost_day_value = Energy_Cost_BeginDate_To_EndDate(startday_string, endday_string);
+            value_list.push([energy_cost_day_value]);
+
+        }
+
+        Show_Line(Line_Energy_Cost, value_list, label_list, "line_energy_cost");
+    }
+
+
+    // 去其他的界面
+    // 电力监测画面
+
+    var button_elect_realtime = document.getElementById("div_data_collection");
+
+    button_elect_realtime.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("Elect_RealTime.aspx", "subiframe");
+    }
+
+
+    var button_overview = document.getElementById("div_overview");
+
+    button_overview.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "hidden";
+    }
+
+
+
+
 
 
 
