@@ -61,6 +61,8 @@
             
             var contect_div = document.getElementById(div_name_head + (i+1).toString());
 
+            contect_div.innerHTML = "";
+
             // 能源消耗标题
             var label_energy_cost_title = document.createElement("label");
             label_energy_cost_title.style.position = "absolute";
@@ -91,40 +93,187 @@
             label_energy_cost.style.textAlign = "center";
             contect_div.appendChild(label_energy_cost);
 
+            // 电压
 
+            var Uabc_div = document.createElement("div");
+            
+            Uabc_div.style.position = "absolute";
+            Uabc_div.style.left = "40%";
+            Uabc_div.style.width = "55%";
+            Uabc_div.style.top = "5%";
+            Uabc_div.style.height = "20%";
+            Uabc_div.style.borderStyle = "solid";
+            Uabc_div.style.borderColor = "#444B55";
+            contect_div.appendChild(Uabc_div);
+
+
+            var Uabc_title = document.createElement("label");
+            Uabc_title.style.position = "absolute";
+            Uabc_title.style.left = "5%";
+            Uabc_title.style.width = "30%";
+            Uabc_title.style.top = "5%";
+            Uabc_title.style.height = "15px";
+            Uabc_title.style.fontSize = "12px";
+            Uabc_title.style.color = "white";
+            Uabc_title.textContent = "三相电压（V）";
+            Uabc_div.appendChild(Uabc_title);
+
+            var label_Uabc = document.createElement("label");
+            label_Uabc.style.position = "absolute";
+            label_Uabc.style.left = "10%";
+            label_Uabc.style.width = "80%";
+            label_Uabc.style.top = "50%";
+            label_Uabc.style.height = "30px";
+            label_Uabc.style.fontSize = "28px";
+            label_Uabc.textContent = "0";
+            label_Uabc.id = div_name_head + (i + 1).toString() + "_Uabc";
+            label_Uabc.style.color = "white";
+            label_Uabc.style.textAlign = "center";
+            Uabc_div.appendChild(label_Uabc);
+
+
+            // 电流
+            var Iabc_div = document.createElement("div");
+            Iabc_div.style.position = "absolute";
+            Iabc_div.style.left = "40%";
+            Iabc_div.style.width = "55%";
+            Iabc_div.style.top = "25%";
+            Iabc_div.style.height = "20%";
+            Iabc_div.style.borderStyle = "solid";
+            Iabc_div.style.borderColor = "#444B55";
+            contect_div.appendChild(Iabc_div);
+
+            var Iabc_title = document.createElement("label");
+            Iabc_title.style.position = "absolute";
+            Iabc_title.style.left = "5%";
+            Iabc_title.style.width = "30%";
+            Iabc_title.style.top = "5%";
+            Iabc_title.style.height = "15px";
+            Iabc_title.style.fontSize = "12px";
+            Iabc_title.style.color = "white";
+            Iabc_title.textContent = "三相电流（I）";
+            Iabc_div.appendChild(Iabc_title);
+
+            var label_Iabc = document.createElement("label");
+            label_Iabc.style.position = "absolute";
+            label_Iabc.style.left = "10%";
+            label_Iabc.style.width = "80%";
+            label_Iabc.style.top = "50%";
+            label_Iabc.style.height = "30px";
+            label_Iabc.style.fontSize = "28px";
+            label_Iabc.textContent = "0";
+            label_Iabc.id = div_name_head + (i + 1).toString() + "_Iabc";
+            label_Iabc.style.color = "white";
+            label_Iabc.style.textAlign = "center";
+            Iabc_div.appendChild(label_Iabc);
+
+            // 功率
+            var Power_Rate_div = document.createElement("div");
+            Power_Rate_div.style.position = "absolute";
+            Power_Rate_div.style.left = "40%";
+            Power_Rate_div.style.width = "55%";
+            Power_Rate_div.style.top = "45%";
+            Power_Rate_div.style.height = "20%";
+            Power_Rate_div.style.borderStyle = "solid";
+            Power_Rate_div.style.borderColor = "#444B55";
+            contect_div.appendChild(Power_Rate_div);
+
+            var Power_Rate_title = document.createElement("label");
+            Power_Rate_title.style.position = "absolute";
+            Power_Rate_title.style.left = "5%";
+            Power_Rate_title.style.width = "30%";
+            Power_Rate_title.style.top = "5%";
+            Power_Rate_title.style.height = "15px";
+            Power_Rate_title.style.fontSize = "12px";
+            Power_Rate_title.style.color = "white";
+            Power_Rate_title.textContent = "功率";
+            Power_Rate_div.appendChild(Power_Rate_title);
+
+            var label_Power_Rate = document.createElement("label");
+            label_Power_Rate.style.position = "absolute";
+            label_Power_Rate.style.left = "10%";
+            label_Power_Rate.style.width = "80%";
+            label_Power_Rate.style.top = "50%";
+            label_Power_Rate.style.height = "30px";
+            label_Power_Rate.style.fontSize = "28px";
+            label_Power_Rate.textContent = "0";
+            label_Power_Rate.id = div_name_head + (i + 1).toString() + "_Power_Rate";
+            label_Power_Rate.style.color = "white";
+            label_Power_Rate.style.textAlign = "center";
+            Power_Rate_div.appendChild(label_Power_Rate);
+
+            // 转换因数
+            var Conversion_Factor_div = document.createElement("label");
+            Conversion_Factor_div.style.position = "absolute";
+            Conversion_Factor_div.style.left = "40%";
+            Conversion_Factor_div.style.width = "55%";
+            Conversion_Factor_div.style.top = "65%";
+            Conversion_Factor_div.style.height = "20%";
+            Conversion_Factor_div.style.borderStyle = "solid";
+            Conversion_Factor_div.style.borderColor = "#444B55";
+            contect_div.appendChild(Conversion_Factor_div);
+
+            var Conversion_Factor_title = document.createElement("label");
+            Conversion_Factor_title.style.position = "absolute";
+            Conversion_Factor_title.style.left = "5%";
+            Conversion_Factor_title.style.width = "30%";
+            Conversion_Factor_title.style.top = "5%";
+            Conversion_Factor_title.style.height = "15px";
+            Conversion_Factor_title.style.fontSize = "12px";
+            Conversion_Factor_title.style.color = "white";
+            Conversion_Factor_title.textContent = "转换因数";
+            Conversion_Factor_div.appendChild(Conversion_Factor_title);
+
+            var label_Conversion_Factor = document.createElement("label");
+            label_Conversion_Factor.style.position = "absolute";
+            label_Conversion_Factor.style.left = "10%";
+            label_Conversion_Factor.style.width = "80%";
+            label_Conversion_Factor.style.top = "50%";
+            label_Conversion_Factor.style.height = "30px";
+            label_Conversion_Factor.style.fontSize = "28px";
+            label_Conversion_Factor.textContent = "0";
+            label_Conversion_Factor.id = div_name_head + (i + 1).toString() + "_Conversion_Factor";
+            label_Conversion_Factor.style.color = "white";
+            label_Conversion_Factor.style.textAlign = "center";
+            Conversion_Factor_div.appendChild(label_Conversion_Factor);
         }
     }
 
     // 电功能表的更新
-    function Elect_Devices_Tick()
-    {
+    function Elect_Devices_Tick() {
         for (var i = 0; i < elect_device_list.length; i++) {
-            try{
-                var energy_label = document.getElementById("elect_device_div" + (i + 1).toString() + "_energy_cost");
 
-                var shebeiId = elect_device_list[i].toString();
+            var shebeiId = elect_device_list[i].toString();
+            // 用电量
 
-                var energy_cost_str = get_result_sql("select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"");
+            var label_elect_cost_id = "elect_device_div" + (i + 1).toString() + "_energy_cost";
+            var sql_elect_cost = "select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_elect_cost, label_elect_cost_id);
+            //From_Sql_To_TextContent(label_elect_cost_id, sql_elect_cost);
 
-                var energy_cost_json = From_Text_To_Json(energy_cost_str);
+            var label_Uabc_id = "elect_device_div" + (i + 1).toString() + "_Uabc";
+            var sql_Uabc = "select value1 from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
+            //From_Sql_To_TextContent(label_Uabc_id, sql_Uabc);
 
-                if (energy_cost_json[0] == "") {
-                    energy_label.textContent = "0";
-                }
-                else {
-                    energy_label.textContent = energy_cost_json[0];
-                }
-            }
-            catch (err) {
-                try{
-                    var energy_label = document.getElementById("elect_device_div" + (i + 1).toString() + "_energy_cost");
+            var label_Iabc_id = "elect_device_div" + (i + 1).toString() + "_Iabc";
+            var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
+            //From_Sql_To_TextContent(label_Iabc_id, sql_Iabc);
 
-                    energy_label.textContent = "0";
+            var label_Power_Rate_id = "elect_device_div" + (i + 1).toString() + "_Power_Rate";
+            var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_Power_Rate, label_Power_Rate_id);
+            // From_Sql_To_TextContent(label_Power_Rate_id, sql_Power_Rate);
 
-                }
-                catch(err){}
+            var label_Conversion_Factor = "elect_device_div" + (i + 1).toString() + "_Conversion_Factor";
+            var sql_Conversion_Factor = "select value4 from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_Conversion_Factor, label_Conversion_Factor);
+            //From_Sql_To_TextContent(label_Conversion_Factor, sql_Conversion_Factor);
 
-            }
+
+            
+
 
         }
     }
