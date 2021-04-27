@@ -333,3 +333,28 @@ function Show_Doughnut(myRadarChart, value_array, color_array, highlight_array, 
     }
 
 }
+
+// 把查询出来的语句给label的textcontent变量
+function From_Sql_To_TextContent(label_id,sql)
+{
+    try {
+        var energy_label = document.getElementById(label_id);
+       // var shebeiId = elect_device_list[i].toString();
+        var energy_cost_str = get_result_sql(sql);
+        var energy_cost_json = From_Text_To_Json(energy_cost_str);
+        if (energy_cost_json[0] == "") {
+            energy_label.textContent = "0";
+        }
+        else {
+            energy_label.textContent = energy_cost_json[0];
+        }
+    }
+    catch (err) {
+        try {
+            var energy_label = document.getElementById("elect_device_div" + (i + 1).toString() + "_energy_cost");
+            energy_label.textContent = "0";
+        }
+        catch (err) { }
+    }
+}
+

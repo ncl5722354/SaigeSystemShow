@@ -112,9 +112,9 @@
         </div>
 
         <label id="label_company" style="position:absolute;left:25%;width:50%;top:95%;height:30px;font-size:25px;color:white;text-align:center">深圳市赛格物业管理有限公司</label>
-        <div id="div_menu" style="position:absolute;left:0%;width:15%;top:80px;bottom:0px;background-color:#212C32">
-            <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center">页面总览</div>
-            <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">数据采集</div>
+        <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
+            <div id="div_overview" style="position:absolute;left:-5%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
+            <div id="div_data_collection" style="position:absolute;left:-5%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
@@ -184,6 +184,9 @@
                 </canvas>
 
        </div>
+
+       <iframe id="subiframe" style="position:absolute;left:10%;top:10%;width:90%;height:90%;visibility:hidden"></iframe>
+       </div>
     </form>
 </body>
 </html>
@@ -225,16 +228,13 @@
         Device_Num_And_Online_Tick();
         Energy_Cost_Tick();
         Show_Energy_Cost_Line();
+        Select_Sql_Tick();
 
         var project_online_timer = setInterval(Project_Online_Tick, 30000);         // 更新项目的在线情况
-
-
         var device_online_timer = setInterval(Device_Num_And_Online_Tick, 30000);    // 更新设备的在线情况
-
-
-        var energy_cost_timer = setInterval(Energy_Cost_Tick, 10000);                // 更新能源消耗的情况
-
-        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 60000);
+        var energy_cost_timer = setInterval(Energy_Cost_Tick, 60000);                // 更新能源消耗的情况
+        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 40000);
+        var select_sql_timer = setInterval(Select_Sql_Tick, 30000);
 
 
 
@@ -430,51 +430,54 @@
     // 在线设备数相关
     function Device_Num_And_Online_Tick()
     {
-        var Device_Num_Label = document.getElementById("label_deviceoverview_num");
-        var Device_Online_Num_Label = document.getElementById("label_deviceonline_num");
+        try{
+            var Device_Num_Label = document.getElementById("label_deviceoverview_num");
+            var Device_Online_Num_Label = document.getElementById("label_deviceonline_num");
 
 
-        var device_list_str = get_result_sql("SELECT * FROM saigedatabase.shebeitable;");
-        var device_list_json = From_Text_To_Json(device_list_str);
+            var device_list_str = get_result_sql("SELECT * FROM saigedatabase.shebeitable;");
+            var device_list_json = From_Text_To_Json(device_list_str);
 
-        Device_Num_Label.textContent = device_list_json.length.toString() + "台";
-
-
-        var nowtime = new Date();
-
-        var lasttime = new Date();
-
-         lasttime.setMinutes(lasttime.getMinutes() - 3);
-
-         var lasttime_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(lasttime);
-
-         var device_online_list_str = get_result_sql("select * from shebeitable where value10>=\"" + lasttime_string + "\"");
-
-         var device_online_list_json = From_Text_To_Json(device_online_list_str);
-
-         Device_Online_Num_Label.textContent = device_online_list_json.length.toString() + "台";
-
-         var online_devices = device_online_list_json.length;
-
-         var offline_devices = device_list_json.length - device_online_list_json.length;
+            Device_Num_Label.textContent = device_list_json.length.toString() + "台";
 
 
-         var value_array = new Array();
-         value_array.push(online_devices.toString());
-         value_array.push(offline_devices.toString());
+            var nowtime = new Date();
+
+            var lasttime = new Date();
+
+            lasttime.setMinutes(lasttime.getMinutes() - 3);
+
+            var lasttime_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(lasttime);
+
+            var device_online_list_str = get_result_sql("select * from shebeitable where value10>=\"" + lasttime_string + "\"");
+
+            var device_online_list_json = From_Text_To_Json(device_online_list_str);
+
+            Device_Online_Num_Label.textContent = device_online_list_json.length.toString() + "台";
+
+            var online_devices = device_online_list_json.length;
+
+            var offline_devices = device_list_json.length - device_online_list_json.length;
 
 
-         var color_array=new Array();
-         color_array.push("blue");
-         color_array.push("red");
+            var value_array = new Array();
+            value_array.push(online_devices.toString());
+            value_array.push(offline_devices.toString());
 
-         var label_array = new Array();
-         label_array.push("在线设备");
-         label_array.push("离线设备");
+
+            var color_array=new Array();
+            color_array.push("blue");
+            color_array.push("red");
+
+            var label_array = new Array();
+            label_array.push("在线设备");
+            label_array.push("离线设备");
 
         
 
-         Show_Doughnut(Doughnut_Project_Online, value_array, color_array, color_array, label_array, "doughunt_device_online");
+            Show_Doughnut(Doughnut_Project_Online, value_array, color_array, color_array, label_array, "doughunt_device_online");
+        }
+        catch(err){}
 
 
     }
@@ -504,35 +507,8 @@
         var month_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(month);
 
 
-        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
-        try {
-            var cost_today_json = From_Text_To_Json(cost_today);
-
-        
-            var cost_today_value = cost_today_json[0].toString();
-
-            var label_energy_cost = document.getElementById("label_today_energy");
-
-            label_energy_cost.textContent = cost_today_value;
-
-        }
-        catch (err) { }
-
-
-        var cost_month = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b");
-        try {
-            var cost_month_json = From_Text_To_Json(cost_month);
-
-
-            var cost_month_value = cost_month_json[0].toString();
-
-            var label_energy_cost_month = document.getElementById("label_month_energy");
-
-            label_energy_cost_month.textContent = cost_month_value;
-
-        }
-        catch (err) { }
-
+        get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_today_energy");
+        get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_month_energy");
     }
 
 
@@ -574,7 +550,7 @@
         var value_list = new Array();
 
 
-        for (var i = 15; i >=0; i--) {
+        for (var i = 7; i >=0; i--) {
 
             var startday = new Date();
             var endday = new Date();
@@ -595,6 +571,43 @@
 
         Show_Line(Line_Energy_Cost, value_list, label_list, "line_energy_cost");
     }
+
+
+    // 去其他的界面
+    // 电力监测画面
+
+    var button_elect_realtime = document.getElementById("div_data_collection");
+
+    button_elect_realtime.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("Elect_RealTime.aspx", "subiframe");
+    }
+
+
+    var button_overview = document.getElementById("div_overview");
+
+    button_overview.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "hidden";
+    }
+
+
+    // 用来集中select 异步更新
+    function Select_Sql_Tick()
+    {
+
+       
+
+
+
+
+
+    }
+
+
 
 
 
