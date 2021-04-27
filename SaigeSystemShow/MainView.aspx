@@ -230,11 +230,11 @@
         Show_Energy_Cost_Line();
         Select_Sql_Tick();
 
-        var project_online_timer = setInterval(Project_Online_Tick, 30000);         // 更新项目的在线情况
-        var device_online_timer = setInterval(Device_Num_And_Online_Tick, 30000);    // 更新设备的在线情况
-        var energy_cost_timer = setInterval(Energy_Cost_Tick, 60000);                // 更新能源消耗的情况
-        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 40000);
-        var select_sql_timer = setInterval(Select_Sql_Tick, 30000);
+        var project_online_timer = setInterval(Project_Online_Tick, 13000);         // 更新项目的在线情况
+        var device_online_timer = setInterval(Device_Num_And_Online_Tick, 20000);    // 更新设备的在线情况
+        var energy_cost_timer = setInterval(Energy_Cost_Tick, 35000);                // 更新能源消耗的情况
+        var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 30000);
+        var select_sql_timer = setInterval(Select_Sql_Tick, 65000);
 
 
 
@@ -506,9 +506,15 @@
         month.setHours(0, 0, 0);
         var month_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(month);
 
+        var label_cost_energy_today = document.getElementById("label_today_energy");
+        var label_cost_energy_mongth = document.getElementById("label_month_energy");
 
-        get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_today_energy");
-        get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_month_energy");
+        label_cost_energy_today.textContent = Energy_Cost_BeginDate_To_EndDate(today_string, torrow_string);
+        label_cost_energy_mongth.textContent = Energy_Cost_BeginDate_To_EndDate(month_string, torrow_string);
+        
+
+        //get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + today_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_today_energy");
+        //get_result_sql_to_labelcontent(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + month_string + "\" and savetime<=\"" + torrow_string + "\") as a group by a.device_id) as b", "label_month_energy");
     }
 
 
@@ -517,7 +523,7 @@
     function Energy_Cost_BeginDate_To_EndDate(startdate,enddate)
     {
 
-        var cost_today = get_result_sql(" select sum(`max(value)`-`min(value)`) from (select max(value),min(value) from  (select device_id,value_id, value from history_save where value_id=(select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\"" + startdate + "\" and savetime<=\"" + enddate + "\") as a group by a.device_id) as b");
+        var cost_today = get_result_sql("select sum(cost) from elect_device_energy_cost where datetime>=\"" + startdate + "\" and datetime<\"" + enddate + "\"");
         try {
             var cost_today_json = From_Text_To_Json(cost_today);
 
