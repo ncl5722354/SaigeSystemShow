@@ -65,7 +65,7 @@
         setInterval(Elect_Devices_Tick, 20000);
 
         Elect_Temp_Device_Tick();
-        setInterval(Elect_Devices_Tick, 20000);
+        setInterval(Elect_Temp_Device_Tick, 20000);
     }
 
     init();

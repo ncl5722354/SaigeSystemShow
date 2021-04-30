@@ -63,6 +63,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BitDevices.aspx" />
     <Content Include="chart\bower.json" />
     <Content Include="chart\composer.json" />
     <Content Include="chart\LICENSE.md" />
@@ -101,6 +102,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitDevices.aspx.cs">
+      <DependentUpon>BitDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BitDevices.aspx.designer.cs">
+      <DependentUpon>BitDevices.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Elect_RealTime.aspx.cs">
       <DependentUpon>Elect_RealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

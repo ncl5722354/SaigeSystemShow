@@ -115,6 +115,7 @@
         <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
             <div id="div_overview" style="position:absolute;left:-5%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
             <div id="div_data_collection" style="position:absolute;left:-5%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
+            <div id="div_bit_devices" style="position:absolute;left:-5%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">开关量监测</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
@@ -289,8 +290,10 @@
     // 动画设定
     Set_Animation_Select_Button("div_overview");
     Set_Animation_Select_Button("div_data_collection");
+    Set_Animation_Select_Button("div_bit_devices");
     Set_Animation_Div("device_overview");
     Set_Animation_Div("device_project_info");
+   
 
 
     Set_Animation_Label("label_deviceoverview_title");
@@ -598,6 +601,15 @@
     {
         var sub_iframe = document.getElementById("subiframe");
         sub_iframe.style.visibility = "hidden";
+    }
+
+    var button_bit_devices = document.getElementById("div_bit_devices");
+
+    button_bit_devices.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("BitDevices.aspx", "subiframe");
     }
 
 

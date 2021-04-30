@@ -13,7 +13,10 @@
       <publishTime>04/12/2021 08:42:52</publishTime>
     </File>
     <File Include="bin/SaigeSystemShow.dll">
-      <publishTime>04/27/2021 09:32:00</publishTime>
+      <publishTime>04/30/2021 16:16:02</publishTime>
+    </File>
+    <File Include="BitDevices.aspx">
+      <publishTime>04/30/2021 16:05:01</publishTime>
     </File>
     <File Include="chart/bower.json">
       <publishTime>04/12/2021 08:56:12</publishTime>
@@ -76,7 +79,7 @@
       <publishTime>04/20/2021 14:39:27</publishTime>
     </File>
     <File Include="MainView.aspx">
-      <publishTime>04/29/2021 10:43:09</publishTime>
+      <publishTime>04/30/2021 14:58:38</publishTime>
     </File>
     <File Include="pic/loginba.png">
       <publishTime>04/12/2021 08:42:52</publishTime>
@@ -88,7 +91,7 @@
       <publishTime>04/25/2021 16:55:40</publishTime>
     </File>
     <File Include="String_Caozuo.js">
-      <publishTime>04/22/2021 10:28:41</publishTime>
+      <publishTime>04/30/2021 15:06:57</publishTime>
     </File>
     <File Include="viewfunction.js">
       <publishTime>04/12/2021 08:42:52</publishTime>
