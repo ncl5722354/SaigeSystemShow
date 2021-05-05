@@ -9,14 +9,11 @@
 </head>
 <body>
     <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
-    <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
-        <img  id="img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
+    <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;background-color:#0B121C">
         <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">电力系统实时监测</label>
-        
-        <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;"></div>
-        <div id="elect_device_div2" style="position:absolute;left:35%;width:30%;height:40%;top:15%;"></div>
-        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;"></div>
-
+        <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
+        <div id="elect_device_div2" style="position:absolute;left:35%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
+        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
     </div>
     </form>
 </body>
@@ -83,22 +80,12 @@
 
             contect_div.innerHTML = "";
 
-            // 放入图片
-            var back_framk_img = document.createElement("img");
-            back_framk_img.style.left = "0%";
-            back_framk_img.style.top = "0%";
-            back_framk_img.style.width = "100%";
-            back_framk_img.style.height = "100%";
-            back_framk_img.src = "pic//frame2.png";
-            contect_div.appendChild(back_framk_img);
-
-
             // 能源消耗标题
             var label_energy_cost_title = document.createElement("label");
             label_energy_cost_title.style.position = "absolute";
-            label_energy_cost_title.style.left = "15%";
+            label_energy_cost_title.style.left = "5%";
             label_energy_cost_title.style.width = "20%";
-            label_energy_cost_title.style.top = "15%";
+            label_energy_cost_title.style.top = "10%";
             label_energy_cost_title.style.height = "20px";
             label_energy_cost_title.style.fontSize = "18px";
             label_energy_cost_title.textContent = "能源消耗";
@@ -112,7 +99,7 @@
             var label_energy_cost = document.createElement("label");
            
             label_energy_cost.style.position = "absolute";
-            label_energy_cost.style.left = "10%";
+            label_energy_cost.style.left = "0%";
             label_energy_cost.style.width = "30%";
             label_energy_cost.style.top = "30%";
             label_energy_cost.style.height = "40px";
@@ -128,10 +115,12 @@
             var Uabc_div = document.createElement("div");
             
             Uabc_div.style.position = "absolute";
-            Uabc_div.style.left = "50%";
-            Uabc_div.style.width = "50%";
-            Uabc_div.style.top = "15%";
+            Uabc_div.style.left = "40%";
+            Uabc_div.style.width = "55%";
+            Uabc_div.style.top = "5%";
             Uabc_div.style.height = "15%";
+            Uabc_div.style.borderStyle = "solid";
+            Uabc_div.style.borderColor = "#444B55";
             contect_div.appendChild(Uabc_div);
 
 
@@ -163,10 +152,12 @@
             // 电流
             var Iabc_div = document.createElement("div");
             Iabc_div.style.position = "absolute";
-            Iabc_div.style.left = "50%";
-            Iabc_div.style.width = "50%";
-            Iabc_div.style.top = "30%";
+            Iabc_div.style.left = "40%";
+            Iabc_div.style.width = "55%";
+            Iabc_div.style.top = "20%";
             Iabc_div.style.height = "15%";
+            Iabc_div.style.borderStyle = "solid";
+            Iabc_div.style.borderColor = "#444B55";
             contect_div.appendChild(Iabc_div);
 
             var Iabc_title = document.createElement("label");
@@ -196,10 +187,12 @@
             // 功率
             var Power_Rate_div = document.createElement("div");
             Power_Rate_div.style.position = "absolute";
-            Power_Rate_div.style.left = "50%";
-            Power_Rate_div.style.width = "50%";
-            Power_Rate_div.style.top = "45%";
+            Power_Rate_div.style.left = "40%";
+            Power_Rate_div.style.width = "55%";
+            Power_Rate_div.style.top = "35%";
             Power_Rate_div.style.height = "15%";
+            Power_Rate_div.style.borderStyle = "solid";
+            Power_Rate_div.style.borderColor = "#444B55";
             contect_div.appendChild(Power_Rate_div);
 
             var Power_Rate_title = document.createElement("label");
@@ -229,10 +222,12 @@
             // 转换因数
             var Conversion_Factor_div = document.createElement("div");
             Conversion_Factor_div.style.position = "absolute";
-            Conversion_Factor_div.style.left = "50%";
-            Conversion_Factor_div.style.width = "50%";
-            Conversion_Factor_div.style.top = "60%";
+            Conversion_Factor_div.style.left = "40%";
+            Conversion_Factor_div.style.width = "55%";
+            Conversion_Factor_div.style.top = "50%";
             Conversion_Factor_div.style.height = "15%";
+            Conversion_Factor_div.style.borderStyle = "solid";
+            Conversion_Factor_div.style.borderColor = "#444B55";
             contect_div.appendChild(Conversion_Factor_div);
 
             var Conversion_Factor_title = document.createElement("label");
@@ -263,10 +258,12 @@
             // 三相温度
             var Temp_abc_div = document.createElement("label");
             Temp_abc_div.style.position = "absolute";
-            Temp_abc_div.style.left = "50%";
-            Temp_abc_div.style.width = "50%";
-            Temp_abc_div.style.top = "75%";
+            Temp_abc_div.style.left = "40%";
+            Temp_abc_div.style.width = "55%";
+            Temp_abc_div.style.top = "65%";
             Temp_abc_div.style.height = "15%";
+            Temp_abc_div.style.borderStyle = "solid";
+            Temp_abc_div.style.borderColor = "#444B55";
             contect_div.appendChild(Temp_abc_div);
 
             var Temp_abc_Title = document.createElement("label");
@@ -288,24 +285,11 @@
             label_Temp_abc.style.top = "50%";
             label_Temp_abc.style.height = "15px";
             label_Temp_abc.style.fontSize = "13px";
-            label_Temp_abc.style.textAlign = "center";
+            label_Temp_abc.style.textAlign = "0";
             label_Temp_abc.id = div_name_head + (i + 1).toString() + "_Temp_abc";
             label_Temp_abc.style.color = "white";
             label_Temp_abc.style.textAlign = "center";
             Temp_abc_div.appendChild(label_Temp_abc);
-
-            // 表名
-            var Temp_Device_Title = document.createElement("label");
-            Temp_Device_Title.style.position = "absolute";
-            Temp_Device_Title.style.left = "5%";
-            Temp_Device_Title.style.width = "40%";
-            Temp_Device_Title.style.top = "75%";
-            Temp_Device_Title.style.heigh = "20px";
-            Temp_Device_Title.style.fontSize = "18px";
-            Temp_Device_Title.style.textAlign = "center";
-            Temp_Device_Title.id = div_name_head + (i + 1).toString() + "_Title";
-            Temp_Device_Title.style.color = "white";
-            contect_div.appendChild(Temp_Device_Title);
 
         }
     }
@@ -320,30 +304,27 @@
             var label_elect_cost_id = "elect_device_div" + (i + 1).toString() + "_energy_cost";
             var sql_elect_cost = "select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_elect_cost, label_elect_cost_id);
-            
+            //From_Sql_To_TextContent(label_elect_cost_id, sql_elect_cost);
 
             var label_Uabc_id = "elect_device_div" + (i + 1).toString() + "_Uabc";
             var sql_Uabc = "select value1 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
-            
+            //From_Sql_To_TextContent(label_Uabc_id, sql_Uabc);
 
             var label_Iabc_id = "elect_device_div" + (i + 1).toString() + "_Iabc";
             var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
-            
+            //From_Sql_To_TextContent(label_Iabc_id, sql_Iabc);
+
             var label_Power_Rate_id = "elect_device_div" + (i + 1).toString() + "_Power_Rate";
             var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Power_Rate, label_Power_Rate_id);
-            
+            // From_Sql_To_TextContent(label_Power_Rate_id, sql_Power_Rate);
 
             var label_Conversion_Factor = "elect_device_div" + (i + 1).toString() + "_Conversion_Factor";
             var sql_Conversion_Factor = "select value4 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Conversion_Factor, label_Conversion_Factor);
-            
-            var label_Title = "elect_device_div" + (i + 1).toString() + "_Title";
-            var sql_Device_Name = "select shebeiname from shebeitable where shebeiID=\"" + shebeiId + "\"";
-            get_result_sql_to_labelcontent(sql_Device_Name, label_Title);
-            
+            //From_Sql_To_TextContent(label_Conversion_Factor, sql_Conversion_Factor);
         }
     }
 

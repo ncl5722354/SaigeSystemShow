@@ -155,7 +155,7 @@ function Put_Array_Label_In_Div(array,div_name)
         label.style.width = "90%";
         label.style.fontSize = "20px";
         label.textContent = array[i].toString();
-        label.style.color = "#61C9D6";
+        label.style.color = "white";
         label.id = "label_"+ div_name + "_" + i.toString();
         device_project_subdiv_view.appendChild(label);
      //   all_label.push(label.id.toString());
@@ -186,7 +186,7 @@ function Put_Table_Label_In_Div(arrayitem,arrayleft,arraywidth,div_name)
             label.style.width = arraywidth[j];
             label.style.height = "30px";
             label.textContent = label_array[j].toString();
-            label.style.color = "#61C9D6";
+            label.style.color = "white";
             label.id = "label_" + div_name + "_" + i.toString() + "_" + j.toString();
             label.style.textAlign = "center";
             subdiv.appendChild(label);

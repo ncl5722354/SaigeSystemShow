@@ -35,7 +35,7 @@
         @keyframes animation_div_movein
         {
             from{
-                border-color:#61C9D6;
+                border-color:white;
             }
             to
             {
@@ -51,7 +51,7 @@
             }
             to
             {
-                border-color:#61C9D6;
+                border-color:white;
             }
         }
 
@@ -60,7 +60,7 @@
         @keyframes animation_label_movein
         {
             from{
-                color:#61C9D6;
+                color:white;
             }
             to
             {
@@ -76,7 +76,7 @@
             }
             to
             {
-                color:#61C9D6;
+                color:white;
             }
         }
 
@@ -104,31 +104,35 @@
 <body>
     <form id="form1" runat="server">
     <div style="overflow:hidden">
-        <img id="img_bg" style="position:absolute;left:0%;width:100%;top:0%; height:100%;" src="pic/loginba.png" />
-         <div id="mask" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:darkblue;opacity:0.5"></div>
-        <div id="div_headeer" style="position:absolute;left:0%;width:100%;top:0%;height:80px;background-color:#178AB9">
-            <label id="login_name" style="position:absolute;left:85%;width:15%;top:20px;height:30px;font-size:25px;color:white;">登录者</label>
-            <label id="label_title" style="position:absolute;left:10%;width:30%;top:20px;height:40px;font-size:30px;text-align:center;color:white">赛格物业机电管控平台</label>
+        <img id="img_bg" style="position:absolute;left:0%;width:100%;top:0%; height:100%;" src="pic/background.png" />
+         <!--div id="mask" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:darkblue;opacity:0.5"--><!--/div-->
+        <div id="div_headeer" style="position:absolute;left:0%;width:100%;top:0%;height:80px;">
+            <label id="login_name" style="position:absolute;left:85%;width:15%;top:35px;height:30px;font-size:25px;color:white; font-weight: bold; font-style: italic;">登录者</label>
+            <label id="label_title" style="position:absolute;left:40%;width:20%;top:10px;height:40px;font-size:30px;text-align:center;color:white">赛格物业机电管控平台</label>
+            <label id="label_time" style="position:absolute;left:1%;width:20%;top:35px;height:30px;font-size:18px;color:white;font-weight:bold;font-style:italic;">当前时间</label>
         </div>
 
         <label id="label_company" style="position:absolute;left:25%;width:50%;top:95%;height:30px;font-size:25px;color:white;text-align:center">深圳市赛格物业管理有限公司</label>
         <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
-            <div id="div_overview" style="position:absolute;left:-5%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
-            <div id="div_data_collection" style="position:absolute;left:-5%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
+            <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
+            <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
+            <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">开关量监测</div>
         </div>
 
-        <div id="device_overview" style="position:absolute;left:20%;width:20%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;">
-            <div id="back" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-            <label id="label_deviceoverview_title" style="position:absolute;left:5%;width:50%;top:2%;height:15%;font-size:20px;color:#61C9D6;">设备总数量</label>
-            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:17%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
-            <label id="label_deviceonline_title" style="position:absolute;left:5%;width:50%;top:50%;height:15%;font-size:20px;color:#61C9D6;">设备在线数量</label>
-            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:65%;height:30px;font-size:40px;color:#61C9D6;">0台</label>
+        <div id="device_overview" style="position:absolute;left:12%;width:20%;top:10%;height:20%;">
+            <img id="device_overview_back" src="pic/frame1.png" style="position:absolute;left:0%;width:100%;height:100%;top:0%;"/>
+            <div id="back" style="position:absolute;left:0%;width:100%;top:0%;height:100%;"></div>
+            <label id="label_device_overview" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center;">数据总览</label>
+            <label id="label_deviceoverview_title" style="position:absolute;left:5%;width:50%;top:25%;height:15%;font-size:20px;color:white;">设备总数量</label>
+            <label id="label_deviceoverview_num" style="position:absolute;left:60%;width:40%;top:30%;height:30px;font-size:40px;color:white;">0台</label>
+            <label id="label_deviceonline_title" style="position:absolute;left:5%;width:50%;top:55%;height:15%;font-size:20px;color:white;">设备在线数量</label>
+            <label id="label_deviceonline_num" style="position:absolute;left:60%;width:40%;top:60%;height:30px;font-size:40px;color:white;">0台</label>
         </div>
 
 
-        <div id="device_project_info" style="position:absolute;left:45%;width:35%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden;">
-             <div id="back1" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-            <label id="label_device_project_info" style="position:absolute;left:5%;width:50%;top:2%;height:15%;font-size:20px;color:#61C9D6;">各项目在线信息</label>
+        <div id="device_project_info" style="position:absolute;left:35%;width:40%;top:10%;height:20%;">
+             <img id="device_project_back" src="pic/frame1.png" style="position:absolute;left:0%;width:100%;height:100%;top:0%;"/>
+            <label id="label_device_project_info" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center;">各项目在线信息</label>
             <div id="context_div" style="position:absolute;left:0%;width:100%;top:20%;bottom:0px;overflow:hidden;">
                <div id="device_project_subdiv"  style="position:absolute;left:0%;width:100%;top:0px;bottom:0px;">
 
@@ -136,11 +140,12 @@
             </div>
         </div>
 
-        <div id="warning_info" style="position:absolute;left:45%;width:35%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden;">
-            <div id="back2" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-                <label id="label_warning_info" style="position:absolute;left:0%;width:60%;top:2%;height:15%;font-size:20px;color:#61C9D6;text-align:center">报警信息</label>
-                <label id="label_warninig_time" style="position:absolute;left:60%;width:40%;top:2%;height:15%;font-size:20px;color:#61C9D6;text-align:center">报警时间</label>
-                <div id="warning_info_context_div" style="position:absolute;left:0%;width:100%;top:20%;bottom:0px;overflow:hidden">
+        <div id="warning_info" style="position:absolute;left:12%;width:20%;top:70%;height:25%;">
+            <img id="warning_info_back" src="pic/frame1.png" style="position:absolute;left:0%;width:100%;height:100%;top:0%;"/>
+                 <label id="label_warning_title" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center;">报警概况</label>
+                <label id="label_warning_info" style="position:absolute;left:0%;width:60%;top:15%;height:15%;font-size:20px;color:white;text-align:center">报警信息</label>
+                <label id="label_warninig_time" style="position:absolute;left:60%;width:40%;top:15%;height:15%;font-size:20px;color:white;text-align:center">报警时间</label>
+                <div id="warning_info_context_div" style="position:absolute;left:0%;width:100%;top:30%;bottom:0px;overflow:hidden">
                 <div id="warning_info_subdiv" style="position:absolute;left:0%;width:100%;top:0px;bottom:0px">
 
                 </div>
@@ -149,43 +154,53 @@
         </div>
        
 
-        <div id="device_energy_cost" style="position:absolute;left:20%;width:20%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:hidden">
-            <div id="back3" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-            <label id="label_energy_title" style="position:absolute;left:10%;width:30%;top:5%;height:15px;font-size:15px;color:#61C9D6">能源概况</label>
-            <label id="label_today_energy_title" style="position:absolute;left:1%;width:30%;top:30%;height:15px;font-size:15px;color:#61C9D6">今日能源消耗</label>
-            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:25%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
-            <label id="label_month_energy_title" style="position:absolute;left:1%;width:30%;top:50%;height:15px;font-size:15px;color:#61C9D6">本月能源消耗</label>
-            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:45%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
+        <div id="device_energy_cost" style="position:absolute;left:12%;width:20%;top:40%;height:25%;">
+            <img id="device_energy_cost_back" style="position:absolute;left:0%;width:100%;top:0%;height:100%" src="pic/frame1.png"/>
+            <label id="label_energy_title" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center">能源概况</label>
+            <label id="label_today_energy_title" style="position:absolute;left:10%;width:40%;top:30%;height:20px;font-size:20px;color:white">今日能源消耗</label>
+            <label id="label_today_energy" style="position:absolute;left:35%;width:60%;top:30%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
+            <label id="label_month_energy_title" style="position:absolute;left:10%;width:40%;top:65%;height:20px;font-size:20px;color:white">本月能源消耗</label>
+            <label id="label_month_energy" style="position:absolute;left:35%;width:60%;top:65%;height:30px;font-size:28px;color:#F2B828;text-align:center">0</label>
         </div>
 
-        <div id="pie_device_online_div" style="position:absolute;left:85%;width:13%;top:10%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
-            <div id="back4" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-                <label id="pie_device_onliee_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线项目示意</label>
-                <canvas id="pie_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
+        <div id="pie_device_online_div" style="position:absolute;left:78%;width:20%;top:10%;height:20%;overflow:inherit">
+            <img id="pie_device_online_back" style="position:absolute;left:0%;width:100%;top:0%;height:100%" src="pic/frame1.png"/>
+            <label id="pie_device_onliee_title" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center">在线项目统计</label>
+            <div id="pie_device_online_red" style="position:absolute;left:10%;width:8%;top:20%;height:8%;border-style:solid;border-color:white;background-color:red"></div>
+             <label id="label_device_online_red" style="position:absolute;left:0%;width:28%;top:40%;height:15px;font-size:13px;color:white;text-align:center;">离线</label>
+            <div id="pie_device_online_blue" style="position:absolute;left:82%;width:8%;top:20%;height:8%;border-style:solid;border-color:white;background-color:blue"></div>
+            <label id="label_device_online_blue" style="position:absolute;left:72%;width:28%;top:40%;height:15px;font-size:13px;color:white;text-align:center;">在线</label>
+            <canvas id="pie_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
 
-                </canvas>
+            </canvas>
             
         </div>
 
 
-        <div id="Doughnut_device_online_div" style="position:absolute;left:85%;width:13%;top:40%;height:25%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
-            <div id="back6" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:black;opacity:0.5;border-radius:5%;"></div>
-             <label id="goughnut_device_onliee_title2" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:white">在线设备示意</label>
+        <div id="Doughnut_device_online_div" style="position:absolute;left:78%;width:20%;top:40%;height:20%;overflow:inherit">
+            <img id="Doughnut_device_online_back" style="position:absolute;left:0%;width:100%;top:0%;height:100%" src="pic/frame1.png"/>
+            <label id="goughnut_device_onliee_title2" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center">在线设备统计</label>
+              <div id="goughnut_device_online_red" style="position:absolute;left:10%;width:8%;top:20%;height:8%;border-style:solid;border-color:white;background-color:red"></div>
+             <label id="label_device_online_red_goughnut" style="position:absolute;left:0%;width:28%;top:40%;height:15px;font-size:13px;color:white;text-align:center;">离线</label>
+            <div id="goughnut_device_online_blue" style="position:absolute;left:82%;width:8%;top:20%;height:8%;border-style:solid;border-color:white;background-color:blue"></div>
+            <label id="label_device_online_blue_goughnut" style="position:absolute;left:72%;width:28%;top:40%;height:15px;font-size:13px;color:white;text-align:center;">在线</label>
             <canvas id="doughunt_device_online" style="position:absolute;left:0%;width:100%;top:30%;height:65%;">
 
-                </canvas>
+            </canvas>
         </div>
 
-        <div id="line_energy_cowst" style="position:absolute;left:20%;width:75%;top:70%;height:20%;border-style:solid;border-color:#61C9D6;border-radius:5%;overflow:inherit">
-            <div id="back5" style="position:absolute;left:0%;width:100%;top:0%;height:100%;background-color:white;opacity:0.7;border-radius:5%;"> </div>
-             <label id="line_energy_cost_title" style="position:absolute;left:0%;width:100%;top:10%;height:20%;text-align:center;font-size:15px;color:black">能源监测</label>
-                <canvas id="line_energy_cost" style="position:absolute;left:0%;width:100%;top:15%;height:84%;color:white;overflow:inherit">
+        <div id="line_energy_cowst" style="position:absolute;left:35%;width:63%;top:70%;height:25%;overflow:inherit">
+             <img id="line_energy_cowst_back" style="position:absolute;left:0%;width:100%;top:0%;height:100%" src="pic/frame1.png"/>
+            
+             <label id="line_energy_cost_title" style="position:absolute;left:40%;width:20%;top:2%;height:10%;font-size:12px;color:white;text-align:center">能源监测</label>
+                <canvas id="line_energy_cost" style="position:absolute;left:5%;width:95%;top:15%;height:84%;color:white;overflow:inherit">
 
                 </canvas>
 
        </div>
-
-       <iframe id="subiframe" style="position:absolute;left:10%;top:10%;width:90%;height:90%;visibility:hidden"></iframe>
+         <img id="building" style="position:absolute;left:40%;width:30%;top:30%;height:40%;" src="pic/building.png"/>
+       <iframe id="subiframe" style="position:absolute;left:10%;top:7%;width:90%;height:93%;visibility:hidden"></iframe>
+       
        </div>
     </form>
 </body>
@@ -235,16 +250,10 @@
         var energy_cost_timer = setInterval(Energy_Cost_Tick, 35000);                // 更新能源消耗的情况
         var evergy_cost_line_timer = setInterval(Show_Energy_Cost_Line, 30000);
         var select_sql_timer = setInterval(Select_Sql_Tick, 65000);
-
-
+        setInterval(Time_Timer, 500);              // 时钟
 
         // 实时更新设备数量与在线情况
 
-
-
-
-        
-        
         Set_Sroll_Div_In_Div("device_project_subdiv");
 
 
@@ -289,8 +298,10 @@
     // 动画设定
     Set_Animation_Select_Button("div_overview");
     Set_Animation_Select_Button("div_data_collection");
+    Set_Animation_Select_Button("div_bit_devices");
     Set_Animation_Div("device_overview");
     Set_Animation_Div("device_project_info");
+   
 
 
     Set_Animation_Label("label_deviceoverview_title");
@@ -445,7 +456,7 @@
 
             var lasttime = new Date();
 
-            lasttime.setMinutes(lasttime.getMinutes() - 3);
+            lasttime.setMinutes(lasttime.getMinutes() - 5);
 
             var lasttime_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(lasttime);
 
@@ -600,17 +611,29 @@
         sub_iframe.style.visibility = "hidden";
     }
 
+    var button_bit_devices = document.getElementById("div_bit_devices");
+
+    button_bit_devices.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("BitDevices.aspx", "subiframe");
+    }
+
 
     // 用来集中select 异步更新
     function Select_Sql_Tick()
     {
 
-       
+      
+    }
 
 
-
-
-
+    function Time_Timer()
+    {
+        var label_timer = document.getElementById("label_time");
+        var time=new Date();
+        label_timer.textContent = "当前时间：" + To_yyyy_MM_dd_HH_mm_ss_From_Data(time) + " " + Get_Week_Day(time.getDay().toString());
     }
 
 

@@ -47,9 +47,7 @@ function get_result_sql(sql)
 
         }
     });
-    return result;
-
-    
+    return result; 
 }
 
 
