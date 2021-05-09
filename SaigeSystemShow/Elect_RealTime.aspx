@@ -62,6 +62,7 @@
        
 
         Put_Elect_Devices_To_Divs(elect_device_list, "elect_device_div");
+        Put_Elect_Temp_To_Divs(elect_temp_device_list, "elect_device_div");
         //alert(elect_device_list);
 
         Elect_Devices_Tick();
@@ -118,7 +119,7 @@
             label_energy_cost.style.height = "40px";
             label_energy_cost.style.fontSize = "38px";
             label_energy_cost.textContent = "0";
-            label_energy_cost.id = div_name_head + (i + 1).toString() + "_energy_cost";
+            label_energy_cost.id = div_name_head + list[i].toString() + "_energy_cost";
             label_energy_cost.style.color = "white";
             label_energy_cost.style.textAlign = "center";
             contect_div.appendChild(label_energy_cost);
@@ -154,7 +155,7 @@
             label_Uabc.style.height = "15px";
             label_Uabc.style.fontSize = "13px";
             label_Uabc.textContent = "0";
-            label_Uabc.id = div_name_head + (i + 1).toString() + "_Uabc";
+            label_Uabc.id = div_name_head + list[i].toString() + "_Uabc";
             label_Uabc.style.color = "white";
             label_Uabc.style.textAlign = "center";
             Uabc_div.appendChild(label_Uabc);
@@ -188,7 +189,7 @@
             label_Iabc.style.height = "15px";
             label_Iabc.style.fontSize = "13px";
             label_Iabc.textContent = "0";
-            label_Iabc.id = div_name_head + (i + 1).toString() + "_Iabc";
+            label_Iabc.id = div_name_head + list[i].toString() + "_Iabc";
             label_Iabc.style.color = "white";
             label_Iabc.style.textAlign = "center";
             Iabc_div.appendChild(label_Iabc);
@@ -221,7 +222,7 @@
             label_Power_Rate.style.height = "15px";
             label_Power_Rate.style.fontSize = "13px";
             label_Power_Rate.textContent = "0";
-            label_Power_Rate.id = div_name_head + (i + 1).toString() + "_Power_Rate";
+            label_Power_Rate.id = div_name_head + list[i].toString() + "_Power_Rate";
             label_Power_Rate.style.color = "white";
             label_Power_Rate.style.textAlign = "center";
             Power_Rate_div.appendChild(label_Power_Rate);
@@ -254,12 +255,37 @@
             label_Conversion_Factor.style.height = "15px";
             label_Conversion_Factor.style.fontSize = "13px";
             label_Conversion_Factor.textContent = "0";
-            label_Conversion_Factor.id = div_name_head + (i + 1).toString() + "_Conversion_Factor";
+            label_Conversion_Factor.id = div_name_head + list[i].toString() + "_Conversion_Factor";
             label_Conversion_Factor.style.color = "white";
             label_Conversion_Factor.style.textAlign = "center";
             Conversion_Factor_div.appendChild(label_Conversion_Factor);
 
 
+
+            // 表名
+            var Temp_Device_Title = document.createElement("label");
+            Temp_Device_Title.style.position = "absolute";
+            Temp_Device_Title.style.left = "5%";
+            Temp_Device_Title.style.width = "40%";
+            Temp_Device_Title.style.top = "75%";
+            Temp_Device_Title.style.heigh = "20px";
+            Temp_Device_Title.style.fontSize = "18px";
+            Temp_Device_Title.style.textAlign = "center";
+            Temp_Device_Title.id = div_name_head + list[i].toString() + "_Title";
+            Temp_Device_Title.style.color = "white";
+            contect_div.appendChild(Temp_Device_Title);
+
+        }
+    }
+
+
+
+    // 三相温度
+    function Put_Elect_Temp_To_Divs(list,div_name_head)
+    {
+        for (var i = 0; i < list.length; i++) {
+
+            var contect_div = document.getElementById(div_name_head + (i + 1).toString());
             // 三相温度
             var Temp_abc_div = document.createElement("label");
             Temp_abc_div.style.position = "absolute";
@@ -289,24 +315,10 @@
             label_Temp_abc.style.height = "15px";
             label_Temp_abc.style.fontSize = "13px";
             label_Temp_abc.style.textAlign = "center";
-            label_Temp_abc.id = div_name_head + (i + 1).toString() + "_Temp_abc";
+            label_Temp_abc.id = div_name_head + list[i].toString() + "_Temp_abc";
             label_Temp_abc.style.color = "white";
             label_Temp_abc.style.textAlign = "center";
             Temp_abc_div.appendChild(label_Temp_abc);
-
-            // 表名
-            var Temp_Device_Title = document.createElement("label");
-            Temp_Device_Title.style.position = "absolute";
-            Temp_Device_Title.style.left = "5%";
-            Temp_Device_Title.style.width = "40%";
-            Temp_Device_Title.style.top = "75%";
-            Temp_Device_Title.style.heigh = "20px";
-            Temp_Device_Title.style.fontSize = "18px";
-            Temp_Device_Title.style.textAlign = "center";
-            Temp_Device_Title.id = div_name_head + (i + 1).toString() + "_Title";
-            Temp_Device_Title.style.color = "white";
-            contect_div.appendChild(Temp_Device_Title);
-
         }
     }
 
@@ -317,30 +329,30 @@
             var shebeiId = elect_device_list[i].toString();
             // 用电量
 
-            var label_elect_cost_id = "elect_device_div" + (i + 1).toString() + "_energy_cost";
+            var label_elect_cost_id = "elect_device_div" + shebeiId + "_energy_cost";
             var sql_elect_cost = "select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_elect_cost, label_elect_cost_id);
             
 
-            var label_Uabc_id = "elect_device_div" + (i + 1).toString() + "_Uabc";
+            var label_Uabc_id = "elect_device_div" + shebeiId + "_Uabc";
             var sql_Uabc = "select value1 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
             
 
-            var label_Iabc_id = "elect_device_div" + (i + 1).toString() + "_Iabc";
+            var label_Iabc_id = "elect_device_div" + shebeiId + "_Iabc";
             var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
             
-            var label_Power_Rate_id = "elect_device_div" + (i + 1).toString() + "_Power_Rate";
+            var label_Power_Rate_id = "elect_device_div" + shebeiId + "_Power_Rate";
             var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Power_Rate, label_Power_Rate_id);
             
 
-            var label_Conversion_Factor = "elect_device_div" + (i + 1).toString() + "_Conversion_Factor";
+            var label_Conversion_Factor = "elect_device_div" + shebeiId + "_Conversion_Factor";
             var sql_Conversion_Factor = "select value4 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Conversion_Factor, label_Conversion_Factor);
             
-            var label_Title = "elect_device_div" + (i + 1).toString() + "_Title";
+            var label_Title = "elect_device_div" + shebeiId + "_Title";
             var sql_Device_Name = "select shebeiname from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Device_Name, label_Title);
             
@@ -357,7 +369,7 @@
             var device_id = elect_temp_device_list[i].toString();
 
             // 三相温度
-            var label_elect_temp_abc_id = "elect_device_div" + (i + 1).toString() + "_Temp_abc";
+            var label_elect_temp_abc_id = "elect_device_div" + device_id + "_Temp_abc";
             var sql_Temp_abc = "select value1 from shebeitable where shebeiID=\"" + device_id + "\"";
             get_result_sql_to_labelcontent(sql_Temp_abc, label_elect_temp_abc_id);
         }
