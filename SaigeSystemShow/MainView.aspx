@@ -117,6 +117,7 @@
             <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
             <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
             <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">开关量监测</div>
+            <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:255px;height:25px;font-size:20px;color:white;text-align:center;">模拟量监测</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:12%;width:20%;top:10%;height:20%;">
@@ -299,6 +300,7 @@
     Set_Animation_Select_Button("div_overview");
     Set_Animation_Select_Button("div_data_collection");
     Set_Animation_Select_Button("div_bit_devices");
+    Set_Animation_Select_Button("div_water_pump");
     Set_Animation_Div("device_overview");
     Set_Animation_Div("device_project_info");
    
@@ -620,6 +622,14 @@
         Put_Page_In_iFrame("BitDevices.aspx", "subiframe");
     }
 
+    var button_water_pump = document.getElementById("div_water_pump");
+
+    button_water_pump.onclick = function (event) {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("waterpump.aspx", "subiframe");
+    }
+    
 
     // 用来集中select 异步更新
     function Select_Sql_Tick()

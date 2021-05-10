@@ -104,6 +104,7 @@
     <Content Include="sql_JS.js" />
     <Content Include="String_Caozuo.js" />
     <Content Include="viewfunction.js" />
+    <Content Include="waterpump.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,13 @@
     <Compile Include="SqlCaozuo.asmx.cs">
       <DependentUpon>SqlCaozuo.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="waterpump.aspx.cs">
+      <DependentUpon>waterpump.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="waterpump.aspx.designer.cs">
+      <DependentUpon>waterpump.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>

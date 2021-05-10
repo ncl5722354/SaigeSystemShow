@@ -245,6 +245,7 @@ function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_arr
 function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
     try {
         myRadarChart.destroy();
+        myRadarChart
     }
     catch (err) { }
 
@@ -254,7 +255,7 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
         datasetStrokeWidth: 1,
         pointDotStrokeWidth: 1,
         pointDot: true,
-        pointDotRadius: 1,
+        pointDotRadius: 3,
         pointHitDetectionRadius: 1,
         datasetStroke: false,
         bezierCurveTension: 1,
@@ -263,9 +264,9 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
         scaleFontColor: "#fff",
         tooltipFontColor: "#fff",
         scaleFontColor: "rgba(220,220,220,1)",
-        scaleFontSize: 50,
-        pointLabelFontColor: "rgba(220,220,220,0)",
-       
+        scaleFontSize: 10,
+        pointLabelFontColor: "rgba(220,220,220,0.8)",
+        bezierCurve: false
 
     };
 
@@ -285,9 +286,7 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
             }]
     };
 
-    myRadarChart = new Chart(ctx).Line(data, {
-        bezierCurve: false
-    });
+    myRadarChart = new Chart(ctx).Line(data, options);
 
     for (var i = 0; i < value_array.length; i++) {
         myRadarChart.addData(value_array[i],label_list[i].toString());
