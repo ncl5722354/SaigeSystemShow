@@ -11,14 +11,63 @@
     <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
     <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
         <img  id="img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
-        <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">电力系统实时监测</label>
+        <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">供配电监测</label>
         
-        <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;"></div>
+       <%-- <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;"></div>
         <div id="elect_device_div2" style="position:absolute;left:35%;width:30%;height:40%;top:15%;"></div>
-        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;"></div>
+        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;"></div>--%>
+        
+        <div id="div_Substation_room" style="position:absolute;left:5%;width:25%;top:15%;height:30%">
+            <img id="backgroud_Substation_room" style="position:absolute;left:0%;top:0%;width:100%;height:100%" src="pic/frame1.png"/>
+            <label id="Substation_room_label" style="position:absolute;left:30%;width:40%;top:1%;height:20px;font-size:18px;text-align:center;color:white;">变压器房</label>
+            <label id="Substartion_room_tempabc_Title" style="position:absolute;left:1%;width:40%;top:15%;height:25px;font-size:20px;text-align:center;color:white">变压器三相温度</label>
+            <div id="Tempabc_div1" style="position:absolute;left:1%;width:98%;top:35%;height:25px;font-size:20px;text-align:center;color:white"></div>
+            <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:1%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
+            <div id="TempRoom_div1" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
+        </div>
+
+        <div id="div_Substation_room_vedio" style="position:absolute;left:5%;width:25%;top:65%;height:30%">
+            <img id="backgroud_Substation_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <label id="Substation_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">变压器房监控</label>
+            <video id="vedio_Substation_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
+
+        <div id="div_Low_voltage_Room" style="position:absolute;left:35%;width:25%;top:15%;height:30%">
+            <img id="backgroud_low_voltage_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <label id="low_voltage_room_label" style="position:absolute;left:30%;width:40%;top:2%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房</label>
+            <label id="low_voltage_room_roomtemp_Title" style="position:absolute;left:1%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">低压设备房温湿度</label>
+            <div id="TempRoom_div2" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：21℃  湿度：40%</div>
+        </div>
+
+
+        <div id="div_low_voltage_room_vedio" style="position:absolute;left:35%;width:25%;top:65%;height:30%">
+            <img id="backgroud_low_voltage_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <label id="low_voltage_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房监控</label>
+            <video id="vedio_voltage_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
+
+
+        <div id="div_Generator_room" style="position:absolute;left:65%;width:30%;top:15%;height:30%">
+            <img id="background_Generator_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png" />
+             <label id="Generator_room_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机组参数</label>
+            <div id="elect_value1" style="position:absolute;left:0%;width:100%;top:5%;height:95%;">
+
+            </div>
+            <label id="Generator_status_title" style="position:absolute;left:50%;width:20%;top:80%;height:12px;font-size:10px;color:white;text-align:center">运行状态</label>
+            <div id="bit_device_1" style="position:absolute;left:75%;width:3%;top:80%;height:5%;border-radius:100%;background-color:red"></div>
+        </div>
+
+
+        <div id="div_Generator_room_vedio" style="position:absolute;left:65%;width:25%;top:65%;height:30%">
+            <img id="backgroud_Generator_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <label id="Generator_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机监控</label>
+            <video id="Generator_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
 
         <div id="chart_datagrid_view" style="position:absolute;left:20%;width:60%;top:30%;height:60%;border-style:solid;border-width:2px;border-color:white;visibility:hidden;overflow:inherit">
+
              <img  id="sub_img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
+             
              <label id="sub_label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">历史数据</label>
               <label id="sub_chart_close" style="position:absolute;left:85%;width:15%;top:2%;height:20px;font-size:18px;text-align:center;color:white">关 闭</label>
               <div id="sub_chart_div" style="position:absolute;left:20%;width:60%;top:15%;height:84%;">
@@ -41,37 +90,55 @@
 <script src="sql_JS.js"></script>
 <script src="cooket.js"></script>
 <script src="Controler_Function.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
 <script>
 
     var elect_device_list = new Array();       // 保存电力设备列表
     var elect_temp_device_list = new Array();  // 保存电力温度设备列表
+    var bit_device_list = new Array();         // 保存开关量设备列表
+
+
 
 
     function init()
     {
 
-        /// 正泰电表系列
-        var elect_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰电表\")");
-        var elect_device_list_json = From_Text_To_Json(elect_device_list_string);
-        for(var i=0;i<elect_device_list_json.length;i++)
-        {
-            elect_device_list.push(elect_device_list_json[i]);
-        }
+        elect_temp_device_list.push("设备20210429095350");
+
+        Put_Elect_Temp_To_Divs(elect_temp_device_list, "Tempabc_div");
+
+
+        // 电力
+        elect_device_list.push("设备20210409224051");
+        Put_Elect_Devices_To_Divs(elect_device_list, "elect_value");
+
+
+        // 开关量
+        bit_device_list.push("设备20210430112255_2");
+
+        ///// 正泰电表系列
+        //var elect_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰电表\")");
+        //var elect_device_list_json = From_Text_To_Json(elect_device_list_string);
+        //for(var i=0;i<elect_device_list_json.length;i++)
+        //{
+        //    elect_device_list.push(elect_device_list_json[i]);
+        //}
 
         
-        // 正泰电力温度系列
-        var elect_temp_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰三相温度表\")")
-        var elect_temp_device_list_json = From_Text_To_Json(elect_temp_device_list_string);
+        //// 正泰电力温度系列
+        //var elect_temp_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰三相温度表\")")
+        //var elect_temp_device_list_json = From_Text_To_Json(elect_temp_device_list_string);
 
-        for (var i = 0; i < elect_temp_device_list_json.length; i++)
-        {
-            elect_temp_device_list.push(elect_temp_device_list_json[i]);
-        }
+        //for (var i = 0; i < elect_temp_device_list_json.length; i++)
+        //{
+        //    elect_temp_device_list.push(elect_temp_device_list_json[i]);
+        //}
        
 
-        Put_Elect_Devices_To_Divs(elect_device_list, "elect_device_div");
-        Put_Elect_Temp_To_Divs(elect_temp_device_list, "elect_device_div");
+        //Put_Elect_Devices_To_Divs(elect_device_list, "elect_device_div");
+        //Put_Elect_Temp_To_Divs(elect_temp_device_list, "elect_device_div");
         //alert(elect_device_list);
 
         Elect_Devices_Tick();
@@ -80,12 +147,18 @@
         Elect_Temp_Device_Tick();
         setInterval(Elect_Temp_Device_Tick, 20000);
 
+        Bit_Deivce_Tick();
+        setInterval(Bit_Deivce_Tick, 20000);
+
         var sub_chart_close = document.getElementById("sub_chart_close");
         sub_chart_close.onclick=function(event)
         {
             var sub_div = document.getElementById("chart_datagrid_view");
             sub_div.style.visibility = "hidden";
         }
+
+       
+        // Play_Vedio("192.168.1.2", "vedio_Substation_room_vedio");
 
 
     }
@@ -164,7 +237,7 @@
                 var thisid=event.target.id;
 
                 //  从历史中读取
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Get_Xiahuaxian_String(thisid,4)+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\")");
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Get_Xiahuaxian_String(thisid,3)+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\")");
                 var value_time_json = From_Text_To_Json(value_time_string);
 
                 var value_list = new Array();
@@ -355,31 +428,31 @@
             // 三相温度
             var Temp_abc_div = document.createElement("label");
             Temp_abc_div.style.position = "absolute";
-            Temp_abc_div.style.left = "50%";
-            Temp_abc_div.style.width = "50%";
-            Temp_abc_div.style.top = "75%";
-            Temp_abc_div.style.height = "15%";
+            Temp_abc_div.style.left = "0%";
+            Temp_abc_div.style.width = "100%";
+            Temp_abc_div.style.top = "0%";
+            Temp_abc_div.style.height = "100%";
             contect_div.appendChild(Temp_abc_div);
 
-            var Temp_abc_Title = document.createElement("label");
-            Temp_abc_Title.style.position = "absolute";
-            Temp_abc_Title.style.left = "5%";
-            Temp_abc_Title.style.width = "40%";
-            Temp_abc_Title.style.top = "5%";
-            Temp_abc_Title.style.height = "15px";
-            Temp_abc_Title.style.fontSize = "12px";
-            Temp_abc_Title.style.color = "white";
-            Temp_abc_Title.textContent = "电力三相温度（℃）"
-            Temp_abc_div.appendChild(Temp_abc_Title);
+            //var Temp_abc_Title = document.createElement("label");
+            //Temp_abc_Title.style.position = "absolute";
+            //Temp_abc_Title.style.left = "5%";
+            //Temp_abc_Title.style.width = "40%";
+            //Temp_abc_Title.style.top = "5%";
+            //Temp_abc_Title.style.height = "15px";
+            //Temp_abc_Title.style.fontSize = "12px";
+            //Temp_abc_Title.style.color = "white";
+            //Temp_abc_Title.textContent = "电力三相温度（℃）"
+            //Temp_abc_div.appendChild(Temp_abc_Title);
 
 
             var label_Temp_abc = document.createElement("label");
             label_Temp_abc.style.position = "absolute";
             label_Temp_abc.style.left = "10%";
             label_Temp_abc.style.width = "80%";
-            label_Temp_abc.style.top = "50%";
-            label_Temp_abc.style.height = "15px";
-            label_Temp_abc.style.fontSize = "13px";
+            label_Temp_abc.style.top = "0%";
+            label_Temp_abc.style.height = "25px";
+            label_Temp_abc.style.fontSize = "20px";
             label_Temp_abc.style.textAlign = "center";
             label_Temp_abc.id = div_name_head + list[i].toString() + "_Temp_abc";
             label_Temp_abc.style.color = "white";
@@ -395,12 +468,12 @@
             var shebeiId = elect_device_list[i].toString();
             // 用电量
 
-            var label_elect_cost_id = "elect_device_div_" + shebeiId + "_energy_cost";
+            var label_elect_cost_id = "elect_value_" + shebeiId + "_energy_cost";
             var sql_elect_cost = "select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_elect_cost, label_elect_cost_id);
             
 
-            var label_Uabc_id = "elect_device_div_" + shebeiId + "_Uabc";
+            var label_Uabc_id = "elect_value_" + shebeiId + "_Uabc";
             var sql_Uabc = "select value1 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             //get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
 
@@ -411,20 +484,20 @@
 
             
 
-            var label_Iabc_id = "elect_device_div_" + shebeiId + "_Iabc";
+            var label_Iabc_id = "elect_value_" + shebeiId + "_Iabc";
             var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
             
-            var label_Power_Rate_id = "elect_device_div_" + shebeiId + "_Power_Rate";
+            var label_Power_Rate_id = "elect_value_" + shebeiId + "_Power_Rate";
             var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Power_Rate, label_Power_Rate_id);
             
 
-            var label_Conversion_Factor = "elect_device_div_" + shebeiId + "_Conversion_Factor";
+            var label_Conversion_Factor = "elect_value_" + shebeiId + "_Conversion_Factor";
             var sql_Conversion_Factor = "select value4 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Conversion_Factor, label_Conversion_Factor);
             
-            var label_Title = "elect_device_div_" + shebeiId + "_Title";
+            var label_Title = "elect_value_" + shebeiId + "_Title";
             var sql_Device_Name = "select shebeiname from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Device_Name, label_Title);
             
@@ -441,9 +514,49 @@
             var device_id = elect_temp_device_list[i].toString();
 
             // 三相温度
-            var label_elect_temp_abc_id = "elect_device_div" + device_id + "_Temp_abc";
+            var label_elect_temp_abc_id = "Tempabc_div" + device_id + "_Temp_abc";
             var sql_Temp_abc = "select value1 from shebeitable where shebeiID=\"" + device_id + "\"";
-            get_result_sql_to_labelcontent(sql_Temp_abc, label_elect_temp_abc_id);
+            var temp_abc_string = get_result_sql(sql_Temp_abc);
+            var temp_abc_json = From_Text_To_Json(temp_abc_string);
+            var temp_string = temp_abc_json[0].toString();
+            var label = document.getElementById(label_elect_temp_abc_id);
+            label.textContent = "A相:" + Get_Kongge_String(temp_string, 1) + "℃\xa0\xa0" + "B相:" + Get_Kongge_String(temp_string, 2) + "℃\xa0\xa0" + "C相:" + Get_Kongge_String(temp_string, 3) + "℃";
+
+           // get_result_sql_to_labelcontent(sql_Temp_abc, label_elect_temp_abc_id);
+        }
+    }
+
+
+    // 开关量
+    function Bit_Deivce_Tick()
+    {
+        for(var i=0;i<bit_device_list.length;i++)
+        {
+            var id = bit_device_list[i].toString();
+
+            var Bit_Deivce_id = Get_Xiahuaxian_String(id, 1);
+            var index = Get_Xiahuaxian_String(id, 2);
+
+            var Bit_Sql = "select value1 from shebeitable where shebeiID=\"" + Bit_Deivce_id + "\"";
+
+            var bit_value_string = get_result_sql(Bit_Sql);
+
+            var bit_value_json = From_Text_To_Json(bit_value_string);
+
+            var bit_value = bit_value_json[0].toString();
+
+            var index_int = parseInt(index);
+
+            var bit = Get_Kongge_String(bit_value, index_int);
+
+            var div= document.getElementById("bit_device_"+(i+1).toString());
+
+            if (bit == "0")
+                div.style.backgroundColor = "red";
+            if (bit == "1")
+                div.style.backgroundColor = "yellow";
+
+                
         }
     }
 
