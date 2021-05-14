@@ -19,29 +19,33 @@
         
         <div id="div_Substation_room" style="position:absolute;left:5%;width:25%;top:15%;height:30%">
             <img id="backgroud_Substation_room" style="position:absolute;left:0%;top:0%;width:100%;height:100%" src="pic/frame1.png"/>
+            <img id="backgroud_Substation_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
             <label id="Substation_room_label" style="position:absolute;left:30%;width:40%;top:1%;height:20px;font-size:18px;text-align:center;color:white;">变压器房</label>
-            <label id="Substartion_room_tempabc_Title" style="position:absolute;left:1%;width:40%;top:15%;height:25px;font-size:20px;text-align:center;color:white">变压器三相温度</label>
-            <div id="Tempabc_div1" style="position:absolute;left:1%;width:98%;top:35%;height:25px;font-size:20px;text-align:center;color:white"></div>
-            <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:1%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
-            <div id="TempRoom_div1" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
+            <label id="Substartion_room_tempabc_Title" style="position:absolute;left:15%;width:40%;top:20%;height:25px;font-size:20px;text-align:center;color:white">变压器三相温度</label>
+            <div id="Tempabc_div1" style="position:absolute;left:5%;width:95%;top:35%;height:25px;font-size:16px;text-align:center;color:white"></div>
+            <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
+            <div id="TempRoom_div1" style="position:absolute;left:5%;width:98%;top:75%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
         </div>
 
         <div id="div_Substation_room_vedio" style="position:absolute;left:5%;width:25%;top:65%;height:30%">
             <img id="backgroud_Substation_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_Substation_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
             <label id="Substation_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">变压器房监控</label>
             <video id="vedio_Substation_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
         </div>
 
         <div id="div_Low_voltage_Room" style="position:absolute;left:35%;width:25%;top:15%;height:30%">
             <img id="backgroud_low_voltage_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+             <img id="backgroud_low_voltage_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
             <label id="low_voltage_room_label" style="position:absolute;left:30%;width:40%;top:2%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房</label>
-            <label id="low_voltage_room_roomtemp_Title" style="position:absolute;left:1%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">低压设备房温湿度</label>
+            <label id="low_voltage_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">低压设备房温湿度</label>
             <div id="TempRoom_div2" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：21℃  湿度：40%</div>
         </div>
 
 
         <div id="div_low_voltage_room_vedio" style="position:absolute;left:35%;width:25%;top:65%;height:30%">
             <img id="backgroud_low_voltage_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_low_voltage_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
             <label id="low_voltage_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房监控</label>
             <video id="vedio_voltage_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
         </div>
@@ -49,6 +53,7 @@
 
         <div id="div_Generator_room" style="position:absolute;left:65%;width:30%;top:15%;height:30%">
             <img id="background_Generator_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png" />
+            <img id="background_Generator_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
              <label id="Generator_room_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机组参数</label>
             <div id="elect_value1" style="position:absolute;left:0%;width:100%;top:5%;height:95%;">
 
@@ -60,6 +65,7 @@
 
         <div id="div_Generator_room_vedio" style="position:absolute;left:65%;width:25%;top:65%;height:30%">
             <img id="backgroud_Generator_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_Generator_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
             <label id="Generator_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机监控</label>
             <video id="Generator_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
         </div>

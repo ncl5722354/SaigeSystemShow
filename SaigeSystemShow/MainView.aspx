@@ -116,8 +116,8 @@
         <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
             <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
             <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">供配电</div>
-            <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">开关量监测</div>
-            <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:255px;height:25px;font-size:20px;color:white;text-align:center;">模拟量监测</div>
+            <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;visibility:hidden">开关量监测</div>
+            <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">给排水</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:12%;width:20%;top:10%;height:20%;">
