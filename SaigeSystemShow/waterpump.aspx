@@ -74,6 +74,12 @@
                <label id="Fire_pump_Start_Stop" style="position:absolute;left:20%;width:30%;top:25%;height:20px;font-size:18px;color:white">启停状态</label>
                <div id="Bits_Devices_4" style="position:absolute;left:50%;width:5%;top:26%;height:7%;background-color:red;border-radius:100%"></div>
                <label id="Fire_pump_Auto" style="position:absolute;left:20%;width:30%;top:40%;height:20px;font-size:18px;color:white">手自动状态</label>
+               <div id="Bits_Devices_5" style="position:absolute;left:50%;width:5%;top:41%;height:7%;background-color:red;border-radius:100%"></div>
+               <label id="Fire_pump_Error" style="position:absolute;left:20%;width:30%;top:55%;height:20px;font-size:18px;color:white">故障指示</label>
+               <div id="Bits_Devices_6" style="position:absolute;left:50%;width:5%;top:56%;height:7%;background-color:red;border-radius:100%"></div>
+               <label id="Fire_pump_Exit_Press" style="position:absolute;left:20%;width:30%;top:70%;height:20px;font-size:18px;color:white">出口压力</label>
+               <div id="AI_div_5" style="position:absolute;left:50%;width:50%;top:70%;height:20px;font-size:18px;color:white;">1125
+               </div>
            </div>
        </div>
       </form>
