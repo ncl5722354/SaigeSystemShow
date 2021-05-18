@@ -245,7 +245,7 @@ function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_arr
 function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
     try {
         myRadarChart.destroy();
-        myRadarChart
+       
     }
     catch (err) { }
 
@@ -267,12 +267,11 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
         scaleFontSize: 10,
         pointLabelFontColor: "rgba(220,220,220,0.8)",
         bezierCurve: false
-
     };
 
 
     var data = {
-        labels: [],
+        labels: label_list,
         datasets: [
             {
                 label: "My First dataset",
@@ -282,15 +281,102 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: []
+                data: value_array
             }]
     };
 
     myRadarChart = new Chart(ctx).Line(data, options);
 
-    for (var i = 0; i < value_array.length; i++) {
-        myRadarChart.addData(value_array[i],label_list[i].toString());
+    //for (var i = 0; i < value_array.length; i++) {
+    //    myRadarChart.addData(value_array[i],label_list[i].toString());
+    //}
+
+
+}
+
+function Show_Three_Lines(myRadarChar,value_array_3,label_list,canvas_name)
+{
+    var list1 = new Array();
+    var list2 = new Array();
+    var list3 = new Array();
+    try {
+        myRadarChart.destroy();
+        
+       
+        
     }
+    catch (err) { }
+
+    for (var i = 0; i < value_array_3.length; i++) {
+        list1.push(value_array_3[i][0]);
+        list2.push(value_array_3[i][1]);
+        list3.push(value_array_3[i][2]);
+    }
+
+    var ctx = document.getElementById(canvas_name).getContext("2d");
+
+    var options = {
+        datasetStrokeWidth: 1,
+        pointDotStrokeWidth: 1,
+        pointDot: true,
+        pointDotRadius: 3,
+        pointHitDetectionRadius: 1,
+        datasetStroke: false,
+        bezierCurveTension: 1,
+        datasetFill: false,
+        bezierCurve: false,
+        scaleFontColor: "#fff",
+        tooltipFontColor: "#fff",
+        scaleFontColor: "rgba(220,220,220,1)",
+        scaleFontSize: 10,
+        pointLabelFontColor: "rgba(220,220,220,0.8)",
+        bezierCurve: false
+    };
+
+
+
+    var data = {
+        labels: label_list,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(220,220,0,1)",   // 线的颜色
+                pointColor: "rgba(220,0,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list1
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(220,0,0,1)",   // 线的颜色
+                pointColor: "rgba(220,0,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list2
+            }
+            ,
+            {
+                label: "My Thrid dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(0,0,220,1)",   // 线的颜色
+                pointColor: "rgba(220,0,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list3
+            }
+        ]
+    };
+
+    myRadarChart = new Chart(ctx).Line(data, options);
+
+    //for (var i = 0; i < value_array_3.length; i++) {
+    //    myRadarChart.addData(value_array_3[i], label_list[i].toString());
+    //}
 
 
 }

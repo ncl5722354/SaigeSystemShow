@@ -76,7 +76,7 @@
              
              <label id="sub_label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">历史数据</label>
               <label id="sub_chart_close" style="position:absolute;left:85%;width:15%;top:2%;height:20px;font-size:18px;text-align:center;color:white">关 闭</label>
-              <div id="sub_chart_div" style="position:absolute;left:20%;width:60%;top:15%;height:84%;">
+              <div id="sub_chart_div" style="position:absolute;left:10%;width:80%;top:20%;height:80%;">
 
               </div>
         </div>
@@ -243,7 +243,9 @@
                 var thisid=event.target.id;
 
                 //  从历史中读取
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Get_Xiahuaxian_String(thisid,3)+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\")");
+                var today = new Date();
+                var day_string = To_yyyy_MM_dd_From_Data(today);
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Get_Xiahuaxian_String(thisid,3)+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\""+day_string+" 00:00:00\"");
                 var value_time_json = From_Text_To_Json(value_time_string);
 
                 var value_list = new Array();
@@ -251,19 +253,19 @@
 
                 var count = value_time_json.length;
 
-                if (count >= 30) count = 30;
+                //if (count >= 30) count = 30;
+
+
                 for(var i=0;i<count;i++)
                 {
                     value_list.push([value_time_json[i][0]]);
-                    time_list.push([value_time_json[i][1]]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1],2)]);
                 }
 
 
                 Show_Line(line_object, value_list, time_list, "sub_line_canvas");
 
                 // 画曲线
-
-
             }
 
 
@@ -305,6 +307,51 @@
             label_Uabc.style.textAlign = "center";
             Uabc_div.appendChild(label_Uabc);
 
+            label_Uabc.onclick=function(event)
+            {
+                var line_grid_view = document.getElementById("chart_datagrid_view");
+                line_grid_view.style.visibility = "visible";
+
+                var sub_lind_view = document.getElementById("sub_chart_div");
+
+                sub_lind_view.innerHTML = "";
+
+                var canvas = document.createElement("canvas");
+                canvas.style.left = "0%";
+                canvas.style.width = "100%";
+                canvas.style.top = "0%";
+                canvas.style.heigh = "100%";
+                canvas.style.position = "absolute";
+                canvas.id = "sub_line_canvas";
+                sub_lind_view.appendChild(canvas);
+
+                var line_object;
+
+                var thisid = event.target.id;
+
+                //  从历史中读取
+                var today = new Date();
+                var day_string = To_yyyy_MM_dd_From_Data(today);
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"正泰电表电压\") and savetime>=\"" + day_string + " 00:00:00\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var count = value_time_json.length;
+                var value_list = new Array();
+                var time_list = new Array();
+
+                for (var i = 0; i < count; i++) {
+                    value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+                }
+
+
+               
+                Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+
+
+
+            }
+
 
             // 电流
             var Iabc_div = document.createElement("div");
@@ -338,6 +385,50 @@
             label_Iabc.style.color = "white";
             label_Iabc.style.textAlign = "center";
             Iabc_div.appendChild(label_Iabc);
+
+            label_Iabc.onclick=function(event)
+            {
+                var line_grid_view = document.getElementById("chart_datagrid_view");
+                line_grid_view.style.visibility = "visible";
+
+                var sub_lind_view = document.getElementById("sub_chart_div");
+
+                sub_lind_view.innerHTML = "";
+
+                var canvas = document.createElement("canvas");
+                canvas.style.left = "0%";
+                canvas.style.width = "100%";
+                canvas.style.top = "0%";
+                canvas.style.heigh = "100%";
+                canvas.style.position = "absolute";
+                canvas.id = "sub_line_canvas";
+                sub_lind_view.appendChild(canvas);
+
+                var line_object;
+
+                var thisid = event.target.id;
+
+                //  从历史中读取
+                var today = new Date();
+                var day_string = To_yyyy_MM_dd_From_Data(today);
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"正泰电表电流\") and savetime>=\"" + day_string + " 00:00:00\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var count = value_time_json.length;
+                var value_list = new Array();
+                var time_list = new Array();
+
+                for (var i = 0; i < count; i++) {
+                    value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+                }
+
+
+
+                Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+            }
+
+
 
             // 功率
             var Power_Rate_div = document.createElement("div");
@@ -492,7 +583,14 @@
 
             var label_Iabc_id = "elect_value_" + shebeiId + "_Iabc";
             var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
-            get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
+            //get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
+           
+            var Iabc_value_string = get_result_sql(sql_Iabc);
+            var Iabec_value_json = From_Text_To_Json(Iabc_value_string);
+            var label_Iabc = document.getElementById(label_Iabc_id);
+            label_Iabc.textContent = "A: " + Get_Kongge_String(Iabec_value_json[0].toString(), 1) + "   " + "B: " + Get_Kongge_String(Iabec_value_json[0].toString(), 2) + "   " + "C: " + Get_Kongge_String(Iabec_value_json[0].toString(), 3);
+
+
             
             var label_Power_Rate_id = "elect_value_" + shebeiId + "_Power_Rate";
             var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
