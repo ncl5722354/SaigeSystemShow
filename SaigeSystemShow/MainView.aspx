@@ -115,9 +115,9 @@
         <label id="label_company" style="position:absolute;left:25%;width:50%;top:95%;height:30px;font-size:25px;color:white;text-align:center">深圳市赛格物业管理有限公司</label>
         <div id="div_menu" style="position:absolute;left:0%;width:10%;top:80px;bottom:0px;background-color:#212C32">
             <div id="div_overview" style="position:absolute;left:-10%;width:70%;top:30px;height:25px;font-size:20px;color:white;text-align:center;">页面总览</div>
-            <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">电力系统</div>
-            <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">开关量监测</div>
-            <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:255px;height:25px;font-size:20px;color:white;text-align:center;">模拟量监测</div>
+            <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">供配电</div>
+            <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;visibility:hidden">开关量监测</div>
+            <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">给排水</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:12%;width:20%;top:10%;height:20%;">
@@ -231,12 +231,6 @@
 
         var label_name = document.getElementById("login_name");
         label_name.textContent = "登录用户：" + username;
-
-
-
-
-       
-
 
         // 各项目的在线情况
 
