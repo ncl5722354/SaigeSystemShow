@@ -232,12 +232,6 @@
         var label_name = document.getElementById("login_name");
         label_name.textContent = "登录用户：" + username;
 
-
-
-
-       
-
-
         // 各项目的在线情况
 
         Project_Online_Tick();

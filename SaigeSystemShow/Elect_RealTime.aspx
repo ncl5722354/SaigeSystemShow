@@ -79,6 +79,10 @@
               <div id="sub_chart_div" style="position:absolute;left:10%;width:80%;top:20%;height:80%;">
 
               </div>
+            <label id="label_time1" style="position:absolute;left:1%;width:20%;top:20%;height:20px;text-align:center;font-size:18px;color:white;">选择时间1</label>
+            <input id="input_time1" type="text" style="position:absolute;left:20%;width:20%;height:20px;top:20%;"/>
+            <div id="data1" style="position:absolute;left:10%;width:50%;height:40%;top:25%;z-index:2"></div>
+            <select id="select1" style="position:absolute;left:32%;width:10%;top:12%;height:20px;visibility:hidden"></select>
         </div>
 
     </div>
@@ -104,7 +108,8 @@
     var elect_device_list = new Array();       // 保存电力设备列表
     var elect_temp_device_list = new Array();  // 保存电力温度设备列表
     var bit_device_list = new Array();         // 保存开关量设备列表
-
+    var Show_Line_Device_ID;                 // 图表里显示曲线的设备Id
+    var Show_mode;                           // 显示模式，如果是0 代表是一条线   如果是1，代表三条线
 
 
 
@@ -167,6 +172,7 @@
         // Play_Vedio("192.168.1.2", "vedio_Substation_room_vedio");
 
 
+        init_date_kongjian_xiala("input_time1","data1","正泰电表1","电力监测1","canvas_device1","input_time1","select1"); // 初始化日期下拉控件1
     }
 
     init();
@@ -253,14 +259,23 @@
 
                 var count = value_time_json.length;
 
-                //if (count >= 30) count = 30;
-
-
+                
+            
                 for(var i=0;i<count;i++)
                 {
                     value_list.push([value_time_json[i][0]]);
                     time_list.push([Get_Kongge_String(value_time_json[i][1],2)]);
                 }
+
+                // 读取名字
+                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+                Show_mode = 0;
+
+
+                Set_Title(device_name_json[i] + "用电量");
 
 
                 Show_Line(line_object, value_list, time_list, "sub_line_canvas");
@@ -345,6 +360,17 @@
                 }
 
 
+                // 读取名字
+                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+                Show_mode = 1;
+
+
+                Set_Title(device_name_json[i] + "三相电压");
+
+
                
                 Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
 
@@ -424,6 +450,16 @@
                 }
 
 
+                // 读取名字
+                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+                Show_mode = 1;
+
+
+                Set_Title(device_name_json[i] + "三相电流");
+
 
                 Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
             }
@@ -463,6 +499,62 @@
             label_Power_Rate.style.textAlign = "center";
             Power_Rate_div.appendChild(label_Power_Rate);
 
+            label_Power_Rate.onclick=function(event)
+            {
+                var line_grid_view = document.getElementById("chart_datagrid_view");
+                line_grid_view.style.visibility = "visible";
+
+                var sub_lind_view = document.getElementById("sub_chart_div");
+
+                sub_lind_view.innerHTML = "";
+
+                var canvas = document.createElement("canvas");
+                canvas.style.left = "0%";
+                canvas.style.width = "100%";
+                canvas.style.top = "0%";
+                canvas.style.heigh = "100%";
+                canvas.style.position = "absolute";
+                canvas.id = "sub_line_canvas";
+                sub_lind_view.appendChild(canvas);
+
+                var line_object;
+
+                var thisid = event.target.id;
+
+                //  从历史中读取
+                var today = new Date();
+                var day_string = To_yyyy_MM_dd_From_Data(today);
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"合相有功功率\") and savetime>=\"" + day_string + " 00:00:00\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var value_list = new Array();
+                var time_list = new Array();
+
+                var count = value_time_json.length;
+
+                //if (count >= 30) count = 30;
+
+
+                for (var i = 0; i < count; i++) {
+                    value_list.push([value_time_json[i][0]]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+                }
+
+                // 读取名字
+                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+                Show_mode = 0;
+
+
+                Set_Title(device_name_json[i] + "有功功率");
+
+
+
+                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+            }
+
             // 转换因数
             var Conversion_Factor_div = document.createElement("div");
             Conversion_Factor_div.style.position = "absolute";
@@ -495,6 +587,61 @@
             label_Conversion_Factor.style.color = "white";
             label_Conversion_Factor.style.textAlign = "center";
             Conversion_Factor_div.appendChild(label_Conversion_Factor);
+
+            label_Conversion_Factor.onclick=function(event)
+            {
+                var line_grid_view = document.getElementById("chart_datagrid_view");
+                line_grid_view.style.visibility = "visible";
+
+                var sub_lind_view = document.getElementById("sub_chart_div");
+
+                sub_lind_view.innerHTML = "";
+
+                var canvas = document.createElement("canvas");
+                canvas.style.left = "0%";
+                canvas.style.width = "100%";
+                canvas.style.top = "0%";
+                canvas.style.heigh = "100%";
+                canvas.style.position = "absolute";
+                canvas.id = "sub_line_canvas";
+                sub_lind_view.appendChild(canvas);
+
+                var line_object;
+
+                var thisid = event.target.id;
+
+                //  从历史中读取
+                var today = new Date();
+                var day_string = To_yyyy_MM_dd_From_Data(today);
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"合相功率因数\") and savetime>=\"" + day_string + " 00:00:00\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var value_list = new Array();
+                var time_list = new Array();
+
+                var count = value_time_json.length;
+
+                //if (count >= 30) count = 30;
+
+
+                for (var i = 0; i < count; i++) {
+                    value_list.push([value_time_json[i][0]]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+                }
+
+                // 读取名字
+                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+                Show_mode = 0;
+
+
+                Set_Title(device_name_json[i] + "转换因数");
+
+
+                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+            }
 
 
 
@@ -664,6 +811,292 @@
         }
     }
 
+
+    // 设置标题信息
+    function Set_Title(title)
+    {
+        var document_title = document.getElementById("sub_label_title");
+        document_title.textContent = title;
+    }
+
+
+
+    // 日期下拉菜单
+
+    function init_date_kongjian_xiala(kongjian_name, kongjian_xiala_name, biaoname, chart_name, canvase_name, input_name, select_name) {
+
+        var data_kongjian = document.getElementById(kongjian_name);
+        var Timenow = new Date();
+
+        data_kongjian.value = Timenow.getFullYear() + "-" + (Timenow.getMonth() + 1).toString() + "-" + Timenow.getDate().toString();
+
+        var data_xiala_kongjian = document.getElementById(kongjian_xiala_name);
+        data_xiala_kongjian.innerHTML = "";
+
+
+
+
+        var nowtime = new Date(data_kongjian.value);
+
+        // 点击输入框展开
+        data_kongjian.onclick = function (event) {
+
+            Riqi_Kongjian_Show_Days(kongjian_name, kongjian_xiala_name, biaoname, chart_name, canvase_name, input_name, select_name)
+
+        }
+
+
+        data_xiala_kongjian.style.backgroundColor = "white";
+
+        // 年份月份指示
+        var label_nianyue = document.createElement("label");
+        label_nianyue.style.position = "absolute";
+        label_nianyue.style.left = "20%";
+        label_nianyue.style.width = "60%";
+        label_nianyue.style.top = "1%";
+        label_nianyue.style.height = "9%";
+        label_nianyue.style.textAlign = "center";
+        label_nianyue.style.borderStyle = "solid";
+        label_nianyue.textContent = nowtime.getFullYear() + "-" + (nowtime.getMonth() + 1);
+        data_xiala_kongjian.appendChild(label_nianyue);
+
+
+        data_xiala_kongjian.style.visibility = "hidden";
+
+
+        $(function () {
+            $(document).bind("click", function (e) {
+
+                var a = $(e.target).closest(("div#") + kongjian_xiala_name).length;
+                var b = $(e.target).closest("input").length;
+                var c = $(e.target).closest("img#riqi_left").length;
+                var d = $(e.target).closest("img#riqi_right").length;
+                if (a == 0 && b == 0 && c == 0 && d == 0) {
+                    data_xiala_kongjian.style.visibility = "hidden";
+                }
+            })
+        })
+    }
+
+
+    function Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name)
+    {
+
+        var data_kongjian = document.getElementById(kongjian_name);
+        var nowtime;
+        try{
+            nowtime  = new Date(data_kongjian.value);
+        }
+        catch{nowtime=new Date();}
+        var data_xiala_kongjian = document.getElementById(kongjian_xiala_name);
+        data_xiala_kongjian.style.visibility = "visible";
+
+         
+        data_xiala_kongjian.innerHTML = "";
+
+        data_xiala_kongjian.style.backgroundColor = "white";
+
+        // 年份月份指示
+        var label_nianyue = document.createElement("label");
+        label_nianyue.style.position = "absolute";
+        label_nianyue.style.left = "20%";
+        label_nianyue.style.width = "60%";
+        label_nianyue.style.top = "1%";
+        label_nianyue.style.height = "9%";
+        label_nianyue.style.textAlign = "center";
+        label_nianyue.style.borderStyle = "solid";
+        label_nianyue.textContent = nowtime.getFullYear() + "-" + (nowtime.getMonth() + 1);
+        data_xiala_kongjian.appendChild(label_nianyue);
+
+        // 后退一个月 前进一个月按钮
+        var img_back_month=document.createElement("img");
+        img_back_month.id="riqi_left";
+        img_back_month.style.position="absolute";
+        img_back_month.style.left="12%";
+        img_back_month.style.width="8%";
+        img_back_month.style.top="1%";
+        img_back_month.style.height="9%";
+        img_back_month.src="../pic/left1.png";
+        img_back_month.style.borderStyle="solid";
+        data_xiala_kongjian.appendChild(img_back_month);
+            
+        var img_forward_month=document.createElement("img");
+        img_forward_month.id="riqi_right";
+        img_forward_month.style.position="absolute";
+        img_forward_month.style.left="80%";
+        img_forward_month.style.width="8%";
+        img_forward_month.style.top="1%";
+        img_forward_month.style.height="9%";
+        img_forward_month.src="../pic/right1.png";
+        img_forward_month.style.borderStyle="solid";
+        data_xiala_kongjian.appendChild(img_forward_month);
+
+        // 定义前进一个月和后退一个月按钮的事件
+
+        img_back_month.onclick=function(event)
+        {
+            try{
+
+                var riqi_input=document.getElementById(input_name);
+                var riqi_date=new Date(riqi_input.value);
+                riqi_date.setMonth(riqi_date.getMonth()-1);
+                riqi_input.value=riqi_date.getFullYear().toString()+"-"+(riqi_date.getMonth()+1).toString();
+                Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name);
+                data_xiala_kongjian.style.visibility="visible";
+            }
+            catch(err){}
+        }
+
+        img_forward_month.onclick=function(event)
+        {
+            try{
+
+                var riqi_input=document.getElementById(input_name);
+                var riqi_date=new Date(riqi_input.value);
+                riqi_date.setMonth(riqi_date.getMonth()+1);
+                riqi_input.value=riqi_date.getFullYear().toString()+"-"+(riqi_date.getMonth()+1).toString();
+                Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name);
+                data_xiala_kongjian.style.visibility="visible";
+            }
+            catch(err){}
+        }
+
+
+        // 星期指示
+        // 星期1
+        var label_xingqi1 = document.createElement("label");
+        label_xingqi1.style.position = "absolute";
+        label_xingqi1.style.left = "1%";
+        label_xingqi1.style.width = "13%";
+        label_xingqi1.style.top = "11%";
+        label_xingqi1.style.height = "9%";
+        label_xingqi1.style.textAlign = "center";
+        label_xingqi1.style.borderStyle = "solid";
+        label_xingqi1.textContent = "一";
+        data_xiala_kongjian.appendChild(label_xingqi1);
+
+        // 星期2
+        var label_xingqi2 = document.createElement("label");
+        label_xingqi2.style.position = "absolute";
+        label_xingqi2.style.left = "14%";
+        label_xingqi2.style.width = "13%";
+        label_xingqi2.style.top = "11%";
+        label_xingqi2.style.height = "9%";
+        label_xingqi2.style.textAlign = "center";
+        label_xingqi2.style.borderStyle = "solid";
+        label_xingqi2.textContent = "二";
+        data_xiala_kongjian.appendChild(label_xingqi2);
+
+
+        // 星期3
+        var label_xingqi3 = document.createElement("label");
+        label_xingqi3.style.position = "absolute";
+        label_xingqi3.style.left = "27%";
+        label_xingqi3.style.width = "13%";
+        label_xingqi3.style.top = "11%";
+        label_xingqi3.style.height = "9%";
+        label_xingqi3.style.textAlign = "center";
+        label_xingqi3.style.borderStyle = "solid";
+        label_xingqi3.textContent = "三";
+        data_xiala_kongjian.appendChild(label_xingqi3);
+
+
+        // 星期4
+        var label_xingqi4 = document.createElement("label");
+        label_xingqi4.style.position = "absolute";
+        label_xingqi4.style.left = "40%";
+        label_xingqi4.style.width = "13%";
+        label_xingqi4.style.top = "11%";
+        label_xingqi4.style.height = "9%";
+        label_xingqi4.style.textAlign = "center";
+        label_xingqi4.style.borderStyle = "solid";
+        label_xingqi4.textContent = "四";
+        data_xiala_kongjian.appendChild(label_xingqi4);
+
+        // 星期5
+        var label_xingqi5 = document.createElement("label");
+        label_xingqi5.style.position = "absolute";
+        label_xingqi5.style.left = "53%";
+        label_xingqi5.style.width = "13%";
+        label_xingqi5.style.top = "11%";
+        label_xingqi5.style.height = "9%";
+        label_xingqi5.style.textAlign = "center";
+        label_xingqi5.style.borderStyle = "solid";
+        label_xingqi5.textContent = "五";
+        data_xiala_kongjian.appendChild(label_xingqi5);
+
+
+        // 星期6
+        var label_xingqi6 = document.createElement("label");
+        label_xingqi6.style.position = "absolute";
+        label_xingqi6.style.left = "66%";
+        label_xingqi6.style.width = "13%";
+        label_xingqi6.style.top = "11%";
+        label_xingqi6.style.height = "9%";
+        label_xingqi6.style.textAlign = "center";
+        label_xingqi6.style.borderStyle = "solid";
+        label_xingqi6.textContent = "六";
+        data_xiala_kongjian.appendChild(label_xingqi6);
+
+        // 星期日
+        var label_xingqi7 = document.createElement("label");
+        label_xingqi7.style.position = "absolute";
+        label_xingqi7.style.left = "79%";
+        label_xingqi7.style.width = "13%";
+        label_xingqi7.style.top = "11%";
+        label_xingqi7.style.height = "9%";
+        label_xingqi7.style.textAlign = "center";
+        label_xingqi7.style.borderStyle = "solid";
+        label_xingqi7.textContent = "日";
+        data_xiala_kongjian.appendChild(label_xingqi7);
+
+
+        // 计算这个月有多少天
+        var temp_date = new Date(nowtime);
+        temp_date.setMonth(temp_date.getMonth() + 1);
+        temp_date.setDate(0);
+
+        // 这一个月的天数
+        var days = temp_date.getDate();
+        var hangshu = 0;
+
+        temp_date.setMonth(temp_date.getMonth() - 1);
+
+        for (var i = 1; i < days; i++) {
+            //  temp_date.setMonth(temp_date.getMonth() - 1);
+            temp_date.setDate(i);
+
+            var xingqi = temp_date.getDay().toString();
+
+            if (xingqi == 0) xingqi = 7;
+
+            var riqi_label = document.createElement("label");
+            riqi_label.style.left = (1 + 13 * (xingqi - 1)).toString() + "%";
+            riqi_label.style.width = "13%";
+            riqi_label.style.top = (hangshu * 15 + 25).toString() + "%";
+            riqi_label.style.height = "15%";
+            riqi_label.textContent = i.toString();
+            riqi_label.style.position = "absolute";
+            riqi_label.style.borderStyle = "solid";
+            riqi_label.style.textAlign = "center";
+            riqi_label.id=kongjian_name+i.toString();
+            riqi_label.onclick=function(event)
+            {
+                var mylabel= document.getElementById(event.currentTarget.id);
+                var riqi= label_nianyue.textContent +"-" + mylabel.textContent;
+                data_kongjian.value=riqi;
+                data_xiala_kongjian.style.visibility = "hidden";
+                Show_data_From_Date_Text(input_name,select_name);
+                //  show_dianbiao(biaoname,chart_name , canvase_name ,input_name,select_name,false);
+            }
+            if (xingqi == 7)
+                hangshu++;
+
+            data_xiala_kongjian.appendChild(riqi_label);
+            //   alert(xingqi);
+
+        }
+    }
 
 
 </script>

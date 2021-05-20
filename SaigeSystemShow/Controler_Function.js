@@ -185,6 +185,7 @@ function Put_Table_Label_In_Div(arrayitem,arrayleft,arraywidth,div_name)
             label.style.left = arrayleft[j];
             label.style.width = arraywidth[j];
             label.style.height = "30px";
+            label.style.fontSize = "10px";
             label.textContent = label_array[j].toString();
             label.style.color = "white";
             label.id = "label_" + div_name + "_" + i.toString() + "_" + j.toString();
@@ -342,7 +343,7 @@ function Show_Three_Lines(myRadarChar,value_array_3,label_list,canvas_name)
                 label: "My First dataset",
                 fillColor: "rgba(220,220,220,0)",   // 填充
                 strokeColor: "rgba(220,220,0,1)",   // 线的颜色
-                pointColor: "rgba(220,0,0,1)",
+                pointColor: "rgba(220,220,0,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
@@ -363,7 +364,7 @@ function Show_Three_Lines(myRadarChar,value_array_3,label_list,canvas_name)
                 label: "My Thrid dataset",
                 fillColor: "rgba(220,220,220,0)",   // 填充
                 strokeColor: "rgba(0,0,220,1)",   // 线的颜色
-                pointColor: "rgba(220,0,0,1)",
+                pointColor: "rgba(0,0,220,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
