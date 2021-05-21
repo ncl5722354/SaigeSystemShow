@@ -200,7 +200,7 @@
 
        </div>
          <img id="building" style="position:absolute;left:40%;width:30%;top:30%;height:40%;" src="pic/building.png"/>
-       <iframe id="subiframe" style="position:absolute;left:10%;top:7%;width:90%;height:93%;visibility:hidden"></iframe>
+         <iframe id="subiframe" style="position:absolute;left:10%;top:7%;width:90%;height:93%;visibility:hidden"></iframe>
        
        </div>
     </form>
@@ -498,20 +498,20 @@
         var today = new Date();
         today.setHours(0, 0, 0);
 
-        var today_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(today);
+        var today_string = To_yyyy_MM_dd_From_Data(today);
         
 
         var torrow = new Date();
         torrow.setDate(torrow.getDate() + 1);
         torrow.setHours(0, 0, 0);
-        var torrow_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(torrow);
+        var torrow_string = To_yyyy_MM_dd_From_Data(torrow);
 
 
 
         var month = new Date();
         month.setDate(0);
         month.setHours(0, 0, 0);
-        var month_string = To_yyyy_MM_dd_HH_mm_ss_From_Data(month);
+        var month_string = To_yyyy_MM_dd_From_Data(month);
 
         var label_cost_energy_today = document.getElementById("label_today_energy");
         var label_cost_energy_mongth = document.getElementById("label_month_energy");

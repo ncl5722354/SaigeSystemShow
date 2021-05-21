@@ -76,7 +76,7 @@
              
              <label id="sub_label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">历史数据</label>
               <label id="sub_chart_close" style="position:absolute;left:85%;width:15%;top:2%;height:20px;font-size:18px;text-align:center;color:white">关 闭</label>
-              <div id="sub_chart_div" style="position:absolute;left:10%;width:80%;top:20%;height:80%;">
+              <div id="sub_chart_div" style="position:absolute;left:10%;width:80%;top:25%;height:75%;">
 
               </div>
             <label id="label_time1" style="position:absolute;left:1%;width:20%;top:20%;height:20px;text-align:center;font-size:18px;color:white;">选择时间1</label>
@@ -112,6 +112,7 @@
     var Show_Line_Device_ID;                 // 图表里显示曲线的设备Id
     var Show_mode;                           // 显示模式，如果是0 代表是一条线   如果是1，代表三条线
     var line_object;
+    var Show_CanshuType;                     // 显示的参数类型
 
 
     function init()
@@ -197,7 +198,7 @@
 
             if(Show_mode==0)
             {
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\""+ Show_CanshuType+"\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
                 var value_time_json = From_Text_To_Json(value_time_string);
 
                 var value_list = new Array();
@@ -226,7 +227,7 @@
             if(Show_mode==1)
             {
 
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\""+Show_CanshuType+  "\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
                 var value_time_json = From_Text_To_Json(value_time_string);
 
                 var value_list = new Array();
@@ -312,59 +313,8 @@
             label_energy_cost.style.textAlign = "center";
             label_energy_cost.onclick=function(event)
             {
-                var line_grid_view = document.getElementById("chart_datagrid_view");
-                line_grid_view.style.visibility = "visible";
-                
-                var sub_lind_view = document.getElementById("sub_chart_div");
-                
-                sub_lind_view.innerHTML = "";
-
-                var canvas = document.createElement("canvas");
-                canvas.style.left = "0%";
-                canvas.style.width = "100%";
-                canvas.style.top = "0%";
-                canvas.style.heigh = "100%";
-                canvas.style.position = "absolute";
-                canvas.id = "sub_line_canvas";
-                sub_lind_view.appendChild(canvas);
-
-               
-
-                var thisid=event.target.id;
-
-                //  从历史中读取
-                var today = new Date();
-                var day_string = To_yyyy_MM_dd_From_Data(today);
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Get_Xiahuaxian_String(thisid,3)+"\" and value_id = (select canshutypeid from canshutable where canshutype=\"正向有功总电能\") and savetime>=\""+day_string+" 00:00:00\"");
-                var value_time_json = From_Text_To_Json(value_time_string);
-
-                var value_list = new Array();
-                var time_list = new Array();
-
-                var count = value_time_json.length;
-
-                
-            
-                for(var i=0;i<count;i++)
-                {
-                    value_list.push([value_time_json[i][0]]);
-                    time_list.push([Get_Kongge_String(value_time_json[i][1],2)]);
-                }
-
-                // 读取名字
-                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
-                var device_name_json = From_Text_To_Json(device_name_string);
-
-                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
-                Show_mode = 0;
-
-
-                Set_Title(device_name_json[i] + "用电量");
-
-
-                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
-
                 // 画曲线
+                Click_Label_Show_Lind(event,"正向有功总电能","总电能",0);
             }
 
 
@@ -408,56 +358,8 @@
 
             label_Uabc.onclick=function(event)
             {
-                var line_grid_view = document.getElementById("chart_datagrid_view");
-                line_grid_view.style.visibility = "visible";
-
-                var sub_lind_view = document.getElementById("sub_chart_div");
-
-                sub_lind_view.innerHTML = "";
-
-                var canvas = document.createElement("canvas");
-                canvas.style.left = "0%";
-                canvas.style.width = "100%";
-                canvas.style.top = "0%";
-                canvas.style.heigh = "100%";
-                canvas.style.position = "absolute";
-                canvas.id = "sub_line_canvas";
-                sub_lind_view.appendChild(canvas);
-
-               // var line_object;
-
-                var thisid = event.target.id;
-                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
-                Show_mode = 1;
-
-                //  从历史中读取
-                var today = new Date();
-                var day_string = To_yyyy_MM_dd_From_Data(today);
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"正泰电表电压\") and savetime>=\"" + day_string + " 00:00:00\"");
-                var value_time_json = From_Text_To_Json(value_time_string);
-
-                var count = value_time_json.length;
-                var value_list = new Array();
-                var time_list = new Array();
-
-                for (var i = 0; i < count; i++) {
-                    value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
-                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
-                }
-
-
-                // 读取名字
-                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
-                var device_name_json = From_Text_To_Json(device_name_string);
-
                
-
-
-                Set_Title(device_name_json[i] + "三相电压");
-
-
-               
-                Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+                Click_Label_Show_Lind(event,"正泰电表电压","三相电压",1);
 
 
 
@@ -499,55 +401,7 @@
 
             label_Iabc.onclick=function(event)
             {
-                var line_grid_view = document.getElementById("chart_datagrid_view");
-                line_grid_view.style.visibility = "visible";
-
-                var sub_lind_view = document.getElementById("sub_chart_div");
-
-                sub_lind_view.innerHTML = "";
-
-                var canvas = document.createElement("canvas");
-                canvas.style.left = "0%";
-                canvas.style.width = "100%";
-                canvas.style.top = "0%";
-                canvas.style.heigh = "100%";
-                canvas.style.position = "absolute";
-                canvas.id = "sub_line_canvas";
-                sub_lind_view.appendChild(canvas);
-
-              //  var line_object;
-
-                var thisid = event.target.id;
-                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
-                Show_mode = 1;
-
-                //  从历史中读取
-                var today = new Date();
-                var day_string = To_yyyy_MM_dd_From_Data(today);
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"正泰电表电流\") and savetime>=\"" + day_string + " 00:00:00\"");
-                var value_time_json = From_Text_To_Json(value_time_string);
-
-                var count = value_time_json.length;
-                var value_list = new Array();
-                var time_list = new Array();
-
-                for (var i = 0; i < count; i++) {
-                    value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
-                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
-                }
-
-
-                // 读取名字
-                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
-                var device_name_json = From_Text_To_Json(device_name_string);
-
-                
-
-
-                Set_Title(device_name_json[i] + "三相电流");
-
-
-                Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+                Click_Label_Show_Lind(event,"正泰电表电流","三相电流",1);
             }
 
 
@@ -587,59 +441,7 @@
 
             label_Power_Rate.onclick=function(event)
             {
-                var line_grid_view = document.getElementById("chart_datagrid_view");
-                line_grid_view.style.visibility = "visible";
-
-                var sub_lind_view = document.getElementById("sub_chart_div");
-
-                sub_lind_view.innerHTML = "";
-
-                var canvas = document.createElement("canvas");
-                canvas.style.left = "0%";
-                canvas.style.width = "100%";
-                canvas.style.top = "0%";
-                canvas.style.heigh = "100%";
-                canvas.style.position = "absolute";
-                canvas.id = "sub_line_canvas";
-                sub_lind_view.appendChild(canvas);
-
-              //  var line_object;
-
-                var thisid = event.target.id;
-                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
-                Show_mode = 0;
-
-                //  从历史中读取
-                var today = new Date();
-                var day_string = To_yyyy_MM_dd_From_Data(today);
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"合相有功功率\") and savetime>=\"" + day_string + " 00:00:00\"");
-                var value_time_json = From_Text_To_Json(value_time_string);
-
-                var value_list = new Array();
-                var time_list = new Array();
-
-                var count = value_time_json.length;
-
-                //if (count >= 30) count = 30;
-
-
-                for (var i = 0; i < count; i++) {
-                    value_list.push([value_time_json[i][0]]);
-                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
-                }
-
-                // 读取名字
-                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
-                var device_name_json = From_Text_To_Json(device_name_string);
-
-                
-
-
-                Set_Title(device_name_json[i] + "有功功率");
-
-
-
-                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+                Click_Label_Show_Lind(event,"合相有功功率","功率",0);
             }
 
             // 转换因数
@@ -677,58 +479,7 @@
 
             label_Conversion_Factor.onclick=function(event)
             {
-                var line_grid_view = document.getElementById("chart_datagrid_view");
-                line_grid_view.style.visibility = "visible";
-
-                var sub_lind_view = document.getElementById("sub_chart_div");
-
-                sub_lind_view.innerHTML = "";
-
-                var canvas = document.createElement("canvas");
-                canvas.style.left = "0%";
-                canvas.style.width = "100%";
-                canvas.style.top = "0%";
-                canvas.style.heigh = "100%";
-                canvas.style.position = "absolute";
-                canvas.id = "sub_line_canvas";
-                sub_lind_view.appendChild(canvas);
-
-              //  var line_object;
-
-                var thisid = event.target.id;
-                Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
-                Show_mode = 0;
-
-                //  从历史中读取
-                var today = new Date();
-                var day_string = To_yyyy_MM_dd_From_Data(today);
-                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\"合相功率因数\") and savetime>=\"" + day_string + " 00:00:00\"");
-                var value_time_json = From_Text_To_Json(value_time_string);
-
-                var value_list = new Array();
-                var time_list = new Array();
-
-                var count = value_time_json.length;
-
-                //if (count >= 30) count = 30;
-
-
-                for (var i = 0; i < count; i++) {
-                    value_list.push([value_time_json[i][0]]);
-                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
-                }
-
-                // 读取名字
-                var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
-                var device_name_json = From_Text_To_Json(device_name_string);
-
-                
-
-
-                Set_Title(device_name_json[i] + "转换因数");
-
-
-                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+                Click_Label_Show_Lind(event,"合相功率因数","功率因数",0);
             }
 
 

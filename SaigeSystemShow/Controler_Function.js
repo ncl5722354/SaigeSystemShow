@@ -467,3 +467,77 @@ function Play_Vedio(url_string,vedio_div)
         });
     }
 }
+
+
+
+// 点击出现图表
+function Click_Label_Show_Lind(event,canshutype,title,mode)
+{
+
+    var line_grid_view = document.getElementById("chart_datagrid_view");
+    line_grid_view.style.visibility = "visible";
+
+    var sub_lind_view = document.getElementById("sub_chart_div");
+
+    sub_lind_view.innerHTML = "";
+
+    var canvas = document.createElement("canvas");
+    canvas.style.left = "0%";
+    canvas.style.width = "100%";
+    canvas.style.top = "0%";
+    canvas.style.heigh = "100%";
+    canvas.style.position = "absolute";
+    canvas.id = "sub_line_canvas";
+    sub_lind_view.appendChild(canvas);
+
+
+
+    var thisid = event.target.id;
+    Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+    Show_mode = mode;
+    Show_CanshuType = canshutype;
+
+    //  从历史中读取
+    var today = new Date();
+    var day_string = To_yyyy_MM_dd_From_Data(today);
+    var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\""+canshutype+"\") and savetime>=\"" + day_string + " 00:00:00\"");
+    var value_time_json = From_Text_To_Json(value_time_string);
+
+    var value_list = new Array();
+    var time_list = new Array();
+
+    var count = value_time_json.length;
+
+
+    if (mode == 0) {
+
+        for (var i = 0; i < count; i++) {
+            value_list.push([value_time_json[i][0]]);
+            time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+        }
+
+        // 读取名字
+        Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+        
+    }
+
+    if (mode == 1)
+    {
+        for (var i = 0; i < count; i++) {
+            value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
+            time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+        }
+        Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+    }
+
+    var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+    var device_name_json = From_Text_To_Json(device_name_string);
+    
+
+
+
+    Set_Title(device_name_json[i] + title);
+
+
+    
+}
