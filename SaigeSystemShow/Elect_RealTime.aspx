@@ -102,7 +102,10 @@
             <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
-            <input id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:85%;height:25px;font-size:20px;text-align:center;" type="button" />
+            <input id="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;" value="上传图片1"/>
+            <input id="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;" value="上传图片2"/>
+            <input id="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white" value="上传图片3"/>
+            <input id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" type="button" />
         </div>
 
     </div>
@@ -943,12 +946,18 @@
     // 显示添加信息
     function Show_Add_Info_View(btn_show_info_view_string)
     {
+        
         var btn = document.getElementById(btn_show_info_view_string);
         var btn_ok=document.getElementById("add_info_ok");
         var view= document.getElementById("div_add_info_view");
         btn.onclick=function(event)
         {
-           
+            $('#add_pic1').attr('src','');
+            $('#add_pic2').attr('src','');
+            $('#add_pic3').attr('src','');
+            $('#add_info_pic1_input').attr('value','添加图片1');
+            $('#add_info_pic2_input').attr('value','添加图片2');
+            $('#add_info_pic3_input').attr('value','添加图片3');
             view.style.visibility="visible";
         }
 
@@ -963,6 +972,38 @@
             view.style.visibility="hidden";
         }
     }
+
+
+    // 显示读取的图片
+    $('#add_info_pic1_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic1').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic2_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic2').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic3_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic3').attr('src',filereader.result);
+        }
+    })
 
 
 
