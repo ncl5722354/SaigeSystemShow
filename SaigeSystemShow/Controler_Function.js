@@ -469,7 +469,6 @@ function Play_Vedio(url_string,vedio_div)
 }
 
 
-
 // 点击出现图表
 function Click_Label_Show_Lind(event,canshutype,title,mode)
 {

@@ -25,6 +25,7 @@
             <div id="Tempabc_div1" style="position:absolute;left:5%;width:95%;top:35%;height:25px;font-size:16px;text-align:center;color:white"></div>
             <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
             <div id="TempRoom_div1" style="position:absolute;left:5%;width:98%;top:75%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
+            <div id="Substation_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
         </div>
 
         <div id="div_Substation_room_vedio" style="position:absolute;left:5%;width:25%;top:65%;height:30%">
@@ -86,6 +87,24 @@
             <input id="input_data_ok" type="button" style="position:absolute;left:45%;width:10%;top:20%;height:25px;font-size:16px" value="确定"/>
         </div>
 
+        <div id="div_add_info_view" style="position:absolute;left:30%;width:40%;top:20%;height:70%;background-image:url('pic/background2.png');overflow:scroll;border-style:solid;border-width:2px;border-color:white;visibility:hidden" >
+            <label id="add_info_title" style="position:absolute;left:20%;width:60%;top:5%;height:20px;font-size:18px;text-align:center;color:white">添加信息</label>
+            <label id="add_info_colse" style="position:absolute;left:0%;width:20%;top:5%;height:18px;font-size:15px;text-align:center;color:white">关闭</label>
+            <label id="add_info_input_label" style="position:absolute;left:0%;width:20%;top:20%;height:18px;font-size:15px;text-align:center;color:white">添加说明信息</label>
+            <textarea id="add_info_input" style="position:absolute;left:30%;width:60%;top:20%;height:20%;"></textarea>
+            <label id="add_info_type_label" style="position:absolute;left:0%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;color:white">选择类型</label>
+            <select id="add_info_type_select" style="position:absolute;left:30%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;">
+                <option value="option1">正常巡检</option>
+                <option value="option2">发现异常</option>
+                <option value="option3">异常恢复</option>
+            </select>
+            <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
+            <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
+            <input id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:85%;height:25px;font-size:20px;text-align:center;" type="button" />
+        </div>
+
     </div>
     </form>
 </body>
@@ -131,28 +150,7 @@
         // 开关量
         bit_device_list.push("设备20210430112255_2");
 
-        ///// 正泰电表系列
-        //var elect_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰电表\")");
-        //var elect_device_list_json = From_Text_To_Json(elect_device_list_string);
-        //for(var i=0;i<elect_device_list_json.length;i++)
-        //{
-        //    elect_device_list.push(elect_device_list_json[i]);
-        //}
-
-        
-        //// 正泰电力温度系列
-        //var elect_temp_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰三相温度表\")")
-        //var elect_temp_device_list_json = From_Text_To_Json(elect_temp_device_list_string);
-
-        //for (var i = 0; i < elect_temp_device_list_json.length; i++)
-        //{
-        //    elect_temp_device_list.push(elect_temp_device_list_json[i]);
-        //}
        
-
-        //Put_Elect_Devices_To_Divs(elect_device_list, "elect_device_div");
-        //Put_Elect_Temp_To_Divs(elect_temp_device_list, "elect_device_div");
-        //alert(elect_device_list);
 
         Elect_Devices_Tick();
         setInterval(Elect_Devices_Tick, 20000);
@@ -258,6 +256,9 @@
 
 
         }
+
+        Show_Add_Info_View("Substation_addinfo");
+        
     }
 
     init();
@@ -936,6 +937,35 @@
 
         }
     }
+
+
+
+    // 显示添加信息
+    function Show_Add_Info_View(btn_show_info_view_string)
+    {
+        var btn = document.getElementById(btn_show_info_view_string);
+        var btn_ok=document.getElementById("add_info_ok");
+        var view= document.getElementById("div_add_info_view");
+        btn.onclick=function(event)
+        {
+           
+            view.style.visibility="visible";
+        }
+
+        var close_btn = document.getElementById("add_info_colse");
+        close_btn.onclick= function(event)
+        {
+            view.style.visibility="hidden";
+        }
+
+        btn_ok.onclick=function(event)
+        {
+            view.style.visibility="hidden";
+        }
+    }
+
+
+
 
 
 </script>
