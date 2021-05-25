@@ -251,11 +251,6 @@
 
                
                 Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
-
-
-
-
-
             }
 
 
