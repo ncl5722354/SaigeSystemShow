@@ -50,13 +50,17 @@ namespace SaigeSystemShow
            var file = System.Web.HttpContext.Current.Request.Files["add_info_pic1_input"];
            var file2 = System.Web.HttpContext.Current.Request.Files["add_info_pic2_input"];
            var file3 = System.Web.HttpContext.Current.Request.Files["add_info_pic3_input"];
+
+          
+           
+
            string pictureName="";
            string pictureName2 = "";
            string pictrueName3 = "";
 
-           pictureName = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.ToString() + "1";   // 图片名称
-           pictureName2 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.ToString() + "2";   // 图片名称
-           pictrueName3 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.ToString() + "3";   // 图片名称
+           pictureName = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0,100).ToString().PadLeft(3,'0') + "1";   // 图片名称
+           pictureName2 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0, 100).ToString().PadLeft(3, '0') + "2";   // 图片名称
+           pictrueName3 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0, 100).ToString().PadLeft(3, '0') + "3";   // 图片名称
            if (file == null)
            {
                //int idx = uploadName.LastIndexOf(".");
@@ -98,10 +102,10 @@ namespace SaigeSystemShow
 
                Random num1=new Random();
 
-               
 
 
-               string ID= "Info"+DateTime.Now.ToString("yyyyMMddHHmmss")+DateTime.Now.Millisecond.ToString()+num1.ToString();
+
+               string ID = "Info" + DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num1.Next(0, 100).ToString().PadLeft(3,'0');
                var text = Request.Form["add_info_input"].ToString();
              //  string text_string=text;
 

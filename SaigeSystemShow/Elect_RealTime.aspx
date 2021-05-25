@@ -106,6 +106,7 @@
             <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
             <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click"/>
+            <input id="add_info_name_title" runat="server" style="position:absolute;left:200%;color:white"/>
         </div>
 
     </div>
@@ -939,9 +940,11 @@
         
         var btn = document.getElementById(btn_show_info_view_string);
         var btn_ok=document.getElementById("add_info_ok");
+        
         var view= document.getElementById("div_add_info_view");
         btn.onclick=function(event)
         {
+            $('#add_info_name_title').attr('value',event.target.id);
             //alert(event.target.id);
             $('#add_pic1').attr('src','');
             $('#add_pic2').attr('src','');
@@ -952,6 +955,7 @@
             view.style.visibility="visible";
 
             var close_btn = document.getElementById("add_info_colse");
+            
             close_btn.onclick= function(event)
             {
                 view.style.visibility="hidden";
