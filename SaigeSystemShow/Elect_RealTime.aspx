@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
+    <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;" enctype= "multipart/form-data">
     <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
         <img  id="img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
         <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">供配电监测</label>
@@ -25,7 +25,7 @@
             <div id="Tempabc_div1" style="position:absolute;left:5%;width:95%;top:35%;height:25px;font-size:16px;text-align:center;color:white"></div>
             <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
             <div id="TempRoom_div1" style="position:absolute;left:5%;width:98%;top:75%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
-            <div id="Substation_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
+            <div id="变量器房_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
         </div>
 
         <div id="div_Substation_room_vedio" style="position:absolute;left:5%;width:25%;top:65%;height:30%">
@@ -91,18 +91,21 @@
             <label id="add_info_title" style="position:absolute;left:20%;width:60%;top:5%;height:20px;font-size:18px;text-align:center;color:white">添加信息</label>
             <label id="add_info_colse" style="position:absolute;left:0%;width:20%;top:5%;height:18px;font-size:15px;text-align:center;color:white">关闭</label>
             <label id="add_info_input_label" style="position:absolute;left:0%;width:20%;top:20%;height:18px;font-size:15px;text-align:center;color:white">添加说明信息</label>
-            <textarea id="add_info_input" style="position:absolute;left:30%;width:60%;top:20%;height:20%;"></textarea>
+            <textarea id="add_info_input" style="position:absolute;left:30%;width:60%;top:20%;height:20%;" runat="server"></textarea>
             <label id="add_info_type_label" style="position:absolute;left:0%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;color:white">选择类型</label>
-            <select id="add_info_type_select" style="position:absolute;left:30%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;">
-                <option value="option1">正常巡检</option>
-                <option value="option2">发现异常</option>
-                <option value="option3">异常恢复</option>
+            <select id="add_info_type_select" style="position:absolute;left:30%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;" runat="server">
+                <option value="正常巡检">正常巡检</option>
+                <option value="发现异常">发现异常</option>
+                <option value="异常恢复">异常恢复</option>
             </select>
             <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
             <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
-            <input id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:85%;height:25px;font-size:20px;text-align:center;" type="button" />
+            <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
+            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click"/>
         </div>
 
     </div>
@@ -257,7 +260,7 @@
 
         }
 
-        Show_Add_Info_View("Substation_addinfo");
+        Show_Add_Info_View("变量器房_addinfo");
         
     }
 
@@ -518,16 +521,7 @@
             Temp_abc_div.style.height = "100%";
             contect_div.appendChild(Temp_abc_div);
 
-            //var Temp_abc_Title = document.createElement("label");
-            //Temp_abc_Title.style.position = "absolute";
-            //Temp_abc_Title.style.left = "5%";
-            //Temp_abc_Title.style.width = "40%";
-            //Temp_abc_Title.style.top = "5%";
-            //Temp_abc_Title.style.height = "15px";
-            //Temp_abc_Title.style.fontSize = "12px";
-            //Temp_abc_Title.style.color = "white";
-            //Temp_abc_Title.textContent = "电力三相温度（℃）"
-            //Temp_abc_div.appendChild(Temp_abc_Title);
+            
 
 
             var label_Temp_abc = document.createElement("label");
@@ -926,8 +920,7 @@
                 var riqi= label_nianyue.textContent +"-" + mylabel.textContent;
                 data_kongjian.value=riqi;
                 data_xiala_kongjian.style.visibility = "hidden";
-                //Show_data_From_Date_Text(input_name,select_name);
-                //  show_dianbiao(biaoname,chart_name , canvase_name ,input_name,select_name,false);
+                
             }
             if (xingqi == 7)
                 hangshu++;
@@ -943,28 +936,131 @@
     // 显示添加信息
     function Show_Add_Info_View(btn_show_info_view_string)
     {
+        
         var btn = document.getElementById(btn_show_info_view_string);
         var btn_ok=document.getElementById("add_info_ok");
         var view= document.getElementById("div_add_info_view");
         btn.onclick=function(event)
         {
-           
+            //alert(event.target.id);
+            $('#add_pic1').attr('src','');
+            $('#add_pic2').attr('src','');
+            $('#add_pic3').attr('src','');
+            $('#add_info_pic1_input').attr('value','添加图片1');
+            $('#add_info_pic2_input').attr('value','添加图片2');
+            $('#add_info_pic3_input').attr('value','添加图片3');
             view.style.visibility="visible";
+
+            var close_btn = document.getElementById("add_info_colse");
+            close_btn.onclick= function(event)
+            {
+                view.style.visibility="hidden";
+            }
+
+            btn_ok.onclick=function(event)
+            {
+
+                // 把图片上传到服务器
+               // update_file(1,"add_info_pic1_input");
+                
+
+
+                view.style.visibility="hidden";
+            }
+
+
         }
 
-        var close_btn = document.getElementById("add_info_colse");
-        close_btn.onclick= function(event)
-        {
-            view.style.visibility="hidden";
-        }
-
-        btn_ok.onclick=function(event)
-        {
-            view.style.visibility="hidden";
-        }
+        
     }
 
 
+    // 显示读取的图片
+    $('#add_info_pic1_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic1').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic2_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic2').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic3_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic3').attr('src',filereader.result);
+        }
+    })
+
+    function update_file(index, input_name)
+    {
+     
+        var input_object=document.getElementById(input_name);
+        $.ajax({
+            url: "Elect_RealTime.aspx/Update_pic",
+            type: "Post",
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            data: "{index:'" + index + "',name:'"+input_name+ "'}",
+            success: function (data) {
+               
+            
+            },
+            error: function (data) {
+                //200的响应也有可能被认定为error，responseText中没有Message部分
+                return $.parseJSON(data.responseText).Message;
+            },
+            complete: function (data) {
+
+            }
+        });
+    }
+
+    //var formData = new FormData();
+    //formData.append('file', fileObj);
+    //var curWwwPath=window.document.location.href;
+    //var pathName=window.document.location.pathname;
+    //var pos=curWwwPath.indexOf(pathName);
+    //var options = {
+    //    url: curWwwPath.substring(0,pos) + "//services//api//file//uploadImg",
+    //    type: 'POST',
+    //    data: formData,
+    //    processData: false,
+    //    contentType: false,
+    //    headers: {
+    //        'ticket': ticket
+    //    },
+    //    success: function(rsp) {
+    //        if (rsp.code == 200) {
+    //            imgs = rsp.result;
+    //            var innerHtml = '<div class="photo-add" onchange="angular.element(this).scope().showPhoto(this)">' +
+    //                '<img style = "width: 100%;" src="' + imgs + '" alt = "添加照片" class="photoShow" />' +
+    //                '</div>';
+    //            $(".photo-box").before(innerHtml);
+    //            attachmentArr.push(rsp.result);
+    //        } else {
+    //            console.log(rsp.message);
+    //        }
+    //    },
+    //    error: function(e) {
+    //        console.log("网络错误!");
+    //    }
+    //};
+    //$.ajax(options);
 
 
 

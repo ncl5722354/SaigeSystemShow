@@ -6,8 +6,16 @@ using System.Web.Services;
 using MySql;
 using MySql.Data.MySqlClient;
 using MySql.Data;
-
 using System.Collections;
+using System.Web.Security;
+
+using System.Web.UI.HtmlControls;
+
+using System.Web.UI.WebControls;
+
+using System.Web.UI.WebControls.WebParts;
+using System.Text;
+
 
 // 此脚本用来
 
@@ -69,12 +77,9 @@ namespace MEEC_Config_System
                     }
                     return_list.Add(row);
                 }
-
                 mysqlread.Close();
-
             }
             catch { }
-
 
             maindatabase.Close();
             return return_list;
@@ -98,8 +103,37 @@ namespace MEEC_Config_System
             catch { }
             maindatabase.Close();
         }
-        
 
-        
+
+        [WebMethod]
+        public void Update_pic(int index,string name)
+        {
+            
+            Random num=new Random();
+
+            var file = System.Web.HttpContext.Current.Request.Files[name];
+            
+            string pictureName = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.ToString() + index.ToString();   // 图片名称
+            if ( file==null)
+            {
+                //int idx = uploadName.LastIndexOf(".");
+                //string suffix = uploadName.Substring(idx);//获得上传的图片的后缀名 
+                //pictureName = DateTime.Now.Ticks.ToString() + suffix; 
+            }
+
+            try
+            {
+                if (file!=null)
+                {
+                    string path = System.Web.HttpContext.Current.Server.MapPath("~/images/");  // Server.MapPath("~/images/");
+                    file.SaveAs(path + pictureName);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Response.Write(ex);
+            } 
+        }
+       
     }
 }
