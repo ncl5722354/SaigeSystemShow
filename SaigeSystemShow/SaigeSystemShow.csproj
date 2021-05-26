@@ -100,6 +100,7 @@
     <Content Include="pic\frame1.png" />
     <Content Include="pic\frame2.png" />
     <Content Include="pic\loginba.png" />
+    <Content Include="SearchInfo.aspx" />
     <Content Include="SqlCaozuo.asmx" />
     <Content Include="sql_JS.js" />
     <Content Include="String_Caozuo.js" />
@@ -137,6 +138,13 @@
       <DependentUpon>MainView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchInfo.aspx.cs">
+      <DependentUpon>SearchInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchInfo.aspx.designer.cs">
+      <DependentUpon>SearchInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SqlCaozuo.asmx.cs">
       <DependentUpon>SqlCaozuo.asmx</DependentUpon>
       <SubType>Component</SubType>

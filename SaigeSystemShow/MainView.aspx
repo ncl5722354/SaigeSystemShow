@@ -118,6 +118,7 @@
             <div id="div_data_collection" style="position:absolute;left:-10%;width:70%;top:105px;height:25px;font-size:20px;color:white;text-align:center;">供配电</div>
             <div id="div_bit_devices" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;visibility:hidden">开关量监测</div>
             <div id="div_water_pump" style="position:absolute;left:-10%;width:70%;top:180px;height:25px;font-size:20px;color:white;text-align:center;">给排水</div>
+            <div id="div_reasrh_info" style="position:absolute;left:-10%;width:70%;top:255px;height:25px;font-size:20px;color:white;text-align:center;">巡检记录</div>
         </div>
 
         <div id="device_overview" style="position:absolute;left:12%;width:20%;top:10%;height:20%;">
@@ -295,6 +296,8 @@
     Set_Animation_Select_Button("div_data_collection");
     Set_Animation_Select_Button("div_bit_devices");
     Set_Animation_Select_Button("div_water_pump");
+    Set_Animation_Select_Button("div_reasrh_info");
+
     Set_Animation_Div("device_overview");
     Set_Animation_Div("device_project_info");
    
@@ -622,6 +625,15 @@
         var sub_iframe = document.getElementById("subiframe");
         sub_iframe.style.visibility = "visible";
         Put_Page_In_iFrame("waterpump.aspx", "subiframe");
+    }
+
+    var button_reasch_info = document.getElementById("div_reasrh_info");
+
+    button_reasch_info.onclick=function(event)
+    {
+        var sub_iframe = document.getElementById("subiframe");
+        sub_iframe.style.visibility = "visible";
+        Put_Page_In_iFrame("SearchInfo.aspx", "subiframe");
     }
     
 

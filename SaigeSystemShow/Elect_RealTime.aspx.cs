@@ -61,7 +61,7 @@ namespace SaigeSystemShow
            pictureName = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0,100).ToString().PadLeft(3,'0') + "1";   // 图片名称
            pictureName2 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0, 100).ToString().PadLeft(3, '0') + "2";   // 图片名称
            pictrueName3 = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond.ToString() + num.Next(0, 100).ToString().PadLeft(3, '0') + "3";   // 图片名称
-           if (file == null)
+           if (file == null || file.ContentLength==0)
            {
                //int idx = uploadName.LastIndexOf(".");
                //string suffix = uploadName.Substring(idx);//获得上传的图片的后缀名 
@@ -69,31 +69,31 @@ namespace SaigeSystemShow
                pictureName = "";
            }
 
-           if(file2==null)
+           if(file2==null || file2.ContentLength==0)
            {
                pictureName2 = "";
            }
 
-           if(file3==null)
+           if(file3==null || file3.ContentLength==0)
            {
                pictrueName3 = "";
            }
 
            try
            {
-               if (file != null)
+               if (file != null && file.ContentLength!=0)
                {
                    string path = System.Web.HttpContext.Current.Server.MapPath("~/images/");  // Server.MapPath("~/images/");
                    file.SaveAs(path + pictureName);
                }
 
-               if(file2!=null)
+               if(file2!=null && file2.ContentLength!=0)
                {
                    string path = System.Web.HttpContext.Current.Server.MapPath("~/images/");  // Server.MapPath("~/images/");
                    file2.SaveAs(path + pictureName2);
                }
 
-               if (file3 != null)
+               if (file3 != null && file3.ContentLength!=0)
                {
                    string path = System.Web.HttpContext.Current.Server.MapPath("~/images/");  // Server.MapPath("~/images/");
                    file3.SaveAs(path + pictrueName3);
@@ -111,9 +111,11 @@ namespace SaigeSystemShow
 
                var select=Request.Form["add_info_type_select"];
 
+               var device = Request.Form["add_info_name_title"];
+
                var user = Request.Cookies["username"].Value;
 
-               Ex_Sql("insert into search_info_table values(\"" + ID + "\",\"" + text + "\",\"" + select + "\",\"" + user + "\",\"" + pictureName + "\",\""+pictureName2+"\",\""+pictrueName3+"\",\"" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\")");
+               Ex_Sql("insert into search_info_table values(\"" + ID + "\",\""+ Get_Xiahuaxian_String(device,1)+"\",\""+ text + "\",\"" + select + "\",\"" + user + "\",\"" + pictureName + "\",\""+pictureName2+"\",\""+pictrueName3+"\",\"" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\")");
                
            }
            catch (Exception ex)
@@ -143,6 +145,47 @@ namespace SaigeSystemShow
        }
 
 
+
+       public static string Get_Xiahuaxian_String(string scr, int index)
+       {
+           // 返回下划线第index个量
+           try
+           {
+               int count = 0;   // 下划线的数量
+               int length = scr.Length;
+               char[] char_arraylist = scr.ToCharArray(0, length);
+               for (int i = 0; i < length; i++)
+               {
+                   if (char_arraylist[i] == '_')
+                   {
+                       count++;
+                   }
+               }
+               int[] _index = new int[count + 2];
+               string[] substring = new string[count + 1];
+               _index[0] = -1;
+               int mycount = 1;
+               for (int i = 0; i < length; i++)
+               {
+                   if (i == length - 1)
+                   {
+                       _index[mycount] = i + 1;
+                       break;
+                   }
+                   if (char_arraylist[i] == '_')
+                   {
+                       _index[mycount] = i;
+                       mycount++;
+                   }
+               }
+               for (int i = 0; i < count + 1; i++)
+               {
+                   substring[i] = scr.Substring(_index[i] + 1, _index[i + 1] - _index[i] - 1);
+               }
+               return substring[index - 1];
+           }
+           catch { return null; }
+       }  
         
 
         
