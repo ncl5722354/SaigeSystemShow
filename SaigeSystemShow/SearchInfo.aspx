@@ -13,8 +13,17 @@
         <img  id="img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
         <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">巡检信息查询</label>
 
-        <div id="content_div" style="position:absolute;left:20%;width:60%;top:20%;height:79%;overflow:scroll">
-
+        
+        <div id="content_div" style="position:absolute;left:10%;width:80%;top:30%;height:69%;overflow:scroll">
+            <div id="sub_header_div" style="position:absolute;left:0%;width:100%;top:0%;height:10%">
+                <label id="label_device_name" style="position:absolute;left:0%;width:10%;top:0%;height:10%;text-align:center;color:white;">设备</label>
+                <label id="label_info" style="position:absolute;left:10%;width:30%;top:0%;height:10%;text-align:center;color:white;">信息</label>
+                <label id="label_type" style="position:absolute;left:40%;width:10%;top:0%;height:10%;text-align:center;color:white;">操作</label>
+                <label id="label_user" style="position:absolute;left:50%;width:10%;top:0%;height:10%;text-align:center;color:white;">用户</label>
+                <label id="label_"></label>
+            </div>
+            <div id="sub_content_div" style="position:absolute;left:0%;width:130%;top:10%;height:90%;">
+            </div>
         </div>
     </div>
     </form>
@@ -37,7 +46,7 @@
    
     function ReFlush() {
 
-        var content_div = document.getElementById("content_div");
+        var content_div = document.getElementById("sub_content_div");
 
         content_div.innerHTML = "";
 
@@ -136,6 +145,18 @@
             pic3.src = "images//" + select_list_json[i][7].toString();
             content_div.appendChild(pic3);
 
+
+            // time
+            var label_time = document.createElement("label");
+            label_time.style.position = "absolute";
+            label_time.style.left = "135%";
+            label_time.style.width = "30%";
+            label_time.style.top = ((120 * i) + 5).toString() + "px";
+            label_time.style.height = "25px";
+            label_time.style.fontSize = "20px";
+            label_time.textContent = select_list_json[i][8].toString();
+            label_time.style.color = "white";
+            content_div.appendChild(label_time);
         }
     }
    
