@@ -70,6 +70,9 @@
     <Content Include="chart\package.json" />
     <Content Include="chart\README.md" />
     <None Include="Properties\PublishProfiles\1212.pubxml" />
+    <Content Include="privatefunction.js" />
+    <Content Include="NewMain.aspx" />
+    <Content Include="viewconfig.ini" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -137,6 +140,13 @@
     <Compile Include="MainView.aspx.designer.cs">
       <DependentUpon>MainView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NewMain.aspx.cs">
+      <DependentUpon>NewMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewMain.aspx.designer.cs">
+      <DependentUpon>NewMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchInfo.aspx.cs">
       <DependentUpon>SearchInfo.aspx</DependentUpon>
@@ -156,6 +166,12 @@
     <Compile Include="waterpump.aspx.designer.cs">
       <DependentUpon>waterpump.aspx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileOperation\FileOperation.csproj">
+      <Project>{9ed43ee0-8a99-4c7d-bbac-464573da4dd9}</Project>
+      <Name>FileOperation</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

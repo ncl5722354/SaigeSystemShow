@@ -12,3 +12,5 @@ E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\MySql.Dat
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Debug\SaigeSystemShow.csprojResolveAssemblyReference.cache
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Debug\SaigeSystemShow.dll
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Debug\SaigeSystemShow.pdb
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.dll
+E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.pdb
