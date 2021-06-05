@@ -41,6 +41,7 @@
             <label id="low_voltage_room_label" style="position:absolute;left:30%;width:40%;top:2%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房</label>
             <label id="low_voltage_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">低压设备房温湿度</label>
             <div id="TempRoom_div2" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：21℃  湿度：40%</div>
+            <div id="低压设备房_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
         </div>
 
 
@@ -257,7 +258,7 @@
         }
 
         Show_Add_Info_View("变量器房_addinfo");
-        
+        Show_Add_Info_View("低压设备房_addinfo");
     }
 
     init();
