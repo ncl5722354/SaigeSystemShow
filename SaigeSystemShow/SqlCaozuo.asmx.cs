@@ -15,6 +15,7 @@ using System.Web.UI.WebControls;
 
 using System.Web.UI.WebControls.WebParts;
 using System.Text;
+using FileOperation;
 
 
 // 此脚本用来
@@ -39,6 +40,14 @@ namespace MEEC_Config_System
         public static string password = "ncl5722354";
         public static string user="root";
         public static string port="3306";
+
+
+        [System.Runtime.InteropServices.DllImport("kernel32")]
+        public static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+
+        [System.Runtime.InteropServices.DllImport("kernel32")]
+
+        public static extern int GetPrivateProfileString(string section, string key, string def, System.Text.StringBuilder retVal, int size, string filePath);
 
         [WebMethod]
         public string HelloWorld()
@@ -133,6 +142,52 @@ namespace MEEC_Config_System
             {
                 //Response.Write(ex);
             } 
+        }
+
+        // 读取ini文件的属性
+        [WebMethod]
+        public string Read_Init(string ini_path_name, string section, string key)
+        {
+            // 如果没有文件，创建文件
+
+            FileCaozuo.Create_File(System.Web.HttpContext.Current.Server.MapPath("~/" + ini_path_name));
+            StringBuilder temp = new StringBuilder(255);
+
+            int i = GetPrivateProfileString(section, key, "", temp, 255, System.Web.HttpContext.Current.Server.MapPath("~/" + ini_path_name));
+            return temp.ToString();
+        }
+
+        // 读取所有的section
+        [System.Runtime.InteropServices.DllImport("kernel32")]
+        public static extern int GetPrivateProfileSectionNames(byte[] buffer, int iLen, string lpFileName);
+
+        [WebMethod]
+        public ArrayList ReadSections(string ini_path_name)
+        {
+            byte[] buffer = new byte[65535];
+            int rel = GetPrivateProfileSectionNames(buffer, buffer.GetUpperBound(0), System.Web.HttpContext.Current.Server.MapPath("~/"+ini_path_name));
+            return Conver2ArrayList(rel, buffer);
+        }
+        public ArrayList Conver2ArrayList(int rel, byte[] buffer)
+        {
+            ArrayList arrayList = new ArrayList();
+            if (rel > 0)
+            {
+                int iCnt, iPos;
+                string tmp;
+                iCnt = 0; iPos = 0;
+                for (iCnt = 0; iCnt < rel; iCnt++)
+                {
+                    if (buffer[iCnt] == 0x00)
+                    {
+                        tmp = System.Text.ASCIIEncoding.Default.GetString(buffer, iPos, iCnt - iPos).Trim();
+                        iPos = iCnt + 1;
+                        if (tmp != "")
+                            arrayList.Add(tmp);
+                    }
+                }
+            }
+            return arrayList;
         }
        
     }

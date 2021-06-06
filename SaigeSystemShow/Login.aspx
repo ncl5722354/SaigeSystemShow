@@ -67,7 +67,7 @@
         {
 
             setCookie("username", user, 1000);
-            window.location.replace("MainView.aspx");
+            window.location.replace("NewMain.aspx");
         }
     }
 
