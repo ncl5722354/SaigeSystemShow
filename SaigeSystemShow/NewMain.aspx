@@ -50,6 +50,27 @@
 
             </div>
         </div>
+         <div id="div_add_info_view" style="position:absolute;left:30%;width:40%;top:20%;height:70%;background-image:url('pic/background2.png');overflow:scroll;border-style:solid;border-width:2px;border-color:white;visibility:hidden" >
+            <label id="add_info_title" style="position:absolute;left:20%;width:60%;top:5%;height:20px;font-size:18px;text-align:center;color:white">添加信息</label>
+            <label id="add_info_colse" style="position:absolute;left:0%;width:20%;top:5%;height:18px;font-size:15px;text-align:center;color:white">关闭</label>
+            <label id="add_info_input_label" style="position:absolute;left:0%;width:20%;top:20%;height:18px;font-size:15px;text-align:center;color:white">添加说明信息</label>
+            <textarea id="add_info_input" style="position:absolute;left:30%;width:60%;top:20%;height:20%;" runat="server"></textarea>
+            <label id="add_info_type_label" style="position:absolute;left:0%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;color:white">选择类型</label>
+            <select id="add_info_type_select" style="position:absolute;left:30%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;" runat="server">
+                <option value="正常巡检">正常巡检</option>
+                <option value="发现异常">发现异常</option>
+                <option value="异常恢复">异常恢复</option>
+            </select>
+            <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
+            <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
+            <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
+            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click" UseSubmitBehavior="False" />
+            <input id="add_info_name_title" runat="server" style="position:absolute;left:200%;color:white"/>
+        </div>
     </div>
     </form>
 </body>
@@ -70,9 +91,15 @@
        
     // 用读取ini的方式来进行页面的设计
     // 流程控制部分
+    // 需要增加一个标记，展示此界面现在是否可以实时更新
     init();    // 初始化
     var select_list = Read_Selector();// 读取导航栏信息
     var select_json = From_Text_To_Json(select_list);
+    var current_id;
+    var update_is = true;
+    var temp_update_is;
+    // 公共变量
+    var Device_Data_Array;
 
     // 实现导航栏操作
     for (var i = 0; i < select_json.length; i++)
@@ -95,13 +122,15 @@
             
 
             // 读取相应的界面并填充画面
-
+            current_id = event.currentTarget.id;
             Read_View(Get_Xiahuaxian_String(event.currentTarget.id, 2), "div_detail_content");
         }
         
         $("#div_selector").append(label);
         Set_Animation_Select_Button(label.id);
     }
+
+    setInterval(Reflush, 10000);
     
 
 
@@ -141,4 +170,111 @@
 
     // 读取导航信息
     
+
+    function Reflush()
+    {
+        if (update_is == false) return;
+        try{
+            Read_View(Get_Xiahuaxian_String(current_id, 2), "div_detail_content");
+        }
+        catch(err){}
+    }
+
+
+
+    // 关于设备信息上传
+
+    function Show_Add_Info_View(btn_show_info_view_string) {
+
+        var btn = document.getElementById(btn_show_info_view_string);
+        var btn_ok = document.getElementById("add_info_ok");
+
+        var view = document.getElementById("div_add_info_view");
+        btn.onclick = function (event) {
+            temp_update_is = update_is;
+            update_is = false;
+            $('#add_info_name_title').attr('value', event.target.id);
+            //alert(event.target.id);
+            $('#add_pic1').attr('src', '');
+            $('#add_pic2').attr('src', '');
+            $('#add_pic3').attr('src', '');
+            $('#add_info_pic1_input').attr('value', '添加图片1');
+            $('#add_info_pic2_input').attr('value', '添加图片2');
+            $('#add_info_pic3_input').attr('value', '添加图片3');
+            view.style.visibility = "visible";
+
+            var close_btn = document.getElementById("add_info_colse");
+
+            close_btn.onclick = function (event) {
+                update_is = temp_update_is;
+                view.style.visibility = "hidden";
+            }
+
+            btn_ok.onclick = function (event) {
+
+                // 把图片上传到服务器
+                // update_file(1,"add_info_pic1_input");
+                update_is = temp_update_is;
+
+
+                view.style.visibility = "hidden";
+            }
+
+
+        }
+
+
+    }
+
+
+    // 显示读取的图片
+    $('#add_info_pic1_input').change(function () {
+        let fileobj = this.files[0];
+        let filereader = new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload = function () {
+            $('#add_pic1').attr('src', filereader.result);
+        }
+    })
+
+    $('#add_info_pic2_input').change(function () {
+        let fileobj = this.files[0];
+        let filereader = new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload = function () {
+            $('#add_pic2').attr('src', filereader.result);
+        }
+    })
+
+    $('#add_info_pic3_input').change(function () {
+        let fileobj = this.files[0];
+        let filereader = new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload = function () {
+            $('#add_pic3').attr('src', filereader.result);
+        }
+    })
+
+    function update_file(index, input_name) {
+
+        var input_object = document.getElementById(input_name);
+        $.ajax({
+            url: "Elect_RealTime.aspx/Update_pic",
+            type: "Post",
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            data: "{index:'" + index + "',name:'" + input_name + "'}",
+            success: function (data) {
+
+
+            },
+            error: function (data) {
+                //200的响应也有可能被认定为error，responseText中没有Message部分
+                return $.parseJSON(data.responseText).Message;
+            },
+            complete: function (data) {
+
+            }
+        });
+    }
 </script>

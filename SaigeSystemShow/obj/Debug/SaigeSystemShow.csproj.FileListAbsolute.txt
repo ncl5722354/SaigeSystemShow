@@ -14,3 +14,5 @@ E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Debug\Sai
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\obj\Debug\SaigeSystemShow.pdb
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.dll
 E:\程序\新版机电管控界面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.pdb
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.dll
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\SaigeSystemShow\bin\FileOperation.pdb
