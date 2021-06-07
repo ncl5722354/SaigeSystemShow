@@ -9,95 +9,128 @@
     <_PublishTargetUrl>C:\Users\DAIER\Desktop\发布赛格机电展示</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/FileOperation.dll">
+      <publishTime>06/07/2021 21:38:49</publishTime>
+    </File>
     <File Include="bin/MySql.Data.dll">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>09/18/2019 06:03:00</publishTime>
     </File>
     <File Include="bin/SaigeSystemShow.dll">
-      <publishTime>04/30/2021 16:16:02</publishTime>
+      <publishTime>06/07/2021 21:38:50</publishTime>
     </File>
     <File Include="BitDevices.aspx">
-      <publishTime>04/30/2021 16:05:01</publishTime>
+      <publishTime>05/03/2021 16:13:53</publishTime>
     </File>
     <File Include="chart/bower.json">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/composer.json">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.bundle.js">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.bundle.min.js">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.css">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.js">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.min.css">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/dist/Chart.min.js">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/jQuery/JQuery.js">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/LICENSE.md">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/package.json">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="chart/README.md">
-      <publishTime>04/12/2021 08:56:12</publishTime>
+      <publishTime>04/18/2021 14:49:32</publishTime>
     </File>
     <File Include="Controler_Function.js">
-      <publishTime>04/25/2021 16:55:40</publishTime>
+      <publishTime>06/06/2021 17:40:31</publishTime>
     </File>
     <File Include="cooket.js">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>06/05/2021 19:22:35</publishTime>
     </File>
     <File Include="DataGrid.js">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>04/10/2021 17:09:52</publishTime>
     </File>
     <File Include="dll/MySql.Data.dll">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>09/18/2019 06:03:00</publishTime>
     </File>
     <File Include="Elect_RealTime.aspx">
-      <publishTime>04/29/2021 11:15:54</publishTime>
+      <publishTime>06/07/2021 20:58:44</publishTime>
     </File>
     <File Include="js/jquery-3.5.1.js">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>06/23/2020 14:11:13</publishTime>
     </File>
     <File Include="json.js">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>04/03/2021 14:24:24</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>04/20/2021 14:39:27</publishTime>
+      <publishTime>06/05/2021 19:21:59</publishTime>
     </File>
     <File Include="MainView.aspx">
-      <publishTime>04/30/2021 14:58:38</publishTime>
+      <publishTime>06/05/2021 19:21:59</publishTime>
+    </File>
+    <File Include="NewMain.aspx">
+      <publishTime>06/07/2021 20:58:44</publishTime>
+    </File>
+    <File Include="pic/background.png">
+      <publishTime>05/01/2021 22:01:30</publishTime>
+    </File>
+    <File Include="pic/background2.png">
+      <publishTime>05/03/2021 16:07:29</publishTime>
+    </File>
+    <File Include="pic/building.png">
+      <publishTime>05/02/2021 22:42:14</publishTime>
+    </File>
+    <File Include="pic/frame1.png">
+      <publishTime>05/02/2021 16:58:38</publishTime>
+    </File>
+    <File Include="pic/frame2.png">
+      <publishTime>05/03/2021 16:16:42</publishTime>
     </File>
     <File Include="pic/loginba.png">
       <publishTime>04/12/2021 08:42:52</publishTime>
     </File>
+    <File Include="privatefunction.js">
+      <publishTime>06/07/2021 21:38:41</publishTime>
+    </File>
+    <File Include="SearchInfo.aspx">
+      <publishTime>06/05/2021 19:21:59</publishTime>
+    </File>
     <File Include="SqlCaozuo.asmx">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>04/01/2021 15:33:08</publishTime>
     </File>
     <File Include="sql_JS.js">
-      <publishTime>04/25/2021 16:55:40</publishTime>
+      <publishTime>05/25/2021 21:37:16</publishTime>
     </File>
     <File Include="String_Caozuo.js">
-      <publishTime>04/30/2021 15:06:57</publishTime>
+      <publishTime>05/02/2021 17:30:45</publishTime>
+    </File>
+    <File Include="viewconfig.ini">
+      <publishTime>06/05/2021 19:21:59</publishTime>
     </File>
     <File Include="viewfunction.js">
-      <publishTime>04/12/2021 08:42:52</publishTime>
+      <publishTime>06/05/2021 19:21:59</publishTime>
+    </File>
+    <File Include="waterpump.aspx">
+      <publishTime>05/20/2021 22:14:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/27/2021 09:32:00</publishTime>
+      <publishTime>06/07/2021 21:38:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

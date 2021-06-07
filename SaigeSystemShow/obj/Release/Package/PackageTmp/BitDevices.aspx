@@ -36,7 +36,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script>
     // 所有开关量
-    var bit_devices_bits = new Array();  // 保存的是所有的点位
+    var bit_devices_bits = new Array();   //保存的是所有的点位
 
     init();
 

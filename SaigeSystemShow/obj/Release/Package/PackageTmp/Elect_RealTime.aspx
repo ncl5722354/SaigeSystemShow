@@ -8,12 +8,109 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
-    <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;background-color:#0B121C">
-        <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">电力系统实时监测</label>
-        <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
-        <div id="elect_device_div2" style="position:absolute;left:35%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
-        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;border-style:solid;border-width:2px;border-color:#444B55"></div>
+    <form id="form1" runat="server" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;" enctype= "multipart/form-data">
+    <div  id="maindiv" style="position:absolute;left:0%;top:0%;width:100%;height:100%;overflow:hidden;">
+        <img  id="img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
+        <label id="label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">供配电监测</label>
+        
+       <%-- <div id="elect_device_div1" style="position:absolute;left:5%;width:30%;height:40%;top:15%;"></div>
+        <div id="elect_device_div2" style="position:absolute;left:35%;width:30%;height:40%;top:15%;"></div>
+        <div id="elect_device_div3" style="position:absolute;left:65%;width:30%;height:40%;top:15%;"></div>--%>
+        
+        <div id="div_Substation_room" style="position:absolute;left:5%;width:25%;top:15%;height:30%">
+            <img id="backgroud_Substation_room" style="position:absolute;left:0%;top:0%;width:100%;height:100%" src="pic/frame1.png"/>
+            <img id="backgroud_Substation_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+            <label id="Substation_room_label" style="position:absolute;left:30%;width:40%;top:1%;height:20px;font-size:18px;text-align:center;color:white;">变压器房</label>
+            <label id="Substartion_room_tempabc_Title" style="position:absolute;left:15%;width:40%;top:20%;height:25px;font-size:20px;text-align:center;color:white">变压器三相温度</label>
+            <div id="Tempabc_div1" style="position:absolute;left:5%;width:95%;top:35%;height:25px;font-size:16px;text-align:center;color:white"></div>
+            <label id="Substartion_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">变压器房温湿度</label>
+            <div id="TempRoom_div1" style="position:absolute;left:5%;width:98%;top:75%;height:25px;font-size:20px;text-align:center;color:white">温度：20℃  湿度：10%</div>
+            <div id="变量器房_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
+        </div>
+
+        <div id="div_Substation_room_vedio" style="position:absolute;left:5%;width:25%;top:65%;height:30%">
+            <img id="backgroud_Substation_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_Substation_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+            <label id="Substation_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">变压器房监控</label>
+            <video id="vedio_Substation_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
+
+        <div id="div_Low_voltage_Room" style="position:absolute;left:35%;width:25%;top:15%;height:30%">
+            <img id="backgroud_low_voltage_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+             <img id="backgroud_low_voltage_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+            <label id="low_voltage_room_label" style="position:absolute;left:30%;width:40%;top:2%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房</label>
+            <label id="low_voltage_room_roomtemp_Title" style="position:absolute;left:15%;width:40%;top:60%;height:25px;font-size:20px;text-align:center;color:white">低压设备房温湿度</label>
+            <div id="TempRoom_div2" style="position:absolute;left:1%;width:98%;top:76%;height:25px;font-size:20px;text-align:center;color:white">温度：21℃  湿度：40%</div>
+
+             <div id="低压设备房_addinfo" style="position:absolute;left:60%;width:40%;top:8%;height:10%;font-size:15px;color:white;text-align:center;">添加巡检信息</div>
+        </div>
+
+
+        <div id="div_low_voltage_room_vedio" style="position:absolute;left:35%;width:25%;top:65%;height:30%">
+            <img id="backgroud_low_voltage_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_low_voltage_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+            <label id="low_voltage_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">低压设备房监控</label>
+            <video id="vedio_voltage_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
+
+
+        <div id="div_Generator_room" style="position:absolute;left:65%;width:30%;top:15%;height:30%">
+            <img id="background_Generator_room" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png" />
+            <img id="background_Generator_room1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+             <label id="Generator_room_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机组参数</label>
+            <div id="elect_value1" style="position:absolute;left:0%;width:100%;top:5%;height:95%;">
+
+            </div>
+            <label id="Generator_status_title" style="position:absolute;left:50%;width:20%;top:80%;height:12px;font-size:10px;color:white;text-align:center">运行状态</label>
+            <div id="bit_device_1" style="position:absolute;left:75%;width:3%;top:80%;height:5%;border-radius:100%;background-color:red"></div>
+        </div>
+
+
+        <div id="div_Generator_room_vedio" style="position:absolute;left:65%;width:25%;top:65%;height:30%">
+            <img id="backgroud_Generator_room_vedio" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/frame1.png"/>
+            <img id="backgroud_Generator_room_vedio1" style="position:absolute;left:0%;width:100%;top:10%;height:90%;" src="pic/frame2.png"/>
+            <label id="Generator_room_vedio_label" style="position:absolute;left:30%;width:40%;top:3%;height:20px;font-size:15px;text-align:center;color:white;">发电机监控</label>
+            <video id="Generator_room_room_vedio" style="position:absolute;left:1%;width:98%;top:15%;height:84%"></video>
+        </div>
+
+        <div id="chart_datagrid_view" style="position:absolute;left:20%;width:60%;top:30%;height:60%;border-style:solid;border-width:2px;border-color:white;visibility:hidden;overflow:inherit">
+
+             <img  id="sub_img_background" style="position:absolute;left:0%;width:100%;top:0%;height:100%;" src="pic/background2.png"/>
+             
+             <label id="sub_label_title" style="position:absolute;left:30%;width:40%;top:5%;font-size:40px;height:42px;text-align:center;color:white">历史数据</label>
+              <label id="sub_chart_close" style="position:absolute;left:85%;width:15%;top:2%;height:20px;font-size:18px;text-align:center;color:white">关 闭</label>
+              <div id="sub_chart_div" style="position:absolute;left:10%;width:80%;top:25%;height:75%;">
+
+              </div>
+            <label id="label_time1" style="position:absolute;left:1%;width:20%;top:20%;height:20px;text-align:center;font-size:18px;color:white;">选择时间1</label>
+            <input id="input_time1" type="text" style="position:absolute;left:20%;width:20%;height:20px;top:20%;"/>
+            <div id="data1" style="position:absolute;left:10%;width:50%;height:40%;top:25%;z-index:2"></div>
+            <select id="select1" style="position:absolute;left:32%;width:10%;top:12%;height:20px;visibility:hidden"></select>
+            <input id="input_data_ok" type="button" style="position:absolute;left:45%;width:10%;top:20%;height:25px;font-size:16px" value="确定"/>
+        </div>
+
+        <div id="div_add_info_view" style="position:absolute;left:30%;width:40%;top:20%;height:70%;background-image:url('pic/background2.png');overflow:scroll;border-style:solid;border-width:2px;border-color:white;visibility:hidden" >
+            <label id="add_info_title" style="position:absolute;left:20%;width:60%;top:5%;height:20px;font-size:18px;text-align:center;color:white">添加信息</label>
+            <label id="add_info_colse" style="position:absolute;left:0%;width:20%;top:5%;height:18px;font-size:15px;text-align:center;color:white">关闭</label>
+            <label id="add_info_input_label" style="position:absolute;left:0%;width:20%;top:20%;height:18px;font-size:15px;text-align:center;color:white">添加说明信息</label>
+            <textarea id="add_info_input" style="position:absolute;left:30%;width:60%;top:20%;height:20%;" runat="server"></textarea>
+            <label id="add_info_type_label" style="position:absolute;left:0%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;color:white">选择类型</label>
+            <select id="add_info_type_select" style="position:absolute;left:30%;width:20%;height:18px;top:45%;font-size:15px;text-align:center;" runat="server">
+                <option value="正常巡检">正常巡检</option>
+                <option value="发现异常">发现异常</option>
+                <option value="异常恢复">异常恢复</option>
+            </select>
+            <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
+            <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
+            <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
+            <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
+            <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
+            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click"/>
+            <input id="add_info_name_title" runat="server" style="position:absolute;left:200%;color:white"/>
+        </div>
+
     </div>
     </form>
 </body>
@@ -29,43 +126,140 @@
 <script src="sql_JS.js"></script>
 <script src="cooket.js"></script>
 <script src="Controler_Function.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
 <script>
 
     var elect_device_list = new Array();       // 保存电力设备列表
     var elect_temp_device_list = new Array();  // 保存电力温度设备列表
+    var bit_device_list = new Array();         // 保存开关量设备列表
+    var Show_Line_Device_ID;                 // 图表里显示曲线的设备Id
+    var Show_mode;                           // 显示模式，如果是0 代表是一条线   如果是1，代表三条线
+    var line_object;
+    var Show_CanshuType;                     // 显示的参数类型
 
 
     function init()
     {
 
-        /// 正泰电表系列
-        var elect_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰电表\")");
-        var elect_device_list_json = From_Text_To_Json(elect_device_list_string);
-        for(var i=0;i<elect_device_list_json.length;i++)
-        {
-            elect_device_list.push(elect_device_list_json[i]);
-        }
+        elect_temp_device_list.push("设备20210429095350");
 
-        
-        // 正泰电力温度系列
-        var elect_temp_device_list_string = get_result_sql("select shebeiID from shebeitable where shebeizhongleiID=(select shebeizhongleiID from shebeizhongleitable where shebeizhongleiname=\"正泰三相温度表\")")
-        var elect_temp_device_list_json = From_Text_To_Json(elect_temp_device_list_string);
+        Put_Elect_Temp_To_Divs(elect_temp_device_list, "Tempabc_div");
 
-        for (var i = 0; i < elect_temp_device_list_json.length; i++)
-        {
-            elect_temp_device_list.push(elect_temp_device_list_json[i]);
-        }
+
+        // 电力
+        elect_device_list.push("设备20210409224051");
+        Put_Elect_Devices_To_Divs(elect_device_list, "elect_value");
+
+
+        // 开关量
+        bit_device_list.push("设备20210430112255_2");
+
        
-
-        Put_Elect_Devices_To_Divs(elect_device_list, "elect_device_div");
-        //alert(elect_device_list);
 
         Elect_Devices_Tick();
         setInterval(Elect_Devices_Tick, 20000);
 
         Elect_Temp_Device_Tick();
         setInterval(Elect_Temp_Device_Tick, 20000);
+
+        Bit_Deivce_Tick();
+        setInterval(Bit_Deivce_Tick, 20000);
+
+        var sub_chart_close = document.getElementById("sub_chart_close");
+        sub_chart_close.onclick=function(event)
+        {
+            var sub_div = document.getElementById("chart_datagrid_view");
+            sub_div.style.visibility = "hidden";
+        }
+
+       
+        // Play_Vedio("192.168.1.2", "vedio_Substation_room_vedio");
+
+
+        init_date_kongjian_xiala("input_time1","data1","正泰电表1","电力监测1","canvas_device1","input_time1","select1"); // 初始化日期下拉控件1
+
+        var button_ok=document.getElementById("input_data_ok");
+        var data_control=document.getElementById("input_time1");
+        button_ok.onclick=function(event)
+        {
+            var mydate=data_control.value.toString();
+
+            var sub_lind_view = document.getElementById("sub_chart_div");
+            sub_lind_view.innerHTML = "";
+
+            mydate=Get_Henggang_String(mydate,1)+"-"+Get_Henggang_String(mydate,2).padStart(2,'0')+"-"+Get_Henggang_String(mydate,3).padStart(2,'0');
+
+            var canvas = document.createElement("canvas");
+            canvas.style.left = "0%";
+            canvas.style.width = "100%";
+            canvas.style.top = "0%";
+            canvas.style.heigh = "100%";
+            canvas.style.position = "absolute";
+            canvas.id = "sub_line_canvas";
+            sub_lind_view.appendChild(canvas);
+
+            if(Show_mode==0)
+            {
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\""+ Show_CanshuType+"\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var value_list = new Array();
+                var time_list = new Array();
+
+                var count = value_time_json.length;
+
+                
+            
+                for(var i=0;i<count;i++)
+                {
+                    value_list.push([value_time_json[i][0]]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1],2)]);
+                }
+
+                // 读取名字
+                //var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+                //var device_name_json = From_Text_To_Json(device_name_string);
+
+                Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+
+
+                //Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+            }
+
+            if(Show_mode==1)
+            {
+
+                var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\""+  Show_Line_Device_ID+"\" and value_id = (select canshutypeid from canshutable where canshutype=\""+Show_CanshuType+  "\") and savetime>=\""+mydate+" 00:00:00\" and savetime<=\""+mydate+" 23:59:59\"");
+                var value_time_json = From_Text_To_Json(value_time_string);
+
+                var value_list = new Array();
+                var time_list = new Array();
+
+                var count = value_time_json.length;
+
+
+
+                for (var i = 0; i < count; i++) {
+                    value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
+                    time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+                }
+
+
+                // 读取名字
+               
+
+
+               
+                Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+            }
+
+
+        }
+
+        Show_Add_Info_View("变量器房_addinfo");
+        Show_Add_Info_View("低压设备房_addinfo");
     }
 
     init();
@@ -80,17 +274,28 @@
 
             contect_div.innerHTML = "";
 
+            // 放入图片
+            var back_framk_img = document.createElement("img");
+            back_framk_img.style.left = "0%";
+            back_framk_img.style.top = "0%";
+            back_framk_img.style.width = "100%";
+            back_framk_img.style.height = "100%";
+            back_framk_img.src = "pic//frame2.png";
+            contect_div.appendChild(back_framk_img);
+
+
             // 能源消耗标题
             var label_energy_cost_title = document.createElement("label");
             label_energy_cost_title.style.position = "absolute";
-            label_energy_cost_title.style.left = "5%";
+            label_energy_cost_title.style.left = "15%";
             label_energy_cost_title.style.width = "20%";
-            label_energy_cost_title.style.top = "10%";
+            label_energy_cost_title.style.top = "15%";
             label_energy_cost_title.style.height = "20px";
             label_energy_cost_title.style.fontSize = "18px";
             label_energy_cost_title.textContent = "能源消耗";
             label_energy_cost_title.style.color = "white";
-            label_energy_cost_title.style.textAlign="center";
+            label_energy_cost_title.style.textAlign = "center";
+           
 
             contect_div.appendChild(label_energy_cost_title);
 
@@ -99,15 +304,22 @@
             var label_energy_cost = document.createElement("label");
            
             label_energy_cost.style.position = "absolute";
-            label_energy_cost.style.left = "0%";
+            label_energy_cost.style.left = "10%";
             label_energy_cost.style.width = "30%";
             label_energy_cost.style.top = "30%";
             label_energy_cost.style.height = "40px";
             label_energy_cost.style.fontSize = "38px";
             label_energy_cost.textContent = "0";
-            label_energy_cost.id = div_name_head + (i + 1).toString() + "_energy_cost";
+            label_energy_cost.id = div_name_head + "_" + list[i].toString() + "_energy_cost";
             label_energy_cost.style.color = "white";
             label_energy_cost.style.textAlign = "center";
+            label_energy_cost.onclick=function(event)
+            {
+                // 画曲线
+                Click_Label_Show_Lind(event,"正向有功总电能","总电能",0);
+            }
+
+
             contect_div.appendChild(label_energy_cost);
 
             // 电压
@@ -115,12 +327,10 @@
             var Uabc_div = document.createElement("div");
             
             Uabc_div.style.position = "absolute";
-            Uabc_div.style.left = "40%";
-            Uabc_div.style.width = "55%";
-            Uabc_div.style.top = "5%";
+            Uabc_div.style.left = "35%";
+            Uabc_div.style.width = "65%";
+            Uabc_div.style.top = "15%";
             Uabc_div.style.height = "15%";
-            Uabc_div.style.borderStyle = "solid";
-            Uabc_div.style.borderColor = "#444B55";
             contect_div.appendChild(Uabc_div);
 
 
@@ -143,21 +353,28 @@
             label_Uabc.style.height = "15px";
             label_Uabc.style.fontSize = "13px";
             label_Uabc.textContent = "0";
-            label_Uabc.id = div_name_head + (i + 1).toString() + "_Uabc";
+            label_Uabc.id = div_name_head +"_"+ list[i].toString() + "_Uabc";
             label_Uabc.style.color = "white";
             label_Uabc.style.textAlign = "center";
             Uabc_div.appendChild(label_Uabc);
+
+            label_Uabc.onclick=function(event)
+            {
+               
+                Click_Label_Show_Lind(event,"正泰电表电压","三相电压",1);
+
+
+
+            }
 
 
             // 电流
             var Iabc_div = document.createElement("div");
             Iabc_div.style.position = "absolute";
-            Iabc_div.style.left = "40%";
-            Iabc_div.style.width = "55%";
-            Iabc_div.style.top = "20%";
+            Iabc_div.style.left = "35%";
+            Iabc_div.style.width = "65%";
+            Iabc_div.style.top = "30%";
             Iabc_div.style.height = "15%";
-            Iabc_div.style.borderStyle = "solid";
-            Iabc_div.style.borderColor = "#444B55";
             contect_div.appendChild(Iabc_div);
 
             var Iabc_title = document.createElement("label");
@@ -179,20 +396,25 @@
             label_Iabc.style.height = "15px";
             label_Iabc.style.fontSize = "13px";
             label_Iabc.textContent = "0";
-            label_Iabc.id = div_name_head + (i + 1).toString() + "_Iabc";
+            label_Iabc.id = div_name_head+"_" + list[i].toString() + "_Iabc";
             label_Iabc.style.color = "white";
             label_Iabc.style.textAlign = "center";
             Iabc_div.appendChild(label_Iabc);
 
+            label_Iabc.onclick=function(event)
+            {
+                Click_Label_Show_Lind(event,"正泰电表电流","三相电流",1);
+            }
+
+
+
             // 功率
             var Power_Rate_div = document.createElement("div");
             Power_Rate_div.style.position = "absolute";
-            Power_Rate_div.style.left = "40%";
-            Power_Rate_div.style.width = "55%";
-            Power_Rate_div.style.top = "35%";
+            Power_Rate_div.style.left = "35%";
+            Power_Rate_div.style.width = "65%";
+            Power_Rate_div.style.top = "45%";
             Power_Rate_div.style.height = "15%";
-            Power_Rate_div.style.borderStyle = "solid";
-            Power_Rate_div.style.borderColor = "#444B55";
             contect_div.appendChild(Power_Rate_div);
 
             var Power_Rate_title = document.createElement("label");
@@ -214,20 +436,23 @@
             label_Power_Rate.style.height = "15px";
             label_Power_Rate.style.fontSize = "13px";
             label_Power_Rate.textContent = "0";
-            label_Power_Rate.id = div_name_head + (i + 1).toString() + "_Power_Rate";
+            label_Power_Rate.id = div_name_head+"_" + list[i].toString() + "_Power_Rate";
             label_Power_Rate.style.color = "white";
             label_Power_Rate.style.textAlign = "center";
             Power_Rate_div.appendChild(label_Power_Rate);
 
+            label_Power_Rate.onclick=function(event)
+            {
+                Click_Label_Show_Lind(event,"合相有功功率","功率",0);
+            }
+
             // 转换因数
             var Conversion_Factor_div = document.createElement("div");
             Conversion_Factor_div.style.position = "absolute";
-            Conversion_Factor_div.style.left = "40%";
-            Conversion_Factor_div.style.width = "55%";
-            Conversion_Factor_div.style.top = "50%";
+            Conversion_Factor_div.style.left = "35%";
+            Conversion_Factor_div.style.width = "65%";
+            Conversion_Factor_div.style.top = "60%";
             Conversion_Factor_div.style.height = "15%";
-            Conversion_Factor_div.style.borderStyle = "solid";
-            Conversion_Factor_div.style.borderColor = "#444B55";
             contect_div.appendChild(Conversion_Factor_div);
 
             var Conversion_Factor_title = document.createElement("label");
@@ -249,48 +474,66 @@
             label_Conversion_Factor.style.height = "15px";
             label_Conversion_Factor.style.fontSize = "13px";
             label_Conversion_Factor.textContent = "0";
-            label_Conversion_Factor.id = div_name_head + (i + 1).toString() + "_Conversion_Factor";
+            label_Conversion_Factor.id = div_name_head +"_" + list[i].toString() + "_Conversion_Factor";
             label_Conversion_Factor.style.color = "white";
             label_Conversion_Factor.style.textAlign = "center";
             Conversion_Factor_div.appendChild(label_Conversion_Factor);
 
+            label_Conversion_Factor.onclick=function(event)
+            {
+                Click_Label_Show_Lind(event,"合相功率因数","功率因数",0);
+            }
 
+
+
+            // 表名
+            var Temp_Device_Title = document.createElement("label");
+            Temp_Device_Title.style.position = "absolute";
+            Temp_Device_Title.style.left = "5%";
+            Temp_Device_Title.style.width = "40%";
+            Temp_Device_Title.style.top = "75%";
+            Temp_Device_Title.style.heigh = "20px";
+            Temp_Device_Title.style.fontSize = "18px";
+            Temp_Device_Title.style.textAlign = "center";
+            Temp_Device_Title.id = div_name_head+"_" + list[i].toString() + "_Title";
+            Temp_Device_Title.style.color = "white";
+            contect_div.appendChild(Temp_Device_Title);
+
+        }
+    }
+
+
+
+    // 三相温度
+    function Put_Elect_Temp_To_Divs(list,div_name_head)
+    {
+        for (var i = 0; i < list.length; i++) {
+
+            var contect_div = document.getElementById(div_name_head + (i + 1).toString());
             // 三相温度
             var Temp_abc_div = document.createElement("label");
             Temp_abc_div.style.position = "absolute";
-            Temp_abc_div.style.left = "40%";
-            Temp_abc_div.style.width = "55%";
-            Temp_abc_div.style.top = "65%";
-            Temp_abc_div.style.height = "15%";
-            Temp_abc_div.style.borderStyle = "solid";
-            Temp_abc_div.style.borderColor = "#444B55";
+            Temp_abc_div.style.left = "0%";
+            Temp_abc_div.style.width = "100%";
+            Temp_abc_div.style.top = "0%";
+            Temp_abc_div.style.height = "100%";
             contect_div.appendChild(Temp_abc_div);
 
-            var Temp_abc_Title = document.createElement("label");
-            Temp_abc_Title.style.position = "absolute";
-            Temp_abc_Title.style.left = "5%";
-            Temp_abc_Title.style.width = "40%";
-            Temp_abc_Title.style.top = "5%";
-            Temp_abc_Title.style.height = "15px";
-            Temp_abc_Title.style.fontSize = "12px";
-            Temp_abc_Title.style.color = "white";
-            Temp_abc_Title.textContent = "电力三相温度（℃）"
-            Temp_abc_div.appendChild(Temp_abc_Title);
+            
 
 
             var label_Temp_abc = document.createElement("label");
             label_Temp_abc.style.position = "absolute";
             label_Temp_abc.style.left = "10%";
             label_Temp_abc.style.width = "80%";
-            label_Temp_abc.style.top = "50%";
-            label_Temp_abc.style.height = "15px";
-            label_Temp_abc.style.fontSize = "13px";
-            label_Temp_abc.style.textAlign = "0";
-            label_Temp_abc.id = div_name_head + (i + 1).toString() + "_Temp_abc";
+            label_Temp_abc.style.top = "0%";
+            label_Temp_abc.style.height = "25px";
+            label_Temp_abc.style.fontSize = "20px";
+            label_Temp_abc.style.textAlign = "center";
+            label_Temp_abc.id = div_name_head + list[i].toString() + "_Temp_abc";
             label_Temp_abc.style.color = "white";
             label_Temp_abc.style.textAlign = "center";
             Temp_abc_div.appendChild(label_Temp_abc);
-
         }
     }
 
@@ -301,30 +544,46 @@
             var shebeiId = elect_device_list[i].toString();
             // 用电量
 
-            var label_elect_cost_id = "elect_device_div" + (i + 1).toString() + "_energy_cost";
+            var label_elect_cost_id = "elect_value_" + shebeiId + "_energy_cost";
             var sql_elect_cost = "select value5 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_elect_cost, label_elect_cost_id);
-            //From_Sql_To_TextContent(label_elect_cost_id, sql_elect_cost);
+            
 
-            var label_Uabc_id = "elect_device_div" + (i + 1).toString() + "_Uabc";
+            var label_Uabc_id = "elect_value_" + shebeiId + "_Uabc";
             var sql_Uabc = "select value1 from shebeitable where shebeiID=\"" + shebeiId + "\"";
-            get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
-            //From_Sql_To_TextContent(label_Uabc_id, sql_Uabc);
+            //get_result_sql_to_labelcontent(sql_Uabc, label_Uabc_id);
 
-            var label_Iabc_id = "elect_device_div" + (i + 1).toString() + "_Iabc";
+            var Uabc_value_string = get_result_sql(sql_Uabc);
+            var Uabc_value_json = From_Text_To_Json(Uabc_value_string);
+            var label_Uabc = document.getElementById(label_Uabc_id);
+            label_Uabc.textContent  = "A：" + Get_Kongge_String(Uabc_value_json[0].toString(), 1) + "   " + "B：" + Get_Kongge_String(Uabc_value_json[0].toString(), 2) + "   " + "C：" + Get_Kongge_String(Uabc_value_json[0].toString(), 3);
+
+            
+
+            var label_Iabc_id = "elect_value_" + shebeiId + "_Iabc";
             var sql_Iabc = "select value2 from shebeitable where shebeiID=\"" + shebeiId + "\"";
-            get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
-            //From_Sql_To_TextContent(label_Iabc_id, sql_Iabc);
+            //get_result_sql_to_labelcontent(sql_Iabc, label_Iabc_id);
+           
+            var Iabc_value_string = get_result_sql(sql_Iabc);
+            var Iabec_value_json = From_Text_To_Json(Iabc_value_string);
+            var label_Iabc = document.getElementById(label_Iabc_id);
+            label_Iabc.textContent = "A: " + Get_Kongge_String(Iabec_value_json[0].toString(), 1) + "   " + "B: " + Get_Kongge_String(Iabec_value_json[0].toString(), 2) + "   " + "C: " + Get_Kongge_String(Iabec_value_json[0].toString(), 3);
 
-            var label_Power_Rate_id = "elect_device_div" + (i + 1).toString() + "_Power_Rate";
+
+            
+            var label_Power_Rate_id = "elect_value_" + shebeiId + "_Power_Rate";
             var sql_Power_Rate = "select value3 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Power_Rate, label_Power_Rate_id);
-            // From_Sql_To_TextContent(label_Power_Rate_id, sql_Power_Rate);
+            
 
-            var label_Conversion_Factor = "elect_device_div" + (i + 1).toString() + "_Conversion_Factor";
+            var label_Conversion_Factor = "elect_value_" + shebeiId + "_Conversion_Factor";
             var sql_Conversion_Factor = "select value4 from shebeitable where shebeiID=\"" + shebeiId + "\"";
             get_result_sql_to_labelcontent(sql_Conversion_Factor, label_Conversion_Factor);
-            //From_Sql_To_TextContent(label_Conversion_Factor, sql_Conversion_Factor);
+            
+            var label_Title = "elect_value_" + shebeiId + "_Title";
+            var sql_Device_Name = "select shebeiname from shebeitable where shebeiID=\"" + shebeiId + "\"";
+            get_result_sql_to_labelcontent(sql_Device_Name, label_Title);
+            
         }
     }
 
@@ -338,11 +597,471 @@
             var device_id = elect_temp_device_list[i].toString();
 
             // 三相温度
-            var label_elect_temp_abc_id = "elect_device_div" + (i + 1).toString() + "_Temp_abc";
+            var label_elect_temp_abc_id = "Tempabc_div" + device_id + "_Temp_abc";
             var sql_Temp_abc = "select value1 from shebeitable where shebeiID=\"" + device_id + "\"";
-            get_result_sql_to_labelcontent(sql_Temp_abc, label_elect_temp_abc_id);
+            var temp_abc_string = get_result_sql(sql_Temp_abc);
+            var temp_abc_json = From_Text_To_Json(temp_abc_string);
+            var temp_string = temp_abc_json[0].toString();
+            var label = document.getElementById(label_elect_temp_abc_id);
+            label.textContent = "A相:" + Get_Kongge_String(temp_string, 1) + "℃\xa0\xa0" + "B相:" + Get_Kongge_String(temp_string, 2) + "℃\xa0\xa0" + "C相:" + Get_Kongge_String(temp_string, 3) + "℃";
+
+           // get_result_sql_to_labelcontent(sql_Temp_abc, label_elect_temp_abc_id);
         }
     }
+
+
+    // 开关量
+    function Bit_Deivce_Tick()
+    {
+        for(var i=0;i<bit_device_list.length;i++)
+        {
+            var id = bit_device_list[i].toString();
+
+            var Bit_Deivce_id = Get_Xiahuaxian_String(id, 1);
+            var index = Get_Xiahuaxian_String(id, 2);
+
+            var Bit_Sql = "select value1 from shebeitable where shebeiID=\"" + Bit_Deivce_id + "\"";
+
+            var bit_value_string = get_result_sql(Bit_Sql);
+
+            var bit_value_json = From_Text_To_Json(bit_value_string);
+
+            var bit_value = bit_value_json[0].toString();
+
+            var index_int = parseInt(index);
+
+            var bit = Get_Kongge_String(bit_value, index_int);
+
+            var div= document.getElementById("bit_device_"+(i+1).toString());
+
+            if (bit == "0")
+                div.style.backgroundColor = "red";
+            if (bit == "1")
+                div.style.backgroundColor = "yellow";
+
+                
+        }
+    }
+
+
+    // 设置标题信息
+    function Set_Title(title)
+    {
+        var document_title = document.getElementById("sub_label_title");
+        document_title.textContent = title;
+    }
+
+
+
+    // 日期下拉菜单
+
+    function init_date_kongjian_xiala(kongjian_name, kongjian_xiala_name, biaoname, chart_name, canvase_name, input_name, select_name) {
+
+        var data_kongjian = document.getElementById(kongjian_name);
+        var Timenow = new Date();
+
+        data_kongjian.value = Timenow.getFullYear() + "-" + (Timenow.getMonth() + 1).toString() + "-" + Timenow.getDate().toString();
+
+        var data_xiala_kongjian = document.getElementById(kongjian_xiala_name);
+        data_xiala_kongjian.innerHTML = "";
+
+
+
+
+        var nowtime = new Date(data_kongjian.value);
+
+        // 点击输入框展开
+        data_kongjian.onclick = function (event) {
+
+            Riqi_Kongjian_Show_Days(kongjian_name, kongjian_xiala_name, biaoname, chart_name, canvase_name, input_name, select_name)
+
+        }
+
+
+        data_xiala_kongjian.style.backgroundColor = "white";
+
+        // 年份月份指示
+        var label_nianyue = document.createElement("label");
+        label_nianyue.style.position = "absolute";
+        label_nianyue.style.left = "20%";
+        label_nianyue.style.width = "60%";
+        label_nianyue.style.top = "1%";
+        label_nianyue.style.height = "9%";
+        label_nianyue.style.textAlign = "center";
+        label_nianyue.style.borderStyle = "solid";
+        label_nianyue.textContent = nowtime.getFullYear() + "-" + (nowtime.getMonth() + 1);
+        data_xiala_kongjian.appendChild(label_nianyue);
+
+
+        data_xiala_kongjian.style.visibility = "hidden";
+
+
+        $(function () {
+            $(document).bind("click", function (e) {
+
+                var a = $(e.target).closest(("div#") + kongjian_xiala_name).length;
+                var b = $(e.target).closest("input").length;
+                var c = $(e.target).closest("img#riqi_left").length;
+                var d = $(e.target).closest("img#riqi_right").length;
+                if (a == 0 && b == 0 && c == 0 && d == 0) {
+                    data_xiala_kongjian.style.visibility = "hidden";
+                }
+            })
+        })
+    }
+
+
+    function Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name)
+    {
+
+        var data_kongjian = document.getElementById(kongjian_name);
+        var nowtime;
+        try{
+            nowtime  = new Date(data_kongjian.value);
+        }
+        catch{nowtime=new Date();}
+        var data_xiala_kongjian = document.getElementById(kongjian_xiala_name);
+        data_xiala_kongjian.style.visibility = "visible";
+
+         
+        data_xiala_kongjian.innerHTML = "";
+
+        data_xiala_kongjian.style.backgroundColor = "white";
+
+        // 年份月份指示
+        var label_nianyue = document.createElement("label");
+        label_nianyue.style.position = "absolute";
+        label_nianyue.style.left = "20%";
+        label_nianyue.style.width = "60%";
+        label_nianyue.style.top = "1%";
+        label_nianyue.style.height = "9%";
+        label_nianyue.style.textAlign = "center";
+        label_nianyue.style.borderStyle = "solid";
+        label_nianyue.textContent = nowtime.getFullYear() + "-" + (nowtime.getMonth() + 1);
+        data_xiala_kongjian.appendChild(label_nianyue);
+
+        // 后退一个月 前进一个月按钮
+        var img_back_month=document.createElement("img");
+        img_back_month.id="riqi_left";
+        img_back_month.style.position="absolute";
+        img_back_month.style.left="12%";
+        img_back_month.style.width="8%";
+        img_back_month.style.top="1%";
+        img_back_month.style.height="9%";
+        img_back_month.src="../pic/left1.png";
+        img_back_month.style.borderStyle="solid";
+        data_xiala_kongjian.appendChild(img_back_month);
+            
+        var img_forward_month=document.createElement("img");
+        img_forward_month.id="riqi_right";
+        img_forward_month.style.position="absolute";
+        img_forward_month.style.left="80%";
+        img_forward_month.style.width="8%";
+        img_forward_month.style.top="1%";
+        img_forward_month.style.height="9%";
+        img_forward_month.src="../pic/right1.png";
+        img_forward_month.style.borderStyle="solid";
+        data_xiala_kongjian.appendChild(img_forward_month);
+
+        // 定义前进一个月和后退一个月按钮的事件
+
+        img_back_month.onclick=function(event)
+        {
+            try{
+
+                var riqi_input=document.getElementById(input_name);
+                var riqi_date=new Date(riqi_input.value);
+                riqi_date.setMonth(riqi_date.getMonth()-1);
+                riqi_input.value=riqi_date.getFullYear().toString()+"-"+(riqi_date.getMonth()+1).toString();
+                Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name);
+                data_xiala_kongjian.style.visibility="visible";
+            }
+            catch(err){}
+        }
+
+        img_forward_month.onclick=function(event)
+        {
+            try{
+
+                var riqi_input=document.getElementById(input_name);
+                var riqi_date=new Date(riqi_input.value);
+                riqi_date.setMonth(riqi_date.getMonth()+1);
+                riqi_input.value=riqi_date.getFullYear().toString()+"-"+(riqi_date.getMonth()+1).toString();
+                Riqi_Kongjian_Show_Days(kongjian_name,kongjian_xiala_name,biaoname,chart_name,canvase_name,input_name,select_name);
+                data_xiala_kongjian.style.visibility="visible";
+            }
+            catch(err){}
+        }
+
+
+        // 星期指示
+        // 星期1
+        var label_xingqi1 = document.createElement("label");
+        label_xingqi1.style.position = "absolute";
+        label_xingqi1.style.left = "1%";
+        label_xingqi1.style.width = "13%";
+        label_xingqi1.style.top = "11%";
+        label_xingqi1.style.height = "9%";
+        label_xingqi1.style.textAlign = "center";
+        label_xingqi1.style.borderStyle = "solid";
+        label_xingqi1.textContent = "一";
+        data_xiala_kongjian.appendChild(label_xingqi1);
+
+        // 星期2
+        var label_xingqi2 = document.createElement("label");
+        label_xingqi2.style.position = "absolute";
+        label_xingqi2.style.left = "14%";
+        label_xingqi2.style.width = "13%";
+        label_xingqi2.style.top = "11%";
+        label_xingqi2.style.height = "9%";
+        label_xingqi2.style.textAlign = "center";
+        label_xingqi2.style.borderStyle = "solid";
+        label_xingqi2.textContent = "二";
+        data_xiala_kongjian.appendChild(label_xingqi2);
+
+
+        // 星期3
+        var label_xingqi3 = document.createElement("label");
+        label_xingqi3.style.position = "absolute";
+        label_xingqi3.style.left = "27%";
+        label_xingqi3.style.width = "13%";
+        label_xingqi3.style.top = "11%";
+        label_xingqi3.style.height = "9%";
+        label_xingqi3.style.textAlign = "center";
+        label_xingqi3.style.borderStyle = "solid";
+        label_xingqi3.textContent = "三";
+        data_xiala_kongjian.appendChild(label_xingqi3);
+
+
+        // 星期4
+        var label_xingqi4 = document.createElement("label");
+        label_xingqi4.style.position = "absolute";
+        label_xingqi4.style.left = "40%";
+        label_xingqi4.style.width = "13%";
+        label_xingqi4.style.top = "11%";
+        label_xingqi4.style.height = "9%";
+        label_xingqi4.style.textAlign = "center";
+        label_xingqi4.style.borderStyle = "solid";
+        label_xingqi4.textContent = "四";
+        data_xiala_kongjian.appendChild(label_xingqi4);
+
+        // 星期5
+        var label_xingqi5 = document.createElement("label");
+        label_xingqi5.style.position = "absolute";
+        label_xingqi5.style.left = "53%";
+        label_xingqi5.style.width = "13%";
+        label_xingqi5.style.top = "11%";
+        label_xingqi5.style.height = "9%";
+        label_xingqi5.style.textAlign = "center";
+        label_xingqi5.style.borderStyle = "solid";
+        label_xingqi5.textContent = "五";
+        data_xiala_kongjian.appendChild(label_xingqi5);
+
+
+        // 星期6
+        var label_xingqi6 = document.createElement("label");
+        label_xingqi6.style.position = "absolute";
+        label_xingqi6.style.left = "66%";
+        label_xingqi6.style.width = "13%";
+        label_xingqi6.style.top = "11%";
+        label_xingqi6.style.height = "9%";
+        label_xingqi6.style.textAlign = "center";
+        label_xingqi6.style.borderStyle = "solid";
+        label_xingqi6.textContent = "六";
+        data_xiala_kongjian.appendChild(label_xingqi6);
+
+        // 星期日
+        var label_xingqi7 = document.createElement("label");
+        label_xingqi7.style.position = "absolute";
+        label_xingqi7.style.left = "79%";
+        label_xingqi7.style.width = "13%";
+        label_xingqi7.style.top = "11%";
+        label_xingqi7.style.height = "9%";
+        label_xingqi7.style.textAlign = "center";
+        label_xingqi7.style.borderStyle = "solid";
+        label_xingqi7.textContent = "日";
+        data_xiala_kongjian.appendChild(label_xingqi7);
+
+
+        // 计算这个月有多少天
+        var temp_date = new Date(nowtime);
+        temp_date.setMonth(temp_date.getMonth() + 1);
+        temp_date.setDate(0);
+
+        // 这一个月的天数
+        var days = temp_date.getDate();
+        var hangshu = 0;
+
+        temp_date.setMonth(temp_date.getMonth() - 1);
+
+        for (var i = 1; i < days; i++) {
+            //  temp_date.setMonth(temp_date.getMonth() - 1);
+            temp_date.setDate(i);
+
+            var xingqi = temp_date.getDay().toString();
+
+            if (xingqi == 0) xingqi = 7;
+
+            var riqi_label = document.createElement("label");
+            riqi_label.style.left = (1 + 13 * (xingqi - 1)).toString() + "%";
+            riqi_label.style.width = "13%";
+            riqi_label.style.top = (hangshu * 15 + 25).toString() + "%";
+            riqi_label.style.height = "15%";
+            riqi_label.textContent = i.toString();
+            riqi_label.style.position = "absolute";
+            riqi_label.style.borderStyle = "solid";
+            riqi_label.style.textAlign = "center";
+            riqi_label.id=kongjian_name+i.toString();
+            riqi_label.onclick=function(event)
+            {
+                var mylabel= document.getElementById(event.currentTarget.id);
+                var riqi= label_nianyue.textContent +"-" + mylabel.textContent;
+                data_kongjian.value=riqi;
+                data_xiala_kongjian.style.visibility = "hidden";
+                
+            }
+            if (xingqi == 7)
+                hangshu++;
+
+            data_xiala_kongjian.appendChild(riqi_label);
+            //   alert(xingqi);
+
+        }
+    }
+
+
+
+    // 显示添加信息
+    function Show_Add_Info_View(btn_show_info_view_string)
+    {
+        
+        var btn = document.getElementById(btn_show_info_view_string);
+        var btn_ok=document.getElementById("add_info_ok");
+        
+        var view= document.getElementById("div_add_info_view");
+        btn.onclick=function(event)
+        {
+            $('#add_info_name_title').attr('value',event.target.id);
+            //alert(event.target.id);
+            $('#add_pic1').attr('src','');
+            $('#add_pic2').attr('src','');
+            $('#add_pic3').attr('src','');
+            $('#add_info_pic1_input').attr('value','添加图片1');
+            $('#add_info_pic2_input').attr('value','添加图片2');
+            $('#add_info_pic3_input').attr('value','添加图片3');
+            view.style.visibility="visible";
+
+            var close_btn = document.getElementById("add_info_colse");
+            
+            close_btn.onclick= function(event)
+            {
+                view.style.visibility="hidden";
+            }
+
+            btn_ok.onclick=function(event)
+            {
+
+                // 把图片上传到服务器
+               // update_file(1,"add_info_pic1_input");
+                
+
+
+                view.style.visibility="hidden";
+            }
+
+
+        }
+
+        
+    }
+
+
+    // 显示读取的图片
+    $('#add_info_pic1_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic1').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic2_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic2').attr('src',filereader.result);
+        }
+    })
+
+    $('#add_info_pic3_input').change(function(){
+        let fileobj=this.files[0];
+        let filereader=new FileReader();
+        filereader.readAsDataURL(fileobj);
+        filereader.onload=function()
+        {
+            $('#add_pic3').attr('src',filereader.result);
+        }
+    })
+
+    function update_file(index, input_name)
+    {
+     
+        var input_object=document.getElementById(input_name);
+        $.ajax({
+            url: "Elect_RealTime.aspx/Update_pic",
+            type: "Post",
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            data: "{index:'" + index + "',name:'"+input_name+ "'}",
+            success: function (data) {
+               
+            
+            },
+            error: function (data) {
+                //200的响应也有可能被认定为error，responseText中没有Message部分
+                return $.parseJSON(data.responseText).Message;
+            },
+            complete: function (data) {
+
+            }
+        });
+    }
+
+    //var formData = new FormData();
+    //formData.append('file', fileObj);
+    //var curWwwPath=window.document.location.href;
+    //var pathName=window.document.location.pathname;
+    //var pos=curWwwPath.indexOf(pathName);
+    //var options = {
+    //    url: curWwwPath.substring(0,pos) + "//services//api//file//uploadImg",
+    //    type: 'POST',
+    //    data: formData,
+    //    processData: false,
+    //    contentType: false,
+    //    headers: {
+    //        'ticket': ticket
+    //    },
+    //    success: function(rsp) {
+    //        if (rsp.code == 200) {
+    //            imgs = rsp.result;
+    //            var innerHtml = '<div class="photo-add" onchange="angular.element(this).scope().showPhoto(this)">' +
+    //                '<img style = "width: 100%;" src="' + imgs + '" alt = "添加照片" class="photoShow" />' +
+    //                '</div>';
+    //            $(".photo-box").before(innerHtml);
+    //            attachmentArr.push(rsp.result);
+    //        } else {
+    //            console.log(rsp.message);
+    //        }
+    //    },
+    //    error: function(e) {
+    //        console.log("网络错误!");
+    //    }
+    //};
+    //$.ajax(options);
 
 
 

@@ -8,3 +8,4 @@ function Put_Page_In_iFrame(pagename,iframename)
     var iframe = document.getElementById(iframename);
     iframe.src = pagename;
 }
+
