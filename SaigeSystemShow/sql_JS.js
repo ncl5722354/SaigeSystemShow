@@ -75,10 +75,7 @@ function get_result_sql_to_labelcontent(sql,label_id)
                 var label = document.getElementById(label_id);
 
                 label.textContent = reslut_value;
-
-
             }catch(err){}
-
 
         },
         error: function (data) {
@@ -90,7 +87,89 @@ function get_result_sql_to_labelcontent(sql,label_id)
         }
     });
   //  return result;
+}
 
+
+// 获取直接数据的结果更新某个label_content
+function get_result_sql_to_objectcontent(sql,subindex,danwei,div_id)
+{
+    var reslut;
+    $.ajax({
+        url: "SqlCaozuo.asmx/Get_Sql_Select_Return",
+        type: "Post",
+        async: true,
+        dataType: "text",
+        contentType: "application/json; charset=utf-8",
+        data: "{sql:'" + sql + "'}",
+        success: function (data) {
+            try {
+                result = data.toString();
+
+                var reslut_json = From_Text_To_Json(result);
+
+                var reslut_value = reslut_json[0].toString();
+
+                var value = Get_Kongge_String(reslut_value, subindex);
+
+                var label = document.getElementById(div_id);
+
+                label.textContent = value + danwei;
+            } catch (err) { }
+
+        },
+        error: function (data) {
+            //200的响应也有可能被认定为error，responseText中没有Message部分
+            return $.parseJSON(data.responseText).Message;
+        },
+        complete: function (data) {
+
+        }
+    });
+}
+
+function get_result_sql_to_bit(sql,subindex,div_id,true_color,false_color)
+{
+    var reslut;
+    $.ajax({
+        url: "SqlCaozuo.asmx/Get_Sql_Select_Return",
+        type: "Post",
+        async: true,
+        dataType: "text",
+        contentType: "application/json; charset=utf-8",
+        data: "{sql:'" + sql + "'}",
+        success: function (data) {
+            try {
+                result = data.toString();
+
+                var reslut_json = From_Text_To_Json(result);
+
+                var reslut_value = reslut_json[0].toString();
+
+                var value = Get_Kongge_String(reslut_value, subindex);
+
+                var label = document.getElementById(div_id);
+
+                if(value=="0")
+                {
+                    label.style.backgroundColor = false_color;
+                }
+                else
+                {
+                    label.style.backgroundColor = true_color;
+                }
+
+
+            } catch (err) { }
+
+        },
+        error: function (data) {
+            //200的响应也有可能被认定为error，responseText中没有Message部分
+            return $.parseJSON(data.responseText).Message;
+        },
+        complete: function (data) {
+
+        }
+    });
 }
 
 

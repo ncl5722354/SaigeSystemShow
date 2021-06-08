@@ -84,9 +84,13 @@ function Read_View(view_name,subdiv_name)
             var mydiv;
 
             // 各种 元素的类型
-            var type = Read_Value(ini_name, object_name, "类型");
+            //var type = Read_Value(ini_name, object_name, "类型");
             // 父结点属性 
-            
+            var allvalue = Read_All_Value(ini_name, object_name);
+           // Get_Json_Value(allvalue, "width");
+           // alert(allvalue.width);
+           
+            var type = Get_Json_Value(allvalue, "类型");
 
             if(type=="边框1")
             {
@@ -134,21 +138,23 @@ function Read_View(view_name,subdiv_name)
                 mydiv.id = "mydiv_" + object_name;
                 mydiv.style.position = "absolute";
             
-                var source = Read_Value(ini_name, object_name, "数据源");
-                var mainindex = Read_Value(ini_name, object_name, "数据索引");
+                var source = Get_Json_Value(allvalue,"数据源");            // Read_Value(ini_name, object_name, "数据源");
+                var mainindex = Get_Json_Value(allvalue, "数据索引");      // Read_Value(ini_name, object_name, "数据索引");
                 var value_string;
                 var subindex;
                 var subindex_number;
                 if (source != "") {
-                    value_string = get_result_sql("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"");
-                    subindex = Read_Value(ini_name, object_name, "数据次索引");
+                    //  value_string =  get_result_sql("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"");
+                     
+                    subindex = Get_Json_Value(allvalue, "数据次索引");  //Read_Value(ini_name, object_name, "数据次索引");
                     subindex_number = parseInt(subindex);
+                    var danwei = Get_Json_Value(allvalue, "单位");
+                    get_result_sql_to_objectcontent("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"", subindex_number, danwei, "mydiv_" + object_name);
                 }
-                var value_json = From_Text_To_Json(value_string);
                 mydiv.style.color = "white";
-                var danwei = Read_Value(ini_name, object_name, "单位");
-                mydiv.textContent = Get_Kongge_String(value_json[0].toString(), subindex_number) + danwei;
                 mydiv.style.textAlign = "center";
+
+                 // 更写一个get_reslut_sql(sql,次索引,单位,物体各称)
             }
 
             if (type == "间接数据显示")
@@ -156,11 +162,13 @@ function Read_View(view_name,subdiv_name)
                 mydiv = document.createElement("div");
                 mydiv.id = "mydiv_" + object_name;
                 mydiv.style.position = "absolute"
-                var source = Read_Value(ini_name, object_name, "数据源");
-                var value_string = get_result_sql(source);
-                var value_json = From_Text_To_Json(value_string);
+                var source = Get_Json_Value(allvalue, "数据源");        // Read_Value(ini_name, object_name, "数据源");
+                //var value_string = get_result_sql(source);
+                //var value_json = From_Text_To_Json(value_string);
+                var danwei = Get_Json_Value(allvalue, "单位");
+                get_result_sql_to_objectcontent(source, 1, danwei, "mydiv_" + object_name);
                 mydiv.style.color = "white";
-                mydiv.textContent = value_json[0].toString();
+                //mydiv.textContent = value_json[0].toString();
                 mydiv.style.textAlign = "center";
             }
 
@@ -170,7 +178,7 @@ function Read_View(view_name,subdiv_name)
                 mydiv.id = "mydiv_" + object_name;
                 mydiv.style.position = "absolute";
 
-                var text = Read_Value(ini_name, object_name, "文本");
+                var text = Get_Json_Value(allvalue, "文本");            // Read_Value(ini_name, object_name, "文本");
                 mydiv.textContent = text;
                 mydiv.style.color = "white";
                 mydiv.style.textAlign = "center";
@@ -182,28 +190,30 @@ function Read_View(view_name,subdiv_name)
                 mydiv.id = "mydiv_" + object_name;
                 mydiv.style.position = "absolute";
                 mydiv.style.borderRadius = "100%";
-                var source = Read_Value(ini_name, object_name, "数据源");
+                var source = Get_Json_Value(allvalue, "数据源");           // Read_Value(ini_name, object_name, "数据源");
                 var value_string;
                 var subindex;
                 var subindex_number;
                 if (source != "") {
-                    mainindex = Read_Value(ini_name, object_name, "数据索引");
-                    value_string = get_result_sql("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"");
-                    subindex = Read_Value(ini_name, object_name, "数据次索引");
+                    mainindex = Get_Json_Value(allvalue, "数据索引");     //Read_Value(ini_name, object_name, "数据索引");
+                 //   value_string = get_result_sql("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"");
+                    subindex = Get_Json_Value(allvalue, "数据次索引");    //  Read_Value(ini_name, object_name, "数据次索引");
                 }
                 var subindex_number = parseInt(subindex);
-                var value_json = From_Text_To_Json(value_string);
-           
-                var value = Get_Kongge_String(value_json[0].toString(), subindex_number);
+               // var value_json = From_Text_To_Json(value_string);
 
-                if(value=="0")
-                {
-                    mydiv.style.backgroundColor = Read_Value(ini_name, object_name, "0状态");
-                }
-                else
-                {
-                    mydiv.style.backgroundColor = Read_Value(ini_name, object_name, "非0状态");
-                }
+                get_result_sql_to_bit("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"", subindex_number, "mydiv_" + object_name, Get_Json_Value(allvalue, "非0状态"), Get_Json_Value(allvalue, "0状态"));
+           
+               // var value = Get_Kongge_String(value_json[0].toString(), subindex_number);
+
+                //if(value=="0")
+                //{
+                //    mydiv.style.backgroundColor = Get_Json_Value(allvalue, "0状态"); //Read_Value(ini_name, object_name, "0状态");
+                //}
+                //else
+                //{
+                //    mydiv.style.backgroundColor = Get_Json_Value(allvalue, "非0状态"); //  Read_Value(ini_name, object_name, "非0状态");
+                //}
 
             }
 
@@ -215,7 +225,7 @@ function Read_View(view_name,subdiv_name)
                     mydiv.style.position = "absolute";
                     mydiv.style.borderRadius = "100%";
 
-                    var parent = Read_Value(ini_name, object_name, "父结点")
+                    var parent = Get_Json_Value(allvalue, "父结点");    //   Read_Value(ini_name, object_name, "父结点")
                     if (parent == "") {
                         var sub = document.getElementById(subdiv_name);
                         sub.appendChild(mydiv);
@@ -224,30 +234,30 @@ function Read_View(view_name,subdiv_name)
                         var sub = document.getElementById("mydiv_" + parent);
                         sub.appendChild(mydiv);
                     }
-                    var width = Read_Value(ini_name, object_name, "width");
+                    var width = Get_Json_Value(allvalue, "width");  //  Read_Value(ini_name, object_name, "width");
 
                     if (width != "") {
                         mydiv.style.width = width;
                     }
 
-                    var left = Read_Value(ini_name, object_name, "left");
+                    var left = Get_Json_Value(allvalue, "left");  // Read_Value(ini_name, object_name, "left");
                     if (left != "") {
                         mydiv.style.left = left;
                     }
 
-                    var top = Read_Value(ini_name, object_name, "top")
+                    var top = Get_Json_Value(allvalue, "top"); //Read_Value(ini_name, object_name, "top")
                     if (top != "") {
                         mydiv.style.top = top;
                     }
 
-                    var height = Read_Value(ini_name, object_name, "height")
+                    var height = Get_Json_Value(allvalue, "height"); //  Read_Value(ini_name, object_name, "height")
                     if (height != "") {
                         mydiv.style.height = height;
                     }
 
 
 
-                    var count_string = Read_Value(ini_name, object_name, "数量");
+                    var count_string = Get_Json_Value(allvalue, "数量"); // Read_Value(ini_name, object_name, "数量");
                     var count = parseInt(count_string);
 
                     var value_array = new Array();
@@ -255,15 +265,15 @@ function Read_View(view_name,subdiv_name)
                     var title_array = new Array();
                     for(var i=1;i<=count;i++)
                     {
-                        var sql_string = Read_Value(ini_name, object_name, "数据源" + i.toString());
+                        var sql_string = Get_Json_Value(allvalue, "数据源"+i.toString());  // Read_Value(ini_name, object_name, "数据源" + i.toString());
                         var value_string = get_result_sql(sql_string);
                         var value_json = From_Text_To_Json(value_string);
                         value_array.push(value_json[0].toString());
 
-                        var color = Read_Value(ini_name, object_name, "颜色" + i.toString());
+                        var color = Get_Json_Value(allvalue, "颜色"+i.toString());  //  Read_Value(ini_name, object_name, "颜色" + i.toString());
                         color_array.push(color);
 
-                        var label = Read_Value(ini_name, object_name, "标题" + i.toString());
+                        var label = Get_Json_Value(allvalue, "标题" + i.toString()); //Read_Value(ini_name, object_name, "标题" + i.toString());
                         title_array.push(label);
                     }
 
@@ -285,7 +295,7 @@ function Read_View(view_name,subdiv_name)
             if (type == "添加巡检信息")
             {
                 mydiv = document.createElement("div");
-                mydiv.id = Read_Value(ini_name,object_name,"设备名")+"_" + object_name;
+                mydiv.id = Get_Json_Value(allvalue, "设备名") + "_" + object_name; // ; Read_Value(ini_name, object_name, "设备名") + "_" + object_name;
                 mydiv.style.position = "absolute";
                 mydiv.style.borderRadius = "100%";
                 mydiv.style.textAlign = "center";
@@ -307,8 +317,10 @@ function Read_View(view_name,subdiv_name)
                 break;
             }
 
+            
 
-            var parent = Read_Value(ini_name, object_name, "父结点")
+            var parent = Get_Json_Value(allvalue, "父结点");  // Read_Value(ini_name, object_name, "父结点")
+           
             if (parent == "") {
                 var sub = document.getElementById(subdiv_name);
                 sub.appendChild(mydiv);
@@ -317,23 +329,25 @@ function Read_View(view_name,subdiv_name)
                 var sub = document.getElementById("mydiv_" + parent);
                 sub.appendChild(mydiv);
             }
-            var width = Read_Value(ini_name, object_name, "width");
+            var width = Get_Json_Value(allvalue, "width");  //Read_Value(ini_name, object_name, "width");
 
+
+            mydiv.fontSize = "30px";
             if (width != "") {
                 mydiv.style.width = width;
             }
 
-            var left = Read_Value(ini_name, object_name, "left");
+            var left = Get_Json_Value(allvalue, "left"); //Read_Value(ini_name, object_name, "left");
             if (left != "") {
                 mydiv.style.left = left;
             }
 
-            var top = Read_Value(ini_name, object_name, "top")
+            var top = Get_Json_Value(allvalue, "top");    //Read_Value(ini_name, object_name, "top")
             if (top != "") {
                 mydiv.style.top = top;
             }
 
-            var height = Read_Value(ini_name, object_name, "height")
+            var height = Get_Json_Value(allvalue, "height");  //Read_Value(ini_name, object_name, "height")
             if (height != "") {
                 mydiv.style.height = height;
             }
@@ -369,5 +383,48 @@ function Read_Value(ini_name,section_name,key)
 
     var value_json = From_Text_To_Json(value_string);
     return value_json;
+}
+
+function Read_All_Value(ini_name,section_name)
+{
+    var value_string;
+    $.ajax({
+        url: "SqlCaozuo.asmx/ReadKeys",
+        type: "Post",
+        dataType: "text",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data: "{iniFilename:'" + ini_name + "',SectionName:'" + section_name + "'}",
+        success: function (data) {
+            value_string = data;
+           
+        },
+        error: function (data) {
+            //200的响应也有可能被认定为error，responseText中没有Message部分
+            return $.parseJSON(data.responseText).Message;
+        },
+        complete: function (data) {
+
+        }
+    });
+    var value_json = From_Text_To_Json(value_string);
+    return value_json;
+
+}
+
+function Get_Json_Value(json,key)
+{
+    for(var i=0;i<json.length;i++)
+    {
+        //  alert(json[i].toString());
+        try{
+            if(Get_Maohao_String(json[i].toString(),1)==key)
+            {
+                return Get_Maohao_String(json[i].toString(), 2);
+            }
+        }
+        catch(err){}
+    }
+    return "";
 }
 

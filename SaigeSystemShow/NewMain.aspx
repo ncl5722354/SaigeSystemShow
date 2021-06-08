@@ -130,7 +130,7 @@
         Set_Animation_Select_Button(label.id);
     }
 
-    setInterval(Reflush, 10000);
+    setInterval(Reflush, 20000);
     
 
 
