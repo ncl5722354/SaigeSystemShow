@@ -16,6 +16,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Text;
 using FileOperation;
+using System.Collections;
 
 
 // 此脚本用来
@@ -48,6 +49,11 @@ namespace MEEC_Config_System
         [System.Runtime.InteropServices.DllImport("kernel32")]
 
         public static extern int GetPrivateProfileString(string section, string key, string def, System.Text.StringBuilder retVal, int size, string filePath);
+
+        [System.Runtime.InteropServices.DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
+        private static extern uint GetPrivateProfileStringA(string section, string key,
+            string def, Byte[] retVal, int size, string filePath);
+
 
         [WebMethod]
         public string HelloWorld()
@@ -157,6 +163,8 @@ namespace MEEC_Config_System
             return temp.ToString();
         }
 
+        
+
         // 读取所有的section
         [System.Runtime.InteropServices.DllImport("kernel32")]
         public static extern int GetPrivateProfileSectionNames(byte[] buffer, int iLen, string lpFileName);
@@ -168,6 +176,32 @@ namespace MEEC_Config_System
             int rel = GetPrivateProfileSectionNames(buffer, buffer.GetUpperBound(0), System.Web.HttpContext.Current.Server.MapPath("~/"+ini_path_name));
             return Conver2ArrayList(rel, buffer);
         }
+
+        
+        [WebMethod]
+        // 读取所有的key值与最后的值
+        public  ArrayList ReadKeys(string iniFilename,string SectionName)
+        {
+            ArrayList result = new ArrayList();
+            Byte[] buf = new Byte[65536];
+            uint len = GetPrivateProfileStringA(SectionName, null, null, buf, buf.Length, System.Web.HttpContext.Current.Server.MapPath("~/" + iniFilename));
+            int j = 0;
+            for (int i = 0; i < len; i++)
+                if (buf[i] == 0)
+                {
+                    //result.Add(Encoding.Default.GetString(buf, j, i - j));
+                    string key = Encoding.Default.GetString(buf, j, i - j);
+                    
+                    StringBuilder temp = new StringBuilder(255);
+          
+                    int tempi = GetPrivateProfileString(SectionName, key, "", temp, 255, System.Web.HttpContext.Current.Server.MapPath("~/" + iniFilename));
+                    result.Add(key + ":" + temp.ToString());
+                    j = i + 1;
+                }
+            return result;
+        }
+
+
         public ArrayList Conver2ArrayList(int rel, byte[] buffer)
         {
             ArrayList arrayList = new ArrayList();

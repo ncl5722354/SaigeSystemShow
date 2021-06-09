@@ -155,7 +155,7 @@ function Put_Array_Label_In_Div(array,div_name)
         label.style.width = "90%";
         label.style.fontSize = "20px";
         label.textContent = array[i].toString();
-        label.style.color = "#61C9D6";
+        label.style.color = "white";
         label.id = "label_"+ div_name + "_" + i.toString();
         device_project_subdiv_view.appendChild(label);
      //   all_label.push(label.id.toString());
@@ -185,8 +185,9 @@ function Put_Table_Label_In_Div(arrayitem,arrayleft,arraywidth,div_name)
             label.style.left = arrayleft[j];
             label.style.width = arraywidth[j];
             label.style.height = "30px";
+            label.style.fontSize = "10px";
             label.textContent = label_array[j].toString();
-            label.style.color = "#61C9D6";
+            label.style.color = "white";
             label.id = "label_" + div_name + "_" + i.toString() + "_" + j.toString();
             label.style.textAlign = "center";
             subdiv.appendChild(label);
@@ -245,6 +246,7 @@ function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_arr
 function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
     try {
         myRadarChart.destroy();
+       
     }
     catch (err) { }
 
@@ -254,7 +256,7 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
         datasetStrokeWidth: 1,
         pointDotStrokeWidth: 1,
         pointDot: true,
-        pointDotRadius: 1,
+        pointDotRadius: 3,
         pointHitDetectionRadius: 1,
         datasetStroke: false,
         bezierCurveTension: 1,
@@ -263,15 +265,14 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
         scaleFontColor: "#fff",
         tooltipFontColor: "#fff",
         scaleFontColor: "rgba(220,220,220,1)",
-        scaleFontSize: 50,
-        pointLabelFontColor: "rgba(220,220,220,0)",
-       
-
+        scaleFontSize: 10,
+        pointLabelFontColor: "rgba(220,220,220,0.8)",
+        bezierCurve: false
     };
 
 
     var data = {
-        labels: [],
+        labels: label_list,
         datasets: [
             {
                 label: "My First dataset",
@@ -281,17 +282,102 @@ function Show_Line(myRadarChart, value_array,label_list,canvas_name) {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: []
+                data: value_array
             }]
     };
 
-    myRadarChart = new Chart(ctx).Line(data, {
-        bezierCurve: false
-    });
+    myRadarChart = new Chart(ctx).Line(data, options);
 
-    for (var i = 0; i < value_array.length; i++) {
-        myRadarChart.addData(value_array[i],label_list[i].toString());
+    //for (var i = 0; i < value_array.length; i++) {
+    //    myRadarChart.addData(value_array[i],label_list[i].toString());
+    //}
+
+
+}
+
+function Show_Three_Lines(myRadarChar,value_array_3,label_list,canvas_name)
+{
+    var list1 = new Array();
+    var list2 = new Array();
+    var list3 = new Array();
+    try {
+        myRadarChart.destroy();
+        
+       
+        
     }
+    catch (err) { }
+
+    for (var i = 0; i < value_array_3.length; i++) {
+        list1.push(value_array_3[i][0]);
+        list2.push(value_array_3[i][1]);
+        list3.push(value_array_3[i][2]);
+    }
+
+    var ctx = document.getElementById(canvas_name).getContext("2d");
+
+    var options = {
+        datasetStrokeWidth: 1,
+        pointDotStrokeWidth: 1,
+        pointDot: true,
+        pointDotRadius: 3,
+        pointHitDetectionRadius: 1,
+        datasetStroke: false,
+        bezierCurveTension: 1,
+        datasetFill: false,
+        bezierCurve: false,
+        scaleFontColor: "#fff",
+        tooltipFontColor: "#fff",
+        scaleFontColor: "rgba(220,220,220,1)",
+        scaleFontSize: 10,
+        pointLabelFontColor: "rgba(220,220,220,0.8)",
+        bezierCurve: false
+    };
+
+
+
+    var data = {
+        labels: label_list,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(220,220,0,1)",   // 线的颜色
+                pointColor: "rgba(220,220,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list1
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(220,0,0,1)",   // 线的颜色
+                pointColor: "rgba(220,0,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list2
+            }
+            ,
+            {
+                label: "My Thrid dataset",
+                fillColor: "rgba(220,220,220,0)",   // 填充
+                strokeColor: "rgba(0,0,220,1)",   // 线的颜色
+                pointColor: "rgba(0,0,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: list3
+            }
+        ]
+    };
+
+    myRadarChart = new Chart(ctx).Line(data, options);
+
+    //for (var i = 0; i < value_array_3.length; i++) {
+    //    myRadarChart.addData(value_array_3[i], label_list[i].toString());
+    //}
 
 
 }
@@ -358,3 +444,99 @@ function From_Sql_To_TextContent(label_id,sql)
     }
 }
 
+
+// 视频播放
+
+function Play_Vedio(url_string,vedio_div)
+{
+    var video = document.getElementById(vedio_div);
+    // 视频的路径
+    var videoSrc = url_string;
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    }
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', function () {
+            video.play();
+        });
+    }
+}
+
+
+// 点击出现图表
+function Click_Label_Show_Lind(event,canshutype,title,mode)
+{
+
+    var line_grid_view = document.getElementById("chart_datagrid_view");
+    line_grid_view.style.visibility = "visible";
+
+    var sub_lind_view = document.getElementById("sub_chart_div");
+
+    sub_lind_view.innerHTML = "";
+
+    var canvas = document.createElement("canvas");
+    canvas.style.left = "0%";
+    canvas.style.width = "100%";
+    canvas.style.top = "0%";
+    canvas.style.heigh = "100%";
+    canvas.style.position = "absolute";
+    canvas.id = "sub_line_canvas";
+    sub_lind_view.appendChild(canvas);
+
+
+
+    var thisid = event.target.id;
+    Show_Line_Device_ID = Get_Xiahuaxian_String(thisid, 3);
+    Show_mode = mode;
+    Show_CanshuType = canshutype;
+
+    //  从历史中读取
+    var today = new Date();
+    var day_string = To_yyyy_MM_dd_From_Data(today);
+    var value_time_string = get_result_sql("select value,savetime from history_save where device_id=\"" + Get_Xiahuaxian_String(thisid, 3) + "\" and value_id = (select canshutypeid from canshutable where canshutype=\""+canshutype+"\") and savetime>=\"" + day_string + " 00:00:00\"");
+    var value_time_json = From_Text_To_Json(value_time_string);
+
+    var value_list = new Array();
+    var time_list = new Array();
+
+    var count = value_time_json.length;
+
+
+    if (mode == 0) {
+
+        for (var i = 0; i < count; i++) {
+            value_list.push([value_time_json[i][0]]);
+            time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+        }
+
+        // 读取名字
+        Show_Line(line_object, value_list, time_list, "sub_line_canvas");
+        
+    }
+
+    if (mode == 1)
+    {
+        for (var i = 0; i < count; i++) {
+            value_list.push([Get_Kongge_String(value_time_json[i][0], 1), Get_Kongge_String(value_time_json[i][0], 2), Get_Kongge_String(value_time_json[i][0], 3)]);
+            time_list.push([Get_Kongge_String(value_time_json[i][1], 2)]);
+        }
+        Show_Three_Lines(line_object, value_list, time_list, "sub_line_canvas");
+    }
+
+    var device_name_string = get_result_sql("select shebeiname  from shebeitable  where shebeiID=\"" + Get_Xiahuaxian_String(thisid, 3) + "\"");
+    var device_name_json = From_Text_To_Json(device_name_string);
+    
+
+
+
+    Set_Title(device_name_json[i] + title);
+
+
+    
+}

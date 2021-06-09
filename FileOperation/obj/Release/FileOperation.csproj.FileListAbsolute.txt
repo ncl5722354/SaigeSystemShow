@@ -27,3 +27,9 @@ E:\程序\坝光后台\BaguangSystem\FileOperation\obj\Release\FileOperation.csp
 E:\程序\坝光后台\BaguangSystem\FileOperation\obj\Release\FileOperation.csproj.ResolveComReference.cache
 E:\程序\坝光后台\BaguangSystem\FileOperation\obj\Release\FileOperation.dll
 E:\程序\坝光后台\BaguangSystem\FileOperation\obj\Release\FileOperation.pdb
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\bin\Release\FileOperation.dll
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\bin\Release\FileOperation.pdb
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\obj\Release\FileOperation.csprojResolveAssemblyReference.cache
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\obj\Release\FileOperation.csproj.ResolveComReference.cache
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\obj\Release\FileOperation.dll
+D:\nichenglong\程序\程序\赛格后台\新版展示画面\SaigeSystemShow\FileOperation\obj\Release\FileOperation.pdb

@@ -28,7 +28,7 @@ function ex_sql(sql)
 // 获取select 的结果
 function get_result_sql(sql)
 {
-    var reslut;
+    var result;
     $.ajax({
         url: "SqlCaozuo.asmx/Get_Sql_Select_Return",
         type: "Post",
@@ -47,9 +47,7 @@ function get_result_sql(sql)
 
         }
     });
-    return result;
-
-    
+    return result; 
 }
 
 

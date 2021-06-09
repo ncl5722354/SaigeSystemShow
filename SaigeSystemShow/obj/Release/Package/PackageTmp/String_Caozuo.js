@@ -130,3 +130,21 @@ function To_yyyy_MM_dd_From_Data(date)
 {
     return date.getFullYear().toString() + "-" + (date.getMonth() + 1).toString().padStart(2, '0') + "-" + (date.getDate()).toString().padStart(2, '0');
 }
+
+function Get_Week_Day(num)
+{
+    if (num == "1")
+        return "星期一";
+    if (num == "2")
+        return "星期二";
+    if (num == "3")
+        return "星期三";
+    if (num == "4")
+        return "星期四";
+    if (num == "5")
+        return "星期五";
+    if (num == "6")
+        return "星期六";
+    if (num == "0")
+        return "星期日";
+}
