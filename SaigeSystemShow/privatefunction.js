@@ -323,12 +323,31 @@ function Read_View(view_name,subdiv_name)
                     header_div_main.appendChild(header_div);
                 }
 
+
+                // 将数据放入表格中
+                // 参数1：sql 参数2：allvalue 参数3:count 参数4 div_name
+
+
                 header_div_main.style.left = "0px";
                 header_div_main.style.width = sum_width + "px";
                 header_div_main.style.top = "0px";
                 header_div_main.style.height = "42px";
+
+
+
                 mydiv.appendChild(header_div_main);
 
+                // 生成表格
+                var datagrid = document.createElement("div");
+                datagrid.id="sub_gridview_"+object_name;
+                datagrid.style.left="0%";
+                datagrid.style.top="40px"
+                datagrid.style.height = "80%";
+                datagrid.style.overflow = "scroll";
+                mydiv.appendChild(datagrid);
+                
+
+                get_result_sql_to_datagrid(Get_Json_Value(allvalue, "数据源"), allvalue, col_count, "sub_gridview_" + object_name);
                 
             }
 
