@@ -173,6 +173,71 @@ function get_result_sql_to_bit(sql,subindex,div_id,true_color,false_color)
 }
 
 
+function get_result_sql_to_datagrid(sql,allvalue,count,div_name)
+{
+    var reslut;
+    $.ajax({
+        url: "SqlCaozuo.asmx/Get_Sql_Select_Return",
+        type: "Post",
+        async: true,
+        dataType: "text",
+        contentType: "application/json; charset=utf-8",
+        data: "{sql:'" + sql + "'}",
+        success: function (data) {
+            try {
+                result = data.toString();
+
+                var reslut_json = From_Text_To_Json(result);
+
+                var row_height = Get_Json_Value(allvalue, "row_height");
+                
+                var row_height_int = parseInt(row_height);
+
+                var div = document.getElementById(div_name);
+                
+                var sum_height = 0;
+                for(var z=0;z<reslut_json.length;z++)
+                {
+                    var sum_width = 0;
+                    
+                    for(var x=0;x<count;x++)
+                    {
+                        var width_string = Get_Json_Value(allvalue, "列" + (x+1).toString() + "width");
+                        var width_int = parseInt(width_string);
+                        var mylabel = document.createElement("div");
+                        mylabel.style.width = width_int + "px";
+                        mylabel.style.left = sum_width + "px";
+                        mylabel.style.height = row_height + "px";
+                        mylabel.style.position = "absolute";
+                        mylabel.style.color = "white";
+                        mylabel.style.top = sum_height+"px";
+                        if (Get_Json_Value(allvalue, "列" + (x+1).toString() + "类型") == "文字") {
+                            mylabel.textContent = reslut_json[z][x].toString();
+                        }
+                        div.appendChild(mylabel);
+                        sum_width = sum_width + width_int;
+                    }
+                    sum_height = sum_height + row_height_int;
+                   
+                }
+                
+
+
+            } catch (err) { }
+
+        },
+        error: function (data) {
+            //200的响应也有可能被认定为error，responseText中没有Message部分
+            return $.parseJSON(data.responseText).Message;
+        },
+        complete: function (data) {
+
+        }
+    });
+
+}
+
+
 
     // 插入的简单用法
     function insert_sql(insert_array,table_name)

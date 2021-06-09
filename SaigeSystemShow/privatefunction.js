@@ -263,17 +263,17 @@ function Read_View(view_name,subdiv_name)
                     var value_array = new Array();
                     var color_array = new Array();
                     var title_array = new Array();
-                    for(var i=1;i<=count;i++)
+                    for(var j=1;j<=count;j++)
                     {
-                        var sql_string = Get_Json_Value(allvalue, "数据源"+i.toString());  // Read_Value(ini_name, object_name, "数据源" + i.toString());
+                        var sql_string = Get_Json_Value(allvalue, "数据源"+j.toString());  // Read_Value(ini_name, object_name, "数据源" + i.toString());
                         var value_string = get_result_sql(sql_string);
                         var value_json = From_Text_To_Json(value_string);
                         value_array.push(value_json[0].toString());
 
-                        var color = Get_Json_Value(allvalue, "颜色"+i.toString());  //  Read_Value(ini_name, object_name, "颜色" + i.toString());
+                        var color = Get_Json_Value(allvalue, "颜色"+j.toString());  //  Read_Value(ini_name, object_name, "颜色" + i.toString());
                         color_array.push(color);
 
-                        var label = Get_Json_Value(allvalue, "标题" + i.toString()); //Read_Value(ini_name, object_name, "标题" + i.toString());
+                        var label = Get_Json_Value(allvalue, "标题" + j.toString()); //Read_Value(ini_name, object_name, "标题" + i.toString());
                         title_array.push(label);
                     }
 
@@ -292,6 +292,65 @@ function Read_View(view_name,subdiv_name)
                 catch(err){}
             }
 
+            if (type == "表格") {
+                mydiv = document.createElement("div");
+                mydiv.id = Get_Json_Value(allvalue, "设备名") + "_" + object_name;
+                mydiv.style.position = "absolute";
+                mydiv.style.overflow = "scroll";
+                // 定义头文件
+                var header_width;
+                var sum_width = 0;
+                var col_count = Get_Json_Value(allvalue, "列数");
+                
+                var header_div_main = document.createElement("div");
+                
+
+                for (var j = 0; j < col_count; j++) {
+                    var width = Get_Json_Value(allvalue, "列" + (j + 1).toString() + "width");
+                    var width_int = parseInt(width);
+
+                    var header_div = document.createElement("div");
+                    header_div.style.width = width_int + "px";
+                    header_div.style.left = sum_width + "px";
+                    header_div.style.top = 0;
+                    header_div.style.height = "40px";
+                    header_div.style.fontSize = "18px";
+                    header_div.style.textAlign = "center";
+                    header_div.textContent = Get_Json_Value(allvalue, "列" + (j + 1).toString() + "名称");
+                    header_div.style.color = "white";
+                    header_div.style.position = "absolute";
+                    sum_width = sum_width + width_int;
+                    header_div_main.appendChild(header_div);
+                }
+
+
+                // 将数据放入表格中
+                // 参数1：sql 参数2：allvalue 参数3:count 参数4 div_name
+
+
+                header_div_main.style.left = "0px";
+                header_div_main.style.width = sum_width + "px";
+                header_div_main.style.top = "0px";
+                header_div_main.style.height = "42px";
+
+
+
+                mydiv.appendChild(header_div_main);
+
+                // 生成表格
+                var datagrid = document.createElement("div");
+                datagrid.id="sub_gridview_"+object_name;
+                datagrid.style.left="0%";
+                datagrid.style.top="40px"
+                datagrid.style.height = "80%";
+                datagrid.style.overflow = "scroll";
+                mydiv.appendChild(datagrid);
+                
+
+                get_result_sql_to_datagrid(Get_Json_Value(allvalue, "数据源"), allvalue, col_count, "sub_gridview_" + object_name);
+                
+            }
+
             if (type == "添加巡检信息")
             {
                 mydiv = document.createElement("div");
@@ -302,6 +361,7 @@ function Read_View(view_name,subdiv_name)
                 mydiv.textContent = "添加巡检信息";
                 mydiv.style.color = "white";
                 mydiv.style.cursor = "pointer";
+               
 
                 mydiv.onclick= function(event)
                 {

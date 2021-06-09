@@ -64,8 +64,6 @@ function Set_Control_Value(controlname,value)
         }
 
     }
-
-
 }
 
 
