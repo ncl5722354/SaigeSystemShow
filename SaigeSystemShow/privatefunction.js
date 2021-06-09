@@ -296,7 +296,8 @@ function Read_View(view_name,subdiv_name)
                 mydiv = document.createElement("div");
                 mydiv.id = Get_Json_Value(allvalue, "设备名") + "_" + object_name;
                 mydiv.style.position = "absolute";
-                mydiv.style.overflow = "scroll";
+                mydiv.style.overflowX = "auto";
+                
                 // 定义头文件
                 var header_width;
                 var sum_width = 0;
@@ -343,7 +344,7 @@ function Read_View(view_name,subdiv_name)
                 datagrid.style.left="0%";
                 datagrid.style.top="40px"
                 datagrid.style.height = "80%";
-                datagrid.style.overflow = "scroll";
+               
                 mydiv.appendChild(datagrid);
                 
 
