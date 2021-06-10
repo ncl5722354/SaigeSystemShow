@@ -61,6 +61,18 @@
                 <option value="发现异常">发现异常</option>
                 <option value="异常恢复">异常恢复</option>
             </select>
+             
+             <label id="add_info_type_duty_label" style="position:absolute;left:0%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;color:white">消息流向职位选择</label>
+             <select id="add_info_type_duty_select" style="position:absolute;left:20%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;" runat="server">
+
+             </select>
+
+             <label id="add_info_type_user_label" style="position:absolute;left:50%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;color:white">消息流向人员选择</label>
+             <select id="add_info_type_user_select" style="position:absolute;left:70%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;" runat="server">
+
+             </select>
+
+
             <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
             <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
@@ -68,7 +80,7 @@
             <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
-            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click" UseSubmitBehavior="False" />
+            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click" />
             <input id="add_info_name_title" runat="server" style="position:absolute;left:200%;color:white"/>
         </div>
     </div>
@@ -100,6 +112,10 @@
     var temp_update_is;
     // 公共变量
     var Device_Data_Array;
+
+
+    current_id = "w_页面总览";
+    Reflush();
 
     // 实现导航栏操作
     for (var i = 0; i < select_json.length; i++)

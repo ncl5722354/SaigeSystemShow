@@ -194,6 +194,8 @@ function get_result_sql_to_datagrid(sql,allvalue,count,div_name)
                 var row_height_int = parseInt(row_height);
 
                 var div = document.getElementById(div_name);
+
+                div.style.overflowY = "auto";
                 
                 var sum_height = 0;
                 for(var z=0;z<reslut_json.length;z++)
@@ -207,12 +209,27 @@ function get_result_sql_to_datagrid(sql,allvalue,count,div_name)
                         var mylabel = document.createElement("div");
                         mylabel.style.width = width_int + "px";
                         mylabel.style.left = sum_width + "px";
-                        mylabel.style.height = row_height + "px";
+                        mylabel.style.height = (row_height_int).toString() + "px";
                         mylabel.style.position = "absolute";
                         mylabel.style.color = "white";
-                        mylabel.style.top = sum_height+"px";
+                        mylabel.style.top = (sum_height+80) + "px";
+                        mylabel.style.textAlign = "center";
+                        
                         if (Get_Json_Value(allvalue, "列" + (x+1).toString() + "类型") == "文字") {
                             mylabel.textContent = reslut_json[z][x].toString();
+                        }
+
+                        if (Get_Json_Value(allvalue, "列" + (x + 1).toString() + "类型") == "图片") {
+                           
+                            // 加入图片
+                            var pic = document.createElement("img");
+                            pic.style.position = "absolute";
+                            pic.style.left = "0%";
+                            pic.style.width = "100%";
+                            pic.style.top = "0%";
+                            pic.style.height = "100%";
+                            pic.src = "images//" + reslut_json[z][x].toString();
+                            mylabel.appendChild(pic);
                         }
                         div.appendChild(mylabel);
                         sum_width = sum_width + width_int;

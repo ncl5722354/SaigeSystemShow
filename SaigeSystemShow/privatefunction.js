@@ -292,11 +292,118 @@ function Read_View(view_name,subdiv_name)
                 catch(err){}
             }
 
+            if (type == "单曲线")
+            {
+                try {
+                    mydiv = document.createElement("div");
+                    mydiv.id = "mydiv_" + object_name;
+                    mydiv.style.position = "absolute";
+                    mydiv.style.borderRadius = "100%";
+
+                    var parent = Get_Json_Value(allvalue, "父结点");    //   Read_Value(ini_name, object_name, "父结点")
+                    if (parent == "") {
+                        var sub = document.getElementById(subdiv_name);
+                        sub.appendChild(mydiv);
+                    }
+                    else {
+                        var sub = document.getElementById("mydiv_" + parent);
+                        sub.appendChild(mydiv);
+                    }
+                    var width = Get_Json_Value(allvalue, "width");  //  Read_Value(ini_name, object_name, "width");
+
+                    if (width != "") {
+                        mydiv.style.width = width;
+                    }
+
+                    var left = Get_Json_Value(allvalue, "left");  // Read_Value(ini_name, object_name, "left");
+                    if (left != "") {
+                        mydiv.style.left = left;
+                    }
+
+                    var top = Get_Json_Value(allvalue, "top"); //Read_Value(ini_name, object_name, "top")
+                    if (top != "") {
+                        mydiv.style.top = top;
+                    }
+
+                    var height = Get_Json_Value(allvalue, "height"); //  Read_Value(ini_name, object_name, "height")
+                    if (height != "") {
+                        mydiv.style.height = height;
+                    }
+
+
+
+                    
+
+                    //var value_array = new Array();
+                    //var color_array = new Array();
+                    //var title_array = new Array();
+                    //for (var j = 1; j <= count; j++) {
+                    //    var sql_string = Get_Json_Value(allvalue, "数据源" + j.toString());  // Read_Value(ini_name, object_name, "数据源" + i.toString());
+                    //    var value_string = get_result_sql(sql_string);
+                    //    var value_json = From_Text_To_Json(value_string);
+                    //    value_array.push(value_json[0].toString());
+
+                    //    var color = Get_Json_Value(allvalue, "颜色" + j.toString());  //  Read_Value(ini_name, object_name, "颜色" + i.toString());
+                    //    color_array.push(color);
+
+                    //    var label = Get_Json_Value(allvalue, "标题" + j.toString()); //Read_Value(ini_name, object_name, "标题" + i.toString());
+                    //    title_array.push(label);
+                    //}
+
+                    var sql_string = Get_Json_Value(allvalue, "数据源");
+                    var value_string = get_result_sql(sql_string);
+
+                  //  alert(value_string);
+
+                    var value_json = From_Text_To_Json(value_string);
+
+                    var value_array = new Array();
+                    var label_array = new Array();
+
+                    for (var x = 0; x < value_json.length; x++)
+                    {
+                        var time = value_json[x][0].toString();
+                        var value = value_json[x][1].toString();
+                        value_array.push([value]);
+                        label_array.push(time);
+                    }
+
+                    var canvas = document.createElement("canvas");
+                    canvas.id = "canvas_" + object_name;
+                    canvas.style.left = 0;
+                    canvas.style.width = "100%";
+                    canvas.style.top = 0;
+                    canvas.style.height = "100%";
+                    canvas.style.position = "absolute";
+                    mydiv.appendChild(canvas);
+
+                    var title = document.createElement("div");
+                    title.style.position = "absolute";
+                    title.style.left = "30%";
+                    title.style.width = "40%";
+                    title.style.top = "-20px";
+                    title.style.height = "18px";
+                    title.style.fontSize = "16px";
+                    title.textContent = object_name;
+                    mydiv.appendChild(title);
+                    mydiv.style.color = "white";
+                    mydiv.style.textAlign = "center";
+                    var myRadarChart;
+                    Show_Line(myRadarChart, value_array, label_array, "canvas_" + object_name);
+
+
+                   // Show_Pie(myRadarChart, value_array, color_array, color_array, title_array, "canvas_" + object_name);
+                    //function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_array,canvas_name)
+                }
+                catch (err) { }
+            }
+
             if (type == "表格") {
                 mydiv = document.createElement("div");
                 mydiv.id = Get_Json_Value(allvalue, "设备名") + "_" + object_name;
                 mydiv.style.position = "absolute";
-                mydiv.style.overflow = "scroll";
+                mydiv.style.overflowX = "auto";
+                
                 // 定义头文件
                 var header_width;
                 var sum_width = 0;
@@ -343,7 +450,9 @@ function Read_View(view_name,subdiv_name)
                 datagrid.style.left="0%";
                 datagrid.style.top="40px"
                 datagrid.style.height = "80%";
-                datagrid.style.overflow = "scroll";
+
+                
+               
                 mydiv.appendChild(datagrid);
                 
 
