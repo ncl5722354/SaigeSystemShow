@@ -62,21 +62,24 @@
                 <option value="异常恢复">异常恢复</option>
             </select>
              
-             <label id="add_info_type_duty_label" style="position:absolute;left:0%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;color:white">消息流向职位选择</label>
-             <select id="add_info_type_duty_select" style="position:absolute;left:20%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;" runat="server">
 
-             </select>
-
-             <label id="add_info_type_user_label" style="position:absolute;left:50%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;color:white">消息流向人员选择</label>
-             <select id="add_info_type_user_select" style="position:absolute;left:70%;width:20%;height:18px;top:65%;font-size:15px;text-align:center;" runat="server">
-
-             </select>
-
-
-            <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
+              <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
             <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
             <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
+
+             <label id="add_info_type_duty_label" style="position:absolute;left:0%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;color:white">消息流向职位选择</label>
+             <select id="add_info_type_duty_select" style="position:absolute;left:20%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;" >
+
+             </select>
+
+             <label id="add_info_type_user_label" style="position:absolute;left:50%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;color:white">消息流向人员选择</label>
+             <select id="add_info_type_user_select" style="position:absolute;left:70%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;" >
+
+             </select>
+
+
+           
             <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
@@ -112,6 +115,22 @@
     var temp_update_is;
     // 公共变量
     var Device_Data_Array;
+
+    var temp_duty_select = "";                              // 用来判断选择的select与实际的select是不是有不同
+
+    setInterval(update_duty_usr, 100);
+    function update_duty_usr()
+    {
+        var duty_select = document.getElementById("add_info_type_duty_select");
+        if(duty_select.value!=temp_duty_select)
+        {
+            temp_duty_select = duty_select.value;
+
+            get_result_sql_to_select("SELECT userid FROM saigedatabase.usertable where zhiwei=(select zhiwei_ID from saigedatabase.zhiwei_table where zhiwei_Name=\"" + temp_duty_select + "\")", "add_info_type_user_select");
+        }
+
+
+    }
 
 
     current_id = "w_页面总览";

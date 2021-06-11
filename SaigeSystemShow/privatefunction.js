@@ -475,6 +475,10 @@ function Read_View(view_name,subdiv_name)
                 mydiv.onclick= function(event)
                 {
                     Show_Add_Info_View(event.currentTarget.id);
+
+                    // 读取职位信息
+
+                    get_result_sql_to_select("SELECT zhiwei_Name FROM saigedatabase.zhiwei_table", "add_info_type_duty_select");
                 }
             }
 
