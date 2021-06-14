@@ -61,14 +61,29 @@
                 <option value="发现异常">发现异常</option>
                 <option value="异常恢复">异常恢复</option>
             </select>
-            <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
-            <img id="add_pic1" style="position:absolute;left:20%;width:20%;top:55%;height:20%;"/>
-            <img id="add_pic2" style="position:absolute;left:45%;width:20%;top:55%;height:20%;"/>
-            <img id="add_pic3" style="position:absolute;left:70%;width:20%;top:55%;height:20%;"/>
+             
+
+              <label id="add_info_pic" style="position:absolute;left:0%;width:20%;top:55%;height:18px;font-size:15px;text-align:center;color:white">添加图片</label>
+            <img id="add_pic1" style="position:absolute;left:20%;width:16%;top:55%;height:16%;"/>
+            <img id="add_pic2" style="position:absolute;left:45%;width:16%;top:55%;height:16%;"/>
+            <img id="add_pic3" style="position:absolute;left:70%;width:16%;top:55%;height:16%;"/>
+
+             <label id="add_info_type_duty_label" style="position:absolute;left:0%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;color:white">消息流向职位选择</label>
+             <select id="add_info_type_duty_select" style="position:absolute;left:20%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;" runat="server">
+
+             </select>
+
+             <label id="add_info_type_user_label" style="position:absolute;left:50%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;color:white">消息流向人员选择</label>
+             <select id="add_info_type_user_select" style="position:absolute;left:70%;width:20%;height:18px;top:70%;font-size:15px;text-align:center;"  runat="server">
+
+             </select>
+
+
+           
             <input id="add_info_pic1_input" name="add_info_pic1_input" type="file" style="position:absolute;left:20%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic2_input" name="add_info_pic2_input" type="file" style="position:absolute;left:45%;width:20%;top:80%;height:5%;color:white;"  runat="server"/>
             <input id="add_info_pic3_input" name="add_info_pic3_input" type="file" style="position:absolute;left:70%;width:20%;top:80%;height:5%;color:white"  runat="server"/>
-            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click" UseSubmitBehavior="False" />
+            <asp:Button  id="add_info_ok" value="确定" style="position:absolute;left:30%;width:10%;top:88%;height:25px;font-size:20px;text-align:center;" runat="server" OnClick="add_info_ok_Click" />
             <input id="add_info_name_title" runat="server" style="position:absolute;left:200%;color:white"/>
         </div>
     </div>
@@ -101,37 +116,90 @@
     // 公共变量
     var Device_Data_Array;
 
-    // 实现导航栏操作
-    for (var i = 0; i < select_json.length; i++)
-    {
-        var label = document.createElement("div");
-        label.textContent = select_json[i].toString();
-        label.id = "select_" + select_json[i].toString();
-        label.style.position = "absolute";
-        label.style.left = "0%";
-        label.style.top = (80 * i+80).toString() + "px";
-        label.style.width = "100%";
-        label.style.color = "white";
-        label.style.textAlign = "center";
-        label.style.cursor = "pointer";
-        label.onclick=function(event)
-        {
-            // 切换到相应画面
-            var title = document.getElementById("div_content_title");
-            title.textContent = Get_Xiahuaxian_String(event.currentTarget.id, 2);
-            
+    var temp_duty_select = "";                              // 用来判断选择的select与实际的select是不是有不同
 
-            // 读取相应的界面并填充画面
-            current_id = event.currentTarget.id;
-            Read_View(Get_Xiahuaxian_String(event.currentTarget.id, 2), "div_detail_content");
+    setInterval(update_duty_usr, 100);
+    function update_duty_usr()
+    {
+        var duty_select = document.getElementById("add_info_type_duty_select");
+        if(duty_select.value!=temp_duty_select)
+        {
+            temp_duty_select = duty_select.value;
+
+            get_result_sql_to_select("SELECT userid FROM saigedatabase.usertable where zhiwei=(select zhiwei_ID from saigedatabase.zhiwei_table where zhiwei_Name=\"" + temp_duty_select + "\")", "add_info_type_user_select");
         }
-        
-        $("#div_selector").append(label);
-        Set_Animation_Select_Button(label.id);
+
+
     }
+
+
+    current_id = "w_页面总览";
+    Reflush();
+
+    // 实现导航栏操作
+    
 
     setInterval(Reflush, 20000);
     
+    Reflush_selector();
+
+    setInterval(Reflush_selector, 2000);
+
+    function Reflush_selector()
+    {
+        var selector = document.getElementById("div_selector");
+        selector.innerHTML = "";
+
+        for (var i = 0; i < select_json.length; i++) {
+            var label = document.createElement("div");
+            label.textContent = select_json[i].toString();
+            label.id = "select_" + select_json[i].toString();
+            label.style.position = "absolute";
+            label.style.left = "0%";
+            label.style.top = (80 * i + 80).toString() + "px";
+            label.style.width = "100%";
+            label.style.color = "white";
+            label.style.textAlign = "center";
+            label.style.cursor = "pointer";
+            label.onclick = function (event) {
+                // 切换到相应画面
+                var title = document.getElementById("div_content_title");
+                title.textContent = Get_Xiahuaxian_String(event.currentTarget.id, 2);
+
+
+                // 读取相应的界面并填充画面
+                current_id = event.currentTarget.id;
+                Read_View(Get_Xiahuaxian_String(event.currentTarget.id, 2), "div_detail_content");
+            }
+
+            // 对于特殊的位置添加红色数字标签
+
+            if (select_json[i].toString() == "巡检记录")
+            {
+                var username = getCookie("username");
+                var count_string = get_result_sql("select count(*) from search_info_table where touser=\"" + username + "\" and have_senn=\"否\"");
+                var count_json = From_Text_To_Json(count_string);
+                var count = count_json[0];
+                if(count!="0")
+                {
+                    var label_count = document.createElement("div");
+                    label_count.style.position = "absolute";
+                    label_count.style.left = "80%";
+                    label_count.style.width = "14%";
+                    label_count.style.top = "20%";
+                    label_count.style.height = "80%";
+                    label_count.textContent = count;
+                    label_count.style.borderRadius = "100%";
+                    label_count.style.backgroundColor = "red";
+                    label_count.style.color = "white";
+                    label.appendChild(label_count);
+                }
+            }
+
+            $("#div_selector").append(label);
+            Set_Animation_Select_Button(label.id);
+        }
+    }
 
 
     // 初始化函数
@@ -179,6 +247,8 @@
         }
         catch(err){}
     }
+
+
 
 
 

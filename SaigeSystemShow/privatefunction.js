@@ -132,6 +132,8 @@ function Read_View(view_name,subdiv_name)
 
             }
 
+
+
             if (type == "设备数据显示")
             {
                 mydiv = document.createElement("div");
@@ -292,6 +294,112 @@ function Read_View(view_name,subdiv_name)
                 catch(err){}
             }
 
+            if (type == "单曲线")
+            {
+                try {
+                    mydiv = document.createElement("div");
+                    mydiv.id = "mydiv_" + object_name;
+                    mydiv.style.position = "absolute";
+                    mydiv.style.borderRadius = "100%";
+
+                    var parent = Get_Json_Value(allvalue, "父结点");    //   Read_Value(ini_name, object_name, "父结点")
+                    if (parent == "") {
+                        var sub = document.getElementById(subdiv_name);
+                        sub.appendChild(mydiv);
+                    }
+                    else {
+                        var sub = document.getElementById("mydiv_" + parent);
+                        sub.appendChild(mydiv);
+                    }
+                    var width = Get_Json_Value(allvalue, "width");  //  Read_Value(ini_name, object_name, "width");
+
+                    if (width != "") {
+                        mydiv.style.width = width;
+                    }
+
+                    var left = Get_Json_Value(allvalue, "left");  // Read_Value(ini_name, object_name, "left");
+                    if (left != "") {
+                        mydiv.style.left = left;
+                    }
+
+                    var top = Get_Json_Value(allvalue, "top"); //Read_Value(ini_name, object_name, "top")
+                    if (top != "") {
+                        mydiv.style.top = top;
+                    }
+
+                    var height = Get_Json_Value(allvalue, "height"); //  Read_Value(ini_name, object_name, "height")
+                    if (height != "") {
+                        mydiv.style.height = height;
+                    }
+
+
+
+                    
+
+                    //var value_array = new Array();
+                    //var color_array = new Array();
+                    //var title_array = new Array();
+                    //for (var j = 1; j <= count; j++) {
+                    //    var sql_string = Get_Json_Value(allvalue, "数据源" + j.toString());  // Read_Value(ini_name, object_name, "数据源" + i.toString());
+                    //    var value_string = get_result_sql(sql_string);
+                    //    var value_json = From_Text_To_Json(value_string);
+                    //    value_array.push(value_json[0].toString());
+
+                    //    var color = Get_Json_Value(allvalue, "颜色" + j.toString());  //  Read_Value(ini_name, object_name, "颜色" + i.toString());
+                    //    color_array.push(color);
+
+                    //    var label = Get_Json_Value(allvalue, "标题" + j.toString()); //Read_Value(ini_name, object_name, "标题" + i.toString());
+                    //    title_array.push(label);
+                    //}
+
+                    var sql_string = Get_Json_Value(allvalue, "数据源");
+                    var value_string = get_result_sql(sql_string);
+
+                  //  alert(value_string);
+
+                    var value_json = From_Text_To_Json(value_string);
+
+                    var value_array = new Array();
+                    var label_array = new Array();
+
+                    for (var x = 0; x < value_json.length; x++)
+                    {
+                        var time = value_json[x][0].toString();
+                        var value = value_json[x][1].toString();
+                        value_array.push([value]);
+                        label_array.push(time);
+                    }
+
+                    var canvas = document.createElement("canvas");
+                    canvas.id = "canvas_" + object_name;
+                    canvas.style.left = 0;
+                    canvas.style.width = "100%";
+                    canvas.style.top = 0;
+                    canvas.style.height = "100%";
+                    canvas.style.position = "absolute";
+                    mydiv.appendChild(canvas);
+
+                    var title = document.createElement("div");
+                    title.style.position = "absolute";
+                    title.style.left = "30%";
+                    title.style.width = "40%";
+                    title.style.top = "-20px";
+                    title.style.height = "18px";
+                    title.style.fontSize = "16px";
+                    title.textContent = object_name;
+                    mydiv.appendChild(title);
+                    mydiv.style.color = "white";
+                    mydiv.style.textAlign = "center";
+                    var myRadarChart;
+                    Show_Line(myRadarChart, value_array, label_array, "canvas_" + object_name);
+
+
+                   // Show_Pie(myRadarChart, value_array, color_array, color_array, title_array, "canvas_" + object_name);
+                    //function Show_Pie(myRadarChart,value_array,color_array,highlight_array,label_array,canvas_name)
+                }
+                catch (err) { }
+            }
+
             if (type == "表格") {
                 mydiv = document.createElement("div");
                 mydiv.id = Get_Json_Value(allvalue, "设备名") + "_" + object_name;
@@ -344,6 +452,8 @@ function Read_View(view_name,subdiv_name)
                 datagrid.style.left="0%";
                 datagrid.style.top="40px"
                 datagrid.style.height = "80%";
+
+                
                
                 mydiv.appendChild(datagrid);
                 
@@ -367,7 +477,335 @@ function Read_View(view_name,subdiv_name)
                 mydiv.onclick= function(event)
                 {
                     Show_Add_Info_View(event.currentTarget.id);
+
+                    // 读取职位信息
+
+                    get_result_sql_to_select("SELECT zhiwei_Name FROM saigedatabase.zhiwei_table", "add_info_type_duty_select");
                 }
+            }
+
+            if (type == "本人发送信息表格")
+            {
+                var username = getCookie("username");
+                mydiv = document.createElement("div");
+                mydiv.id = "mydiv_" + object_name;
+                mydiv.style.position = "absolute";
+                var result_string = get_result_sql("SELECT savetime,device,info,type,pic,pic2,pic3,touser,have_senn FROM saigedatabase.search_info_table where user=\"" + username + "\" order by savetime desc limit 100");
+                var result_json = From_Text_To_Json(result_string);
+
+
+                var sub_div = document.createElement("div");
+                sub_div.style.left = "0%";
+                sub_div.style.width = (180*9).toString()+"px";
+                sub_div.style.top="20%";
+                sub_div.style.height = "69%";
+                sub_div.style.position = "absolute";
+                sub_div.style.overflowY = "scroll";
+
+
+                mydiv.appendChild(sub_div);
+                mydiv.style.overflowX = "scroll";
+                
+                for(var x=0;x<result_json.length;x++)
+                {
+                    // 设定各种表格
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = "0px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180+80).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][0].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+                    // 设备名
+                    var label_device = document.createElement("div");
+                    label_device.style.position = "absolute";
+                    label_device.style.left = "180px";
+                    label_device.style.width = "180px";
+                    label_device.style.top = (x * 180 + 80).toString() + "px";
+                    label_device.style.height = "180px";
+                    label_device.style.textAlign = "center";
+                    label_device.textContent = result_json[x][1].toString();
+                    label_device.style.color = "white";
+                    sub_div.appendChild(label_device);
+
+                    // 信息
+                    var label_info = document.createElement("div");
+                    label_info.style.position = "absolute";
+                    label_info.style.left = "360px";
+                    label_info.style.width = "180px";
+                    label_info.style.top = (x * 180 + 80).toString() + "px";
+                    label_info.style.height = "180px";
+                    label_info.style.textAlign = "center";
+                    label_info.textContent = result_json[x][2].toString();
+                    label_info.style.color = "white";
+                    sub_div.appendChild(label_info);
+
+                    // 类型 
+                    var label_type = document.createElement("div");
+                    label_type.style.position = "absolute";
+                    label_type.style.left = "540px";
+                    label_type.style.width = "180px";
+                    label_type.style.top = (x * 180 + 80).toString() + "px";
+                    label_type.style.height = "180px";
+                    label_type.style.textAlign = "center";
+                    label_type.textContent = result_json[x][3].toString();
+                    label_type.style.color = "white";
+                    sub_div.appendChild(label_type);
+
+                    // 图片1
+                    try{
+                        var label_pic1 = document.createElement("img");
+                        label_pic1.style.position = "absolute";
+                        label_pic1.style.left = "720px";
+                        label_pic1.style.width = "180px";
+                        label_pic1.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic1.style.height = "180px";
+                        label_pic1.style.textAlign = "center";
+                        label_pic1.src = "images//" + result_json[x][4].toString();
+                        sub_div.appendChild(label_pic1);
+                    }
+
+                    catch(err){}
+
+                    // 图片2
+                    try{
+                        var label_pic2 = document.createElement("img");
+                        label_pic2.style.position = "absolute";
+                        label_pic2.style.left = "900px";
+                        label_pic2.style.width = "180px";
+                        label_pic2.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic2.style.height = "180px";
+                        label_pic2.style.textAlign = "center";
+                        label_pic2.src = "images//" + result_json[x][5].toString();
+                        sub_div.appendChild(label_pic2);
+                    }
+                    catch(err){}
+
+                    // 图片3
+                    try{
+                        var label_pic3 = document.createElement("img");
+                        label_pic3.style.position = "absolute";
+                        label_pic3.style.left = "1080px";
+                        label_pic3.style.width = "180px";
+                        label_pic3.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic3.style.height = "180px";
+                        label_pic3.style.textAlign = "center";
+                        label_pic3.src = "images//" + result_json[x][6].toString();
+                        sub_div.appendChild(label_pic3);
+
+
+                    }
+                    catch(err){}
+
+                    // 目标用户
+                    var label_touser = document.createElement("div");
+                    label_touser.style.position = "absolute";
+                    label_touser.style.left = "1260px";
+                    label_touser.style.width = "180px";
+                    label_touser.style.top = (x * 180 + 80).toString() + "px";
+                    label_touser.style.height = "180px";
+                    label_touser.style.textAlign = "center";
+                    label_touser.textContent = result_json[x][7].toString();
+                    label_touser.style.color = "white";
+                    sub_div.appendChild(label_touser);
+
+                    // 是否确认
+                    var label_sure = document.createElement("div");
+                    label_sure.style.position = "absolute";
+                    label_sure.style.left = "1440px";
+                    label_sure.style.width = "180px";
+                    label_sure.style.top = (x * 180 + 80).toString() + "px";
+                    label_sure.style.height = "180px";
+                    label_sure.style.textAlign = "center";
+                    label_sure.textContent = result_json[x][8].toString();
+                    label_sure.style.color = "white";
+                    sub_div.appendChild(label_sure);
+                }
+            }
+
+
+            if (type == "发送给本人信息表格")
+            {
+                var username = getCookie("username");
+                mydiv = document.createElement("div");
+                mydiv.id = "mydiv_" + object_name;
+                mydiv.style.position = "absolute";
+                var result_string = get_result_sql("SELECT search_info_id,savetime,device,info,user,type,pic,pic2,pic3,have_senn FROM saigedatabase.search_info_table where touser=\"" + username + "\" order by savetime desc limit 100");
+                var result_json = From_Text_To_Json(result_string);
+
+                var sub_div = document.createElement("div");
+                sub_div.style.left = "0%";
+                sub_div.style.width = (180 * 9+100).toString() + "px";
+                sub_div.style.top = "20%";
+                sub_div.style.height = "69%";
+                sub_div.style.position = "absolute";
+                sub_div.style.overflowY = "scroll";
+
+
+                mydiv.appendChild(sub_div);
+                mydiv.style.overflowX = "scroll";
+
+
+                for(var x=0;x<result_json.length;x++)
+                {
+                    // 按钮
+                    var button = document.createElement("input");
+                    button.style.position = "absolute";
+                    button.style.left = "10px";
+                    button.style.width = "80px";
+                    button.style.top = (x * 180 + 80).toString() + "px";
+                    button.style.height = "40px";
+                    button.style.fontSize = "28px";
+                    button.textContent = "确认";
+                    button.value = "确认";
+                    button.style.textAlign = "center";
+                    button.id = "button_ok_" + result_json[x][0].toString();
+                    button.type = "button";
+
+                    button.onclick=function(event)
+                    {
+                        var info_id = Get_Xiahuaxian_String(event.currentTarget.id, 3);
+                        // 将
+                        ex_sql("update search_info_table set have_senn=\"是\" where search_info_id=\"" + info_id + "\"");
+
+                        try {
+                            Read_View(Get_Xiahuaxian_String(current_id, 2), "div_detail_content");
+                        }
+                        catch (err) { }
+                    }
+
+                    if(result_json[x][9].toString()=="否")
+                    {
+                        sub_div.appendChild(button);
+                    }
+
+                    // 时间
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100+0*180).toString()+"px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][1].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+                    // 设备
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100 + 1 * 180).toString() + "px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][2].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+                    // 信息
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100 + 2 * 180).toString() + "px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][3].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+                    // 信息来源
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100 + 3 * 180).toString() + "px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][4].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+                    // 信息种类
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100 + 4 * 180).toString() + "px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][5].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+
+                    // 图片1
+                    // 图片1
+                    try {
+                        var label_pic1 = document.createElement("img");
+                        label_pic1.style.position = "absolute";
+                        label_pic1.style.left = (100 + 5 * 180).toString() + "px";
+                        label_pic1.style.width = "180px";
+                        label_pic1.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic1.style.height = "180px";
+                        label_pic1.style.textAlign = "center";
+                        label_pic1.src = "images//" + result_json[x][6].toString();
+                        sub_div.appendChild(label_pic1);
+                    }
+
+                    catch (err) { }
+
+                    // 图片2
+                    try {
+                        var label_pic1 = document.createElement("img");
+                        label_pic1.style.position = "absolute";
+                        label_pic1.style.left = (100 + 6 * 180).toString() + "px";
+                        label_pic1.style.width = "180px";
+                        label_pic1.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic1.style.height = "180px";
+                        label_pic1.style.textAlign = "center";
+                        label_pic1.src = "images//" + result_json[x][7].toString();
+                        sub_div.appendChild(label_pic1);
+                    }
+
+                    catch (err) { }
+
+                    // 图片3
+                    try {
+                        var label_pic1 = document.createElement("img");
+                        label_pic1.style.position = "absolute";
+                        label_pic1.style.left = (100 + 7 * 180).toString() + "px";
+                        label_pic1.style.width = "180px";
+                        label_pic1.style.top = (x * 180 + 80).toString() + "px";
+                        label_pic1.style.height = "180px";
+                        label_pic1.style.textAlign = "center";
+                        label_pic1.src = "images//" + result_json[x][8].toString();
+                        sub_div.appendChild(label_pic1);
+                    }
+
+                    catch (err) { }
+
+                    // 是否看见
+                    var label_savetime = document.createElement("div");
+                    label_savetime.style.position = "absolute";
+                    label_savetime.style.left = (100 + 8 * 180).toString() + "px";
+                    label_savetime.style.width = "180px";
+                    label_savetime.style.top = (x * 180 + 100).toString() + "px";
+                    label_savetime.style.height = "180px";
+                    label_savetime.style.textAlign = "center";
+                    label_savetime.textContent = result_json[x][9].toString();
+                    label_savetime.style.color = "white";
+                    sub_div.appendChild(label_savetime);
+
+
+
+                }
+
             }
 
 

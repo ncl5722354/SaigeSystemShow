@@ -89,6 +89,47 @@ function get_result_sql_to_labelcontent(sql,label_id)
   //  return result;
 }
 
+// 将sql读取到的信息给select
+function get_result_sql_to_select(sql,select_name)
+{
+    var reslut;
+    $.ajax({
+        url: "SqlCaozuo.asmx/Get_Sql_Select_Return",
+        type: "Post",
+        async: true,
+        dataType: "text",
+        contentType: "application/json; charset=utf-8",
+        data: "{sql:'" + sql + "'}",
+        success: function (data) {
+            try {
+                result = data.toString();
+
+                var reslut_json = From_Text_To_Json(result);
+
+                var select_object = document.getElementById(select_name);
+
+                select_object.options.length = 0;
+
+
+                for(var i=0;i<reslut_json.length;i++)
+                {
+                    var myoption = new Option(reslut_json[i].toString(), reslut_json[i].toString());
+                    select_object.add(myoption);
+                }
+
+            } catch (err) { }
+
+        },
+        error: function (data) {
+            //200的响应也有可能被认定为error，responseText中没有Message部分
+            return $.parseJSON(data.responseText).Message;
+        },
+        complete: function (data) {
+
+        }
+    });
+}
+
 
 // 获取直接数据的结果更新某个label_content
 function get_result_sql_to_objectcontent(sql,subindex,danwei,div_id)

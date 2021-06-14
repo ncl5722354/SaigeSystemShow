@@ -100,10 +100,14 @@ namespace SaigeSystemShow
 
                 var device = Request.Form["add_info_name_title"];
 
+                var select_to_user = Request.Form["add_info_type_user_select"];
+
                 var user = Request.Cookies["username"].Value;
 
-                Ex_Sql("insert into search_info_table values(\"" + ID + "\",\"" + device_name + "\",\"" + text + "\",\"" + select + "\",\"" + user + "\",\"" + pictureName + "\",\"" + pictureName2 + "\",\"" + pictrueName3 + "\",\"" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\")");
+                Ex_Sql("insert into search_info_table values(\"" + ID + "\",\"" + device_name + "\",\"" + text + "\",\"" + select + "\",\"" + user + "\",\"" + pictureName + "\",\"" + pictureName2 + "\",\"" + pictrueName3 + "\",\"" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"\",\""+select_to_user + "\",\"否" +"\")");
 
+
+                Response.Redirect("NewMain.aspx");
 
             }
             catch (Exception ex)
@@ -172,6 +176,5 @@ namespace SaigeSystemShow
             catch { }
             maindatabase.Close();
         }
-
     }
 }
