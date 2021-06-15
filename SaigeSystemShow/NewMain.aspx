@@ -162,10 +162,10 @@
             label.style.textAlign = "center";
             label.style.cursor = "pointer";
             label.onclick = function (event) {
+
                 // 切换到相应画面
                 var title = document.getElementById("div_content_title");
                 title.textContent = Get_Xiahuaxian_String(event.currentTarget.id, 2);
-
 
                 // 读取相应的界面并填充画面
                 current_id = event.currentTarget.id;

@@ -132,6 +132,36 @@ function Read_View(view_name,subdiv_name)
 
             }
 
+            if (type == "边框2")
+            {
+                mydiv = document.createElement("div");
+                mydiv.id = "mydiv_" + object_name;
+                mydiv.style.position = "absolute";
+
+                // 两张图片组成的底
+                var myimage = document.createElement("img");
+                myimage.style.width = "100%";
+                myimage.style.height = "100%";
+                myimage.style.left = "0%";
+                myimage.style.top = "0%";
+                myimage.style.position = "absolute";
+                myimage.src = "pic/frame1.png";         //src="pic/frame1.png"
+                mydiv.appendChild(myimage);
+
+                // 标题
+                var label_title = document.createElement("label");
+                label_title.style.width = "40%";
+                label_title.style.left = "30%";
+                label_title.style.top = "3%";
+                label_title.style.height = "20px";
+                label_title.style.fontSize = "14px";
+                label_title.style.position = "absolute";
+                label_title.style.color = "white";
+                label_title.style.textAlign = "center";
+                label_title.textContent = object_name;
+                mydiv.appendChild(label_title);
+            }
+
 
 
             if (type == "设备数据显示")
@@ -165,12 +195,9 @@ function Read_View(view_name,subdiv_name)
                 mydiv.id = "mydiv_" + object_name;
                 mydiv.style.position = "absolute"
                 var source = Get_Json_Value(allvalue, "数据源");        // Read_Value(ini_name, object_name, "数据源");
-                //var value_string = get_result_sql(source);
-                //var value_json = From_Text_To_Json(value_string);
                 var danwei = Get_Json_Value(allvalue, "单位");
                 get_result_sql_to_objectcontent(source, 1, danwei, "mydiv_" + object_name);
                 mydiv.style.color = "white";
-                //mydiv.textContent = value_json[0].toString();
                 mydiv.style.textAlign = "center";
             }
 
@@ -206,17 +233,7 @@ function Read_View(view_name,subdiv_name)
 
                 get_result_sql_to_bit("select value" + mainindex + " from shebeitable where shebeiname=\"" + source + "\"", subindex_number, "mydiv_" + object_name, Get_Json_Value(allvalue, "非0状态"), Get_Json_Value(allvalue, "0状态"));
            
-               // var value = Get_Kongge_String(value_json[0].toString(), subindex_number);
-
-                //if(value=="0")
-                //{
-                //    mydiv.style.backgroundColor = Get_Json_Value(allvalue, "0状态"); //Read_Value(ini_name, object_name, "0状态");
-                //}
-                //else
-                //{
-                //    mydiv.style.backgroundColor = Get_Json_Value(allvalue, "非0状态"); //  Read_Value(ini_name, object_name, "非0状态");
-                //}
-
+              
             }
 
             if (type == "饼形图")
@@ -496,11 +513,12 @@ function Read_View(view_name,subdiv_name)
 
                 var sub_div = document.createElement("div");
                 sub_div.style.left = "0%";
-                sub_div.style.width = (180*9).toString()+"px";
+                sub_div.style.width = (180*9+50).toString()+"px";
                 sub_div.style.top="20%";
                 sub_div.style.height = "69%";
                 sub_div.style.position = "absolute";
                 sub_div.style.overflowY = "scroll";
+                sub_div.style.overflowX = "hidden";
 
 
                 mydiv.appendChild(sub_div);
@@ -518,7 +536,11 @@ function Read_View(view_name,subdiv_name)
                     label_savetime.style.textAlign = "center";
                     label_savetime.textContent = result_json[x][0].toString();
                     label_savetime.style.color = "white";
+                    label_savetime.style.borderColor = "white";
+                    label_savetime.style.borderWidth = "2px";
+                    label_savetime.style.borderStyle = "solid";
                     sub_div.appendChild(label_savetime);
+
 
                     // 设备名
                     var label_device = document.createElement("div");
@@ -530,6 +552,9 @@ function Read_View(view_name,subdiv_name)
                     label_device.style.textAlign = "center";
                     label_device.textContent = result_json[x][1].toString();
                     label_device.style.color = "white";
+                    label_device.style.borderColor = "white";
+                    label_device.style.borderWidth = "2px";
+                    label_device.style.borderStyle = "solid";
                     sub_div.appendChild(label_device);
 
                     // 信息
@@ -542,6 +567,9 @@ function Read_View(view_name,subdiv_name)
                     label_info.style.textAlign = "center";
                     label_info.textContent = result_json[x][2].toString();
                     label_info.style.color = "white";
+                    label_info.style.borderColor = "white";
+                    label_info.style.borderStyle = "solid";
+                    label_info.style.borderWidth = "2px";
                     sub_div.appendChild(label_info);
 
                     // 类型 
@@ -554,6 +582,9 @@ function Read_View(view_name,subdiv_name)
                     label_type.style.textAlign = "center";
                     label_type.textContent = result_json[x][3].toString();
                     label_type.style.color = "white";
+                    label_type.style.borderColor = "white";
+                    label_type.style.borderStyle = "solid";
+                    label_type.style.borderWidth = "2px";
                     sub_div.appendChild(label_type);
 
                     // 图片1
@@ -566,6 +597,9 @@ function Read_View(view_name,subdiv_name)
                         label_pic1.style.height = "180px";
                         label_pic1.style.textAlign = "center";
                         label_pic1.src = "images//" + result_json[x][4].toString();
+                        label_pic1.style.borderColor = "white";
+                        label_pic1.style.borderStyle = "solid";
+                        label_pic1.style.borderWidth = "2px";
                         sub_div.appendChild(label_pic1);
                     }
 
@@ -581,6 +615,9 @@ function Read_View(view_name,subdiv_name)
                         label_pic2.style.height = "180px";
                         label_pic2.style.textAlign = "center";
                         label_pic2.src = "images//" + result_json[x][5].toString();
+                        label_pic2.style.borderColor = "white";
+                        label_pic2.style.borderStyle = "solid";
+                        label_pic3.style.borderWidth = "2px";
                         sub_div.appendChild(label_pic2);
                     }
                     catch(err){}
@@ -595,6 +632,9 @@ function Read_View(view_name,subdiv_name)
                         label_pic3.style.height = "180px";
                         label_pic3.style.textAlign = "center";
                         label_pic3.src = "images//" + result_json[x][6].toString();
+                        label_pic3.style.borderColor = "white";
+                        label_pic3.style.borderStyle = "solid";
+                        label_pic3.style.borderWidth = "2px";
                         sub_div.appendChild(label_pic3);
 
 
@@ -611,6 +651,9 @@ function Read_View(view_name,subdiv_name)
                     label_touser.style.textAlign = "center";
                     label_touser.textContent = result_json[x][7].toString();
                     label_touser.style.color = "white";
+                    label_touser.style.borderColor = "white";
+                    label_touser.style.borderStyle = "solid";
+                    label_touser.style.borderWidth = "2px";
                     sub_div.appendChild(label_touser);
 
                     // 是否确认
@@ -623,6 +666,9 @@ function Read_View(view_name,subdiv_name)
                     label_sure.style.textAlign = "center";
                     label_sure.textContent = result_json[x][8].toString();
                     label_sure.style.color = "white";
+                    label_sure.style.borderColor = "white";
+                    label_sure.style.borderStyle = "solid";
+                    label_sure.style.borderWidth = "2px";
                     sub_div.appendChild(label_sure);
                 }
             }
@@ -639,11 +685,12 @@ function Read_View(view_name,subdiv_name)
 
                 var sub_div = document.createElement("div");
                 sub_div.style.left = "0%";
-                sub_div.style.width = (180 * 9+100).toString() + "px";
+                sub_div.style.width = (180 * 9+120).toString() + "px";
                 sub_div.style.top = "20%";
                 sub_div.style.height = "69%";
                 sub_div.style.position = "absolute";
                 sub_div.style.overflowY = "scroll";
+                sub_div.style.overflowX = "hidden";
 
 
                 mydiv.appendChild(sub_div);
